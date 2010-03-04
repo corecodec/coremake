@@ -1,0 +1,8 @@
+#define IX86
+
+SDK = /Developer/SDKs/MacOSX10.5.sdk
+FRAMEWORK_PATH = /
+GCC_VERSION = 4.2
+XCODECOMPATVERSION = 3.0
+
+#include "xcode.inc"

@@ -1,0 +1,5 @@
+#define ANDROID_NDK_PROJ
+
+CCFLAGS = -march=armv5te -mtune=xscale
+
+#include "android_arm.inc"
