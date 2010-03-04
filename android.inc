@@ -118,14 +118,17 @@ FOR EACH WORKSPACE
       FOR EACH INSTALL
         COPY %(!NAME) %(¯BUILDDIR)res/raw/%(<NAME).%(>NAME)
       ENDFOR
-      FOR EACH ANDROID_VALUE
-        COPY %(!NAME) %(¯BUILDDIR)res/values/%(<NAME).%(>NAME)
-      ENDFOR
       FOR EACH USE
         FOR EACH INSTALL
           COPY %(!NAME) %(¯BUILDDIR)res/raw/%(<NAME).%(>NAME)
         ENDFOR
       ENDFOR
+      IF %(ANDROID_VALUE)!=""
+        MKDIR %(¯BUILDDIR)res/values/
+        FOR EACH ANDROID_VALUE
+          COPY %(!NAME) %(¯BUILDDIR)res/values/%(<NAME).%(>NAME)
+        ENDFOR
+      ENDIF
       IF %(ICON)!=""
         MKDIR %(BUILDDIR)res/drawable/
         COPY %(!ICON)_64x64.png %(¯BUILDDIR)res/drawable/%(<ICON)_64x64.png
