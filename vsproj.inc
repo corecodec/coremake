@@ -123,7 +123,7 @@ PRINTNL 			OutputDirectory="%(¯~!OUTPUTPATH)debug%(OUTPUTDIR)"
 IF DEFINED(CARBIDE_VS)
   PRINTNL 			IntermediateDirectory="Deb_WINSCW"
 ELSE
-  PRINTNL 			IntermediateDirectory="%(¯~!BUILDPATH)debug\%(~§PATH)"
+  PRINTNL 			IntermediateDirectory="%(¯~!BUILDPATH)debug\%(~§PATH)\%(NAME)"
 ENDIF
 PRINTNL 			ConfigurationType="%(TARGCONFTYPE)"
 // does not work with MFC apps
@@ -436,7 +436,7 @@ PRINTNL 			OutputDirectory="%(¯~!OUTPUTPATH)release%(OUTPUTDIR)"
 IF DEFINED(CARBIDE_VS)
   PRINTNL 			IntermediateDirectory="Deb_WINSCW"
 ELSE
-  PRINTNL 			IntermediateDirectory="%(¯~!BUILDPATH)release\%(~§PATH)"
+  PRINTNL 			IntermediateDirectory="%(¯~!BUILDPATH)release\%(~§PATH)\%(NAME)"
 ENDIF
 IF DEFINED(CARBIDE_VS)
   PRINTNL 			ConfigurationType="0"
