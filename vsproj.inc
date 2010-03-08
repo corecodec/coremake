@@ -59,11 +59,11 @@ IF %(DOXYGEN)
 ENDIF
 
 IF "%(PRECOMPILED_HEADER)"
-  IF "%(PRECOMPILED_HEADER_FORCED)"=="no"
-    PCH_FILE = %(<PRECOMPILED_HEADER).%(>PRECOMPILED_HEADER)
-  ELSE
+//  IF "%(PRECOMPILED_HEADER_FORCED)"=="no"
+//    PCH_FILE = %(<PRECOMPILED_HEADER).%(>PRECOMPILED_HEADER)
+//  ELSE
     PCH_FILE = %(PRECOMPILED_HEADER)
-  ENDIF
+//  ENDIF
   PCH_SOURCE=%(PRECOMPILED_HEADER)
 ENDIF
 
@@ -803,23 +803,6 @@ IF DEFINED(CARBIDE_VS)
   PRINTNL 					Name="%(TARG_DEBUG)|%(TARGNAME)"
   PRINTNL 					>
   PRINTNL 				</FileConfiguration>
-ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(w))
-  PRINTNL 				<FileConfiguration
-  PRINTNL 					Name="%(TARG_DEBUG)|%(TARGNAME)"
-  PRINTNL 					>
-  PRINTNL 					<Tool
-  PRINTNL 						Name="%(CPP_TOOL)"
-  PRINTNL 						WarningLevel="0"
-  PRINTNL 					/>
-  PRINTNL 				</FileConfiguration>
-  PRINTNL 				<FileConfiguration
-  PRINTNL 					Name="%(TARG_RELEASE)|%(TARGNAME)"
-  PRINTNL 					>
-  PRINTNL 					<Tool
-  PRINTNL 						Name="%(CPP_TOOL)"
-  PRINTNL 						WarningLevel="0"
-  PRINTNL 					/>
-  PRINTNL 				</FileConfiguration>
 ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(../PCH_SOURCE) && %(NO_PCH)=="")
   PRINTNL 				<FileConfiguration
   PRINTNL 					Name="%(TARG_DEBUG)|%(TARGNAME)"
@@ -827,6 +810,9 @@ ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(../PCH_SOURCE) && %(NO_PCH)=="")
   PRINTNL 					<Tool
   PRINTNL 						Name="%(CPP_TOOL)"
   PRINTNL 						UsePrecompiledHeader="1"
+  IF %(w)
+    PRINTNL 						WarningLevel="0"
+  ENDIF
   PRINTNL 					/>
   PRINTNL 				</FileConfiguration>
   PRINTNL 				<FileConfiguration
@@ -835,9 +821,39 @@ ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(../PCH_SOURCE) && %(NO_PCH)=="")
   PRINTNL 					<Tool
   PRINTNL 						Name="%(CPP_TOOL)"
   PRINTNL 						UsePrecompiledHeader="1"
+  IF %(w)
+    PRINTNL 						WarningLevel="0"
+  ENDIF
   PRINTNL 					/>
   PRINTNL 				</FileConfiguration>
   ../PCH_SOURCE =
+ELIF ((%(>NAME)==c || %(>NAME)==cpp) && (%(w) || (%(NO_PCH)!="" && %(PRECOMPILED_HEADER))))
+  PRINTNL 				<FileConfiguration
+  PRINTNL 					Name="%(TARG_DEBUG)|%(TARGNAME)"
+  PRINTNL 					>
+  PRINTNL 					<Tool
+  PRINTNL 						Name="%(CPP_TOOL)"
+  IF %(w)
+    PRINTNL 						WarningLevel="0"
+  ENDIF
+  IF %(NO_PCH)!="" && %(PRECOMPILED_HEADER)
+    PRINTNL 						UsePrecompiledHeader="0"
+  ENDIF
+  PRINTNL 					/>
+  PRINTNL 				</FileConfiguration>
+  PRINTNL 				<FileConfiguration
+  PRINTNL 					Name="%(TARG_RELEASE)|%(TARGNAME)"
+  PRINTNL 					>
+  PRINTNL 					<Tool
+  PRINTNL 						Name="%(CPP_TOOL)"
+  IF %(w)
+    PRINTNL 						WarningLevel="0"
+  ENDIF
+  IF %(NO_PCH)!="" && %(PRECOMPILED_HEADER)
+    PRINTNL 						UsePrecompiledHeader="0"
+  ENDIF
+  PRINTNL 					/>
+  PRINTNL 				</FileConfiguration>
 ELIF (%(>NAME)==asm)
   PRINTNL 				<FileConfiguration
   PRINTNL 					Name="%(TARG_RELEASE)|%(TARGNAME)"
