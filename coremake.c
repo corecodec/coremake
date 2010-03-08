@@ -2101,6 +2101,8 @@ void preprocess_stdafx_includes(item* p,int lib)
 			sprintf(file,"%s%s_stdafx.c",gen_path,(*child)->value);
 			src = item_get(item_get(*child,"source",0),file,1);
             set_path_type(src,FLAG_PATH_GENERATED);
+            src = item_get(src,"NO_PCH",1);
+            item_get(src,".",1);
 
             add_inc = item_get(include,gen_path,0);
             set_path_type(add_inc,FLAG_PATH_GENERATED);
@@ -2110,7 +2112,7 @@ void preprocess_stdafx_includes(item* p,int lib)
 			sprintf(file,"%s%s_stdafx.h",gen_path,(*child)->value);
 			src = item_get(item_get(*child,"header",0),file,1);
             set_path_type(src,FLAG_PATH_GENERATED);
-		}
+        }
 	}
 }
 

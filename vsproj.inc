@@ -820,7 +820,7 @@ ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(w))
   PRINTNL 						WarningLevel="0"
   PRINTNL 					/>
   PRINTNL 				</FileConfiguration>
-ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(PCH_SOURCE))
+ELIF ((%(>NAME)==c || %(>NAME)==cpp) && %(../PCH_SOURCE) && %(NO_PCH)=="")
   PRINTNL 				<FileConfiguration
   PRINTNL 					Name="%(TARG_DEBUG)|%(TARGNAME)"
   PRINTNL 					>
