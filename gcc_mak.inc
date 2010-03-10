@@ -247,7 +247,7 @@ FOR EACH HEADER_QT4
     PRINTNL GENERATED += %(!BUILDPATH)%(PATH)GeneratedFiles/moc_%(~<!NAME).cpp
 ENDFOR
 IF "%(PRECOMPILED_HEADER)"!=""
-  PRINTNL GENERATED += %(PRECOMPILED_HEADER).gch
+  PRINTNL GENERATED += %(!PATH)%(PRECOMPILED_HEADER).gch
 ENDIF
 PRINTNL 
 
@@ -348,18 +348,18 @@ ENDIF
 
 PRINTNL .PHONY: all prebuild postbuild install clean distclean cleandep $(LIBS)
 PRINTNL 
-PRINTNL all: prebuild $(GENERATED) $(LIBS) $(OUTPUT) postbuild
+PRINTNL all: prebuild $(LIBS) $(GENERATED) $(OUTPUT) postbuild
 PRINTNL 
 IF "%(PRECOMPILED_HEADER)"!=""
   PRINTNL prebuild:
 //  PRINTNL 	$(hide)echo prebuild
-  PRINTNL 	$(hide)-test ! -f %(PRECOMPILED_HEADER).gch.%(NAME) || mv %(PRECOMPILED_HEADER).gch.%(NAME) %(PRECOMPILED_HEADER).gch
+  PRINTNL 	$(hide)-test ! -f %(PRECOMPILED_HEADER).gch.%(NAME) || mv %(PRECOMPILED_HEADER).gch.%(NAME) %(!PATH)%(PRECOMPILED_HEADER).gch
   PRINTNL 
 ENDIF
 IF "%(PRECOMPILED_HEADER)"!=""
   PRINTNL postbuild:
 //  PRINTNL 	$(hide)echo postbuild
-  PRINTNL 	$(hide)-test ! -f %(PRECOMPILED_HEADER).gch || mv %(PRECOMPILED_HEADER).gch %(PRECOMPILED_HEADER).gch.%(NAME)
+  PRINTNL 	$(hide)-test ! -f %(!PATH)%(PRECOMPILED_HEADER).gch || mv %(!PATH)%(PRECOMPILED_HEADER).gch %(PRECOMPILED_HEADER).gch.%(NAME)
   PRINTNL 
 ENDIF
 
@@ -574,7 +574,7 @@ ENDIF
 
 IF "%(PRECOMPILED_HEADER)"!=""
   PRINTNL
-  PRINTNL $(OBJS): %(PRECOMPILED_HEADER).gch
+  PRINTNL $(OBJS): %(!PATH)%(PRECOMPILED_HEADER).gch
 ENDIF
 
 PRINTNL 
@@ -751,6 +751,16 @@ IF "%(HEADER_QT4)"!=""
   PRINTNL 
 ENDIF
 IF "%(PRECOMPILED_HEADER)"!=""
+  PRINTNL %(!ROOTPATH)%.%(>PRECOMPILED_HEADER).gch: %(!ROOTPATH)%.%(>PRECOMPILED_HEADER)
+  PRINTNL 	$(hide)echo precompiling header $<
+  PRINTNL 	$(hide)-rm -f $@
+  IF "%(>SOURCE)"=="c"
+    PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(CFLAGS) $(CCFLAGS) -c $< -o $@
+  ELSE
+    PRINTNL 	$(hide)$(CCENV) $(CXX) -Wall $(CXXFLAGS) $(CCFLAGS) -c $< -o $@
+  ENDIF
+  PRINTNL
+
   PRINTNL %.%(>PRECOMPILED_HEADER).gch: %.%(>PRECOMPILED_HEADER)
   PRINTNL 	$(hide)echo precompiling header $<
   PRINTNL 	$(hide)-rm -f $@
@@ -792,7 +802,7 @@ PRINTNL clean:
 PRINTNL 	$(hide)rm -f $(OBJS)
 PRINTNL 	$(hide)rm -f $(OUTPUT)
 IF "%(PRECOMPILED_HEADER)"!=""
-  PRINTNL 	$(hide)rm -f %(PRECOMPILED_HEADER).gch %(PRECOMPILED_HEADER).gch.%(NAME)
+  PRINTNL 	$(hide)rm -f %(!PATH)%(PRECOMPILED_HEADER).gch %(PRECOMPILED_HEADER).gch.%(NAME)
 ENDIF
 PRINTNL
 
@@ -816,7 +826,7 @@ FOR EACH USE
   ENDIF
 ENDFOR
 IF "%(PRECOMPILED_HEADER)"!=""
-  PRINTNL 	$(hide)rm -f %(PRECOMPILED_HEADER).gch %(PRECOMPILED_HEADER).gch.%(NAME)
+  PRINTNL 	$(hide)rm -f %(!PATH)%(PRECOMPILED_HEADER).gch %(PRECOMPILED_HEADER).gch.%(NAME)
 ENDIF
 PRINTNL
 
