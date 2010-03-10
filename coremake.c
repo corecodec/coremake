@@ -1644,6 +1644,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 						item_get(i,"INCLUDE",0);
 						item_get(i,"INCLUDE_DEBUG",0);
 						item_get(i,"INCLUDE_RELEASE",0);
+						item_get(i,"EXPDEFINE",0);
 						item_get(i,"DEFINE",0);
 						item_get(i,"LIBS",0);
 						item_get(i,"LIBS_DEBUG",0);
@@ -2647,6 +2648,8 @@ void preprocess_dependency_include(item* base, item* list, int keepexp)
 			item_merge(item_get(base,"linkfile",0),item_find(ref,"linkfile"),list->child[i]);
 			// also merge "crt0"
 			item_merge(item_get(base,"crt0",0),item_find(ref,"crt0"),list->child[i]);
+			// also merge "define"
+			item_merge(item_get(base,keepexp?"expdefine":"define",0),item_find(ref,"expdefine"),list->child[i]);
 
             preprocess_dependency_include(base,item_get(ref,"useinclude",0),keepexp);
             preprocess_dependency_include(base,item_get(ref,"use",0),keepexp);
@@ -2996,6 +2999,8 @@ void preprocess_uselib(item* p,item* ref,item* uselib)
 			        item_merge(item_get(*child,"uselib",0),item_find(ref,"uselib"),use->child[i]);
 			        // also merge "rpath"
 			        item_merge(item_get(*child,"rpath",0),item_find(ref,"rpath"),use->child[i]);
+	                // add to "define"
+	                item_merge(item_get(*child,"define",0),item_find(ref,"expdefine"),use->child[i]);
 
 				    item_get(item_get(*child,"uselib",1),uselib->value,1);
 				    item_delete(use->child[i]);
