@@ -2389,11 +2389,16 @@ void preprocess_stdafx(item* p,int lib)
 
                                 if (stricmp((*child)->child[i]->value,"project_version")==0 && ((*child)->child[i])->child)
                                 {
+                                    char proj_name[256];
                                     int major=1, minor=0, revision=0;
                                     sscanf(r.token,"%d.%d.%d",&major,&minor,&revision);
                                     fprintf(f,"#define PROJECT_VERSION_MAJOR %d\n",major);
                                     fprintf(f,"#define PROJECT_VERSION_MINOR %d\n",minor);
                                     fprintf(f,"#define PROJECT_VERSION_REVISION %d\n",revision);
+
+                                    strcpy(proj_name,(*child)->value);
+                                    upr(proj_name);
+                                    fprintf(f,"#define %s_PROJECT_VERSION 0x%02x%02x%02x\n",proj_name,major,minor,revision);
                                 }
                                 reader_free(&r);
                             }
