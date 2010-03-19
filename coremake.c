@@ -543,6 +543,61 @@ int itemcond_same(itemcond* a,itemcond* b)
 	}
 }
 
+int itemcond_contains(itemcond* cond,item* has)
+{
+    if (cond->func == COND_AND && has)
+    {
+        if (cond->a->value == has)
+            return 1;
+        if (cond->b->value == has)
+            return 1;
+    }
+    return 0;
+}
+
+void itemcond_reduce(itemcond* cond)
+{
+    if (cond->func == COND_OR)
+    {
+        itemcond_reduce(cond->a);
+        itemcond_reduce(cond->b);
+        if (cond->a->value)
+        {
+            if (itemcond_same(cond->a,cond->b))
+            {
+                cond->func = COND_GET;
+                cond->value = cond->a->value;
+            }
+        }
+        if (cond->a->func == COND_GET && itemcond_contains(cond->b,cond->a->value))
+        {
+            cond->func = COND_GET;
+            cond->value = cond->a->value;
+        }
+        if (cond->b->func == COND_GET && itemcond_contains(cond->a,cond->b->value))
+        {
+            cond->func = COND_GET;
+            cond->value = cond->b->value;
+        }
+    }
+    else
+    if (cond->func == COND_AND)
+    {
+        itemcond_reduce(cond->a);
+        itemcond_reduce(cond->b);
+        if (cond->a->value)
+        {
+            if (itemcond_same(cond->a,cond->b))
+            {
+                cond->func = COND_GET;
+                cond->value = cond->a->value;
+            }
+        }
+    }
+    assert(cond->func != COND_0);
+    assert(cond->func != COND_1);
+}
+
 int itemcond_partof(itemcond* a,itemcond* b)
 {
     if (itemcond_same(a,b))
@@ -1732,6 +1787,8 @@ void dumpcond(FILE* f,itemcond* p,int first,int prev,int* startpos,int nobreak)
         fprintf(f,"\\\n    ");
         *startpos = pos;
     }
+
+    itemcond_reduce(p);
 
 	if (!first && (p->func==COND_OR || p->func==COND_AND) && p->func!=prev)
 		fprintf(f,"(");
