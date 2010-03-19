@@ -2690,7 +2690,7 @@ void preprocess_stdafx(item* p,int lib)
 	}
 }
 
-void preprocess_dependency_include(item* base, item* list, int keepexp)
+void preprocess_dependency_include(item* base, item* list, int keep_exp_inc, int discard_exp_def)
 {
 	size_t i;
 	for (i=0;i<item_childcount(list);++i)
@@ -2700,8 +2700,8 @@ void preprocess_dependency_include(item* base, item* list, int keepexp)
 		{
             ref->stamp = stamp;
 
-			// add to "include"
-            item_merge(item_get(base,keepexp?"expinclude":"include",0),item_find(ref,"expinclude"),list->child[i]);
+			// add to "expinclude" to "include" or "expinclude"
+            item_merge(item_get(base,keep_exp_inc?"expinclude":"include",0),item_find(ref,"expinclude"),list->child[i]);
 			// also merge "subinclude"
 			item_merge(item_get(base,"subinclude",0),item_find(ref,"subinclude"),list->child[i]);
 			// also merge "sysinclude"
@@ -2710,11 +2710,12 @@ void preprocess_dependency_include(item* base, item* list, int keepexp)
 			item_merge(item_get(base,"linkfile",0),item_find(ref,"linkfile"),list->child[i]);
 			// also merge "crt0"
 			item_merge(item_get(base,"crt0",0),item_find(ref,"crt0"),list->child[i]);
-			// also merge "define"
-			item_merge(item_get(base,keepexp?"expdefine":"define",0),item_find(ref,"expdefine"),list->child[i]);
+			// also merge "expdefine" to "define" or "expdefine"
+            if (!discard_exp_def)
+			    item_merge(item_get(base,"define",0),item_find(ref,"expdefine"),list->child[i]);
 
-            preprocess_dependency_include(base,item_get(ref,"useinclude",0),keepexp);
-            preprocess_dependency_include(base,item_get(ref,"use",0),keepexp);
+            preprocess_dependency_include(base,item_get(ref,"useinclude",0),keep_exp_inc,1);
+            preprocess_dependency_include(base,item_get(ref,"use",0),keep_exp_inc,0);
 		}
 	}
 }
@@ -2732,8 +2733,8 @@ void preprocess_dependency_init(item* p,int onlysource)
 		(*child)->flags &= ~FLAG_PROCESSED;
 
         ++stamp;
-        preprocess_dependency_include(*child,item_get(*child,"useinclude",0),0);
-        preprocess_dependency_include(*child,item_get(*child,"use",0),0);
+        preprocess_dependency_include(*child,item_get(*child,"useinclude",0),0,1);
+        preprocess_dependency_include(*child,item_get(*child,"use",0),0,0);
 
 		list = item_find(*child,"source");
 		for (i=0;i<item_childcount(list);++i)
@@ -3083,8 +3084,8 @@ void preprocess_builtlib(item* p)
         if (value)
         {
             ++stamp;
-            preprocess_dependency_include(p->child[i],item_get(p->child[i],"useinclude",0),1);
-            preprocess_dependency_include(p->child[i],item_get(p->child[i],"use",0),1);
+            preprocess_dependency_include(p->child[i],item_get(p->child[i],"useinclude",0),1,1);
+            preprocess_dependency_include(p->child[i],item_get(p->child[i],"use",0),1,0);
 
             preprocess_uselib(getroot(p,"group"),p->child[i],value);
             preprocess_uselib(getroot(p,"exe"),p->child[i],value);
