@@ -594,8 +594,6 @@ void itemcond_reduce(itemcond* cond)
             }
         }
     }
-    assert(cond->func != COND_0);
-    assert(cond->func != COND_1);
 }
 
 int itemcond_partof(itemcond* a,itemcond* b)
