@@ -685,13 +685,13 @@ FOR EACH WORKSPACE
     IF %(INCLUDE) || %(INCLUDE_RELEASE) || %(SYSINCLUDE) || %(ABSINCLUDE_RELEASE) || %(ABSINCLUDE) || %(!;CONFIG_INCLUDE)
       PRINTNL 				USER_HEADER_SEARCH_PATHS = (
       FOR EACH INCLUDE
-        PRINTNL 					%(!;NAME),
+        PRINTNL 					%(!;@NAME),
       ENDFOR
       FOR EACH INCLUDE_RELEASE
-        PRINTNL 					%(!;NAME),
+        PRINTNL 					%(!;@NAME),
       ENDFOR
       FOR EACH SYSINCLUDE
-        PRINTNL 					%(!;NAME),
+        PRINTNL 					%(!;@NAME),
       ENDFOR
       FOR EACH ABSINCLUDE_RELEASE
         PRINTNL 					%(NAME),
@@ -700,7 +700,7 @@ FOR EACH WORKSPACE
         PRINTNL 					%(NAME),
       ENDFOR
       IF %(!;CONFIG_INCLUDE)
-        PRINTNL 					%(!;CONFIG_INCLUDE),
+        PRINTNL 					%(!;@CONFIG_INCLUDE),
       ENDIF
       PRINTNL 				);
     ENDIF
@@ -798,13 +798,13 @@ FOR EACH WORKSPACE
     IF %(INCLUDE) || %(INCLUDE_DEBUG) || %(SYSINCLUDE) || %(ABSINCLUDE_DEBUG) || %(ABSINCLUDE) || %(!;CONFIG_INCLUDE)
       PRINTNL 				USER_HEADER_SEARCH_PATHS = (
       FOR EACH INCLUDE
-        PRINTNL 					%(!;NAME),
+        PRINTNL 					%(!;@NAME),
       ENDFOR
       FOR EACH INCLUDE_DEBUG
-        PRINTNL 					%(!;NAME),
+        PRINTNL 					%(!;@NAME),
       ENDFOR
       FOR EACH SYSINCLUDE
-        PRINTNL 					%(!;NAME),
+        PRINTNL 					%(!;@NAME),
       ENDFOR
       FOR EACH ABSINCLUDE_DEBUG
         PRINTNL 					%(NAME),
@@ -813,7 +813,7 @@ FOR EACH WORKSPACE
         PRINTNL 					%(NAME),
       ENDFOR
       IF %(!;CONFIG_INCLUDE)
-        PRINTNL 					%(!;CONFIG_INCLUDE),
+        PRINTNL 					%(!;@CONFIG_INCLUDE),
       ENDIF
       PRINTNL 				);
     ENDIF
@@ -903,13 +903,13 @@ FOR EACH WORKSPACE
       IF %(INCLUDE) || %(INCLUDE_DEBUG) || %(SYSINCLUDE) || %(ABSINCLUDE_DEBUG) || %(ABSINCLUDE) || %(!;CONFIG_INCLUDE)
         PRINTNL 				USER_HEADER_SEARCH_PATHS = (
         FOR EACH INCLUDE
-          PRINTNL 					%(!;NAME),
+          PRINTNL 					%(!;@NAME),
         ENDFOR
         FOR EACH INCLUDE_DEBUG
-          PRINTNL 					%(!;NAME),
+          PRINTNL 					%(!;@NAME),
         ENDFOR
         FOR EACH SYSINCLUDE
-          PRINTNL 					%(!;NAME),
+          PRINTNL 					%(!;@NAME),
         ENDFOR
         FOR EACH ABSINCLUDE_DEBUG
           PRINTNL 					%(NAME),
@@ -918,7 +918,7 @@ FOR EACH WORKSPACE
           PRINTNL 					%(NAME),
         ENDFOR
         IF %(!;CONFIG_INCLUDE)
-          PRINTNL 					%(!;CONFIG_INCLUDE),
+          PRINTNL 					%(!;@CONFIG_INCLUDE),
         ENDIF
         PRINTNL 				);
       ENDIF
