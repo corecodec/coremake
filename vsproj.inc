@@ -862,9 +862,9 @@ ELIF (%(>NAME)==asm)
   PRINTNL 						Name="%(CUSTOM_TOOL)"
   PRINTNL 						Description="Assembling %(~!NAME)..."
   IFDEF IX86
-    PRINTNL 						CommandLine="yasm -f win32 -D_WIN32 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="yasm -f win32 -D_WIN32 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@&INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF IX86_64
-    PRINTNL 						CommandLine="yasm -f win64 -D_WIN64 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="yasm -f win64 -D_WIN64 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@&INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF ARM
     IF %(CPU)==armv6
       PRINTNL 						CommandLine="armasm -cpu arm1136 &quot;$(InputPath)&quot; &quot;$(IntDir)/$(InputName).obj&quot;%(CMD_NEWLINE)"
@@ -882,9 +882,9 @@ ELIF (%(>NAME)==asm)
   PRINTNL 						Name="%(CUSTOM_TOOL)"
   PRINTNL 						Description="Assembling %(~!NAME)..."
   IFDEF IX86
-    PRINTNL 						CommandLine="yasm -f win32 -D_WIN32 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="yasm -f win32 -D_WIN32 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) %(@&INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF IX86_64
-    PRINTNL 						CommandLine="yasm -f win64 -D_WIN64 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="yasm -f win64 -D_WIN64 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) %(@&INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF ARM
     IF %(CPU)==armv6
       PRINTNL 						CommandLine="armasm -cpu arm1136 &quot;$(InputPath)&quot; &quot;$(IntDir)/$(InputName).obj&quot;%(CMD_NEWLINE)"
