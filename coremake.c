@@ -1,4 +1,6 @@
 /*
+  $Id$
+
   Copyright (c) 2006-2010, CoreCodec, Inc.
   All rights reserved.
 
@@ -3532,6 +3534,15 @@ void preprocess(item* p)
     i = item_get(i,config_path,0);
     i->flags |= FLAG_ATTRIB;
     i->flags |= FLAG_PATH_GENERATED;
+
+	// add the path of PLATFORM_FILES to COREMAKE_INCLUDE if COREMAKE_CONFIG_HELPER is set
+	if (item_get(getconfig(p),"COREMAKE_CONFIG_HELPER",0)->flags & FLAG_DEFINED)
+	{
+	    i = item_get(p,"coremake_include",0);
+		i = item_get(i,coremake_root,0);
+		i->flags |= FLAG_ATTRIB;
+		i->flags |= FLAG_PATH_COREMAKE;
+	}
 
     // "GROUP con_to_exe": replaces all "con" by "exe" and add "USE con_to_exe"
     con_to_exe = getvalue(item_find(item_find(getroot(p,"group"),"con_to_exe"),"source"));
