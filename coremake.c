@@ -4736,6 +4736,13 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
                     set_path_type(config,FLAG_PATH_GENERATED);
 					build_file(p,getvalue(config)->value, FLAG_PATH_GENERATED);
                 }
+				config = item_get(getconfig(p),"COREMAKE_CONFIG_HELPER",0);
+				if (config && config->flags & FLAG_DEFINED)
+				{
+					strcpy(tmpstr,coremake_root);
+					strcat(tmpstr,"config_helper.h");
+					build_file(p,tmpstr, FLAG_PATH_COREMAKE);
+				}
 				preprocess(p);
 			}
 		}
