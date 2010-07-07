@@ -42,7 +42,7 @@
 #endif
 
 #if defined(IX86) || defined(IX86_64)
-#define CONFIG_UNALIGNED_ACCESS /* pointers use aligned memory */
+#define CONFIG_UNALIGNED_ACCESS /* pointers can use unaligned memory */
 #endif
 
 #if defined(TARGET_SYMBIAN) && !defined(SYMBIAN90)
@@ -59,7 +59,7 @@
 #endif
 
 #if defined(TARGET_WINCE) || defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS) || defined(ARM) || defined(MIPS)
-#define CONFIG_FIXED_POINT /* platforms where fixed point float processing should favoured */
+#define CONFIG_FIXED_POINT /* platforms where fixed point arithmetic processing should favoured */
 #endif
 
 #if defined(TARGET_WINCE) || defined(TARGET_SYMBIAN)
@@ -74,16 +74,20 @@
 
 /* forbid some defines */
 
-#if defined(TARGET_SYMBIAN) && !defined(SYMBIAN90)
+#if !defined(TARGET_SYMBIAN) || !defined(SYMBIAN90)
 #undef CONFIG_RECOGNIZER /* Symbian recognizers are not supported outside of Symbian 9.x */
 #endif
 
-#if defined(CONFIG_MULTITHREAD) && (defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS))
+#if defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS)
 #undef CONFIG_MULTITHREAD /* platforms where multithreaded should not be used */
 #endif
 
 #if defined(TARGET_PALMOS) || defined(TARGET_LINUX) || defined(TARGET_PS2SDK)
 #undef COREMAKE_UNICODE /* platforms where Unicode is handled via UTF-8 strings */
+#endif
+
+#if defined(TARGET_PALMOS)
+#undef CONFIG_FILEPOS_64 /* platforms where 64 bits file position/size should not be used */
 #endif
 
 #if !defined(ARM) || defined(TARGET_SYMBIAN) || defined(TARGET_IPHONE)
@@ -100,6 +104,10 @@
 
 #if !defined(ARM) || (!defined(TARGET_IPHONE) && !defined(TARGET_ANDROID))
 #undef CONFIG_NEON /* platforms that don't support NEON/ARMv7 instructions */
+#endif
+
+#if !defined(POWERPC)
+#undef CONFIG_ALTIVEC
 #endif
 
 #endif /* __CONFIG_HELPER_H */
