@@ -1535,6 +1535,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 
 			filename = stricmp(file->token,"config_file")==0 ||
 					   stricmp(file->token,"config_include")==0 ||
+					   stricmp(file->token,"config_cleaner")==0 ||
 					   stricmp(file->token,"platform_files")==0 ||	
 					   stricmp(file->token,"expinclude")==0 ||
 					   stricmp(file->token,"subinclude")==0 ||
@@ -3532,16 +3533,25 @@ void preprocess(item* p)
         config_path[0]=0;
     truncfilepath(config_path,0);
     i = item_get(i,config_path,0);
+    set_path_type(i,FLAG_PATH_GENERATED);
     i->flags |= FLAG_ATTRIB;
     i->flags |= FLAG_PATH_GENERATED;
 
-	// add the path of PLATFORM_FILES to COREMAKE_INCLUDE if COREMAKE_CONFIG_HELPER is set
+	// add the path of the CONFIG_CLEANER file to CONFIG_INCLUDE
+	i = getroot(p,"config_cleaner");
+	if (getvalue(i))
+    {
+		strcpy(config_path,getvalue(i)->value);
+		truncfilepath(config_path,0);
+        i = item_get(item_get(p,"config_include",0),config_path,1);
+        set_path_type(i,FLAG_PATH_SOURCE);
+    }
+
+	// add the path of PLATFORM_FILES to CONFIG_INCLUDE if COREMAKE_CONFIG_HELPER is set
 	if (item_get(getconfig(p),"COREMAKE_CONFIG_HELPER",0)->flags & FLAG_DEFINED)
 	{
-	    i = item_get(p,"coremake_include",0);
-		i = item_get(i,coremake_root,0);
-		i->flags |= FLAG_ATTRIB;
-		i->flags |= FLAG_PATH_COREMAKE;
+        i = item_get(item_get(p,"config_include",0),coremake_root,1);
+        set_path_type(i,FLAG_PATH_COREMAKE);
 	}
 
     // "GROUP con_to_exe": replaces all "con" by "exe" and add "USE con_to_exe"
@@ -4743,6 +4753,12 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
 					strcat(tmpstr,"config_helper.h");
 					build_file(p,tmpstr, FLAG_PATH_COREMAKE);
 				}
+				config = getroot(p,"config_cleaner");
+				if (getvalue(config))
+                {
+                    set_path_type(config,FLAG_PATH_SOURCE);
+					build_file(p,getvalue(config)->value, FLAG_PATH_SOURCE);
+                }
 				preprocess(p);
 			}
 		}

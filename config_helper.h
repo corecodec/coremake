@@ -33,35 +33,6 @@
 
 /* force some defines */
 
-#if defined(TARGET_WIN) || (defined(TARGET_OSX) && !defined(TARGET_IPHONE))
-#define CONFIG_MULTITHREAD /* platforms where multithreading should be favored */
-#endif
-
-#if (defined(ARM) || defined(MIPS) || defined(SH3) || defined(SH4)) && !defined(TARGET_IPHONE_SDK)
-#define CONFIG_DYNCODE /* platforms when dynamic code can be used */
-#endif
-
-#if defined(IX86) || defined(IX86_64)
-#define CONFIG_UNALIGNED_ACCESS /* pointers can use unaligned memory */
-#endif
-
-#if defined(TARGET_SYMBIAN) && !defined(SYMBIAN90)
-#undef CONFIG_SIGNED
-#define CONFIG_SIGNED /* allow the signed code on devices that don't need signature */
-#endif
-
-#if defined(TARGET_SYMBIAN) && defined(CONFIG_SIGNED)
-#define CONFIG_RECOGNIZER /* a Symbian recognizer can be used */
-#endif
-
-#if defined(TARGET_WIN32) || defined(TARGET_WIN64) || defined(TARGET_WINCE) || defined(TARGET_OSX) || defined(TARGET_LINUX)
-#define CONFIG_FILEPOS_64 /* platforms where 64 bits file position/size should be favoured */
-#endif
-
-#if defined(TARGET_WINCE) || defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS) || defined(ARM) || defined(MIPS)
-#define CONFIG_FIXED_POINT /* platforms where fixed point arithmetic processing should favoured */
-#endif
-
 #if defined(TARGET_WINCE) || defined(TARGET_SYMBIAN)
 #undef COREMAKE_UNICODE
 #define COREMAKE_UNICODE /* platforms where Unicode is mandatory */
@@ -72,15 +43,25 @@
 #define COREMAKE_STATIC
 #endif
 
+#if (defined(ARM) || defined(MIPS) || defined(SH3) || defined(SH4)) && !defined(TARGET_IPHONE_SDK)
+#undef CONFIG_DYNCODE
+#define CONFIG_DYNCODE /* platforms when dynamic code can be used */
+#endif
+
+#if defined(IX86) || defined(IX86_64)
+#undef CONFIG_UNALIGNED_ACCESS
+#define CONFIG_UNALIGNED_ACCESS /* pointers can use unaligned memory */
+#endif
+
+#if defined(TARGET_WIN32) || defined(TARGET_WIN64) || defined(TARGET_WINCE) || defined(TARGET_OSX) || defined(TARGET_LINUX)
+#define CONFIG_FILEPOS_64 /* platforms where 64 bits file position/size should be favoured */
+#endif
+
+#if defined(TARGET_WINCE) || defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS) || defined(ARM) || defined(MIPS)
+#define CONFIG_FIXED_POINT /* platforms where fixed point arithmetic processing should favoured */
+#endif
+
 /* forbid some defines */
-
-#if !defined(TARGET_SYMBIAN) || !defined(SYMBIAN90)
-#undef CONFIG_RECOGNIZER /* Symbian recognizers are not supported outside of Symbian 9.x */
-#endif
-
-#if defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS)
-#undef CONFIG_MULTITHREAD /* platforms where multithreaded should not be used */
-#endif
 
 #if defined(TARGET_PALMOS) || defined(TARGET_LINUX) || defined(TARGET_PS2SDK)
 #undef COREMAKE_UNICODE /* platforms where Unicode is handled via UTF-8 strings */
