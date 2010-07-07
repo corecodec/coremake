@@ -42,7 +42,14 @@ IFDEF TARGET_IPHONE_SDK
 
 ENDIF // TARGET_IPHONE_SDK
 
-
+IFDEF TARGET_IPHONE_SDK
+    IFDEF CONFIG_BACKGROUND_AUDIO
+	PRINTNL	<key>UIBackgroundModes</key>
+	PRINTNL	<array>
+	PRINTNL	    <string>audio</string>
+	PRINTNL	</array>
+    ENDIF
+ENDIF
 PRINTNL 	<key>CFBundleDevelopmentRegion</key>
 PRINTNL 	<string>English</string>
 IF %(HAS_EXTENSIONS)
