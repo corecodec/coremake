@@ -683,26 +683,7 @@ FOR EACH WORKSPACE
         PRINTNL 				PRODUCT_NAME = %(NAME);
     ENDIF
     IF %(INCLUDE) || %(INCLUDE_RELEASE) || %(SYSINCLUDE) || %(ABSINCLUDE_RELEASE) || %(ABSINCLUDE) || %(!;CONFIG_INCLUDE)
-      PRINTNL 				USER_HEADER_SEARCH_PATHS = (
-      FOR EACH INCLUDE
-        PRINTNL 					%(!;@NAME),
-      ENDFOR
-      FOR EACH INCLUDE_RELEASE
-        PRINTNL 					%(!;@NAME),
-      ENDFOR
-      FOR EACH SYSINCLUDE
-        PRINTNL 					%(!;@NAME),
-      ENDFOR
-      FOR EACH ABSINCLUDE_RELEASE
-        PRINTNL 					%(NAME),
-      ENDFOR
-      FOR EACH ABSINCLUDE
-        PRINTNL 					%(NAME),
-      ENDFOR
-      IF %(!;CONFIG_INCLUDE)
-        PRINTNL 					%(!;@CONFIG_INCLUDE),
-      ENDIF
-      PRINTNL 				);
+      PRINTNL 				USER_HEADER_SEARCH_PATHS = "%(!;@INCLUDE:%=% )%(!;@INCLUDE_RELEASE:%=% )%(!;@SYSINCLUDE:%=% )%(ABSINCLUDE_RELEASE:%=% )%(ABSINCLUDE:%=% )%(!;@CONFIG_INCLUDE:%=% )";
     ENDIF
     PRINTNL 				SYMROOT = %(¯!;§OUTPUTPATH);
     IF %(HAS_REZ)
@@ -796,26 +777,7 @@ FOR EACH WORKSPACE
     ENDIF
     PRINTNL 				SYMROOT = %(¯!;§OUTPUTPATH);
     IF %(INCLUDE) || %(INCLUDE_DEBUG) || %(SYSINCLUDE) || %(ABSINCLUDE_DEBUG) || %(ABSINCLUDE) || %(!;CONFIG_INCLUDE)
-      PRINTNL 				USER_HEADER_SEARCH_PATHS = (
-      FOR EACH INCLUDE
-        PRINTNL 					%(!;@NAME),
-      ENDFOR
-      FOR EACH INCLUDE_DEBUG
-        PRINTNL 					%(!;@NAME),
-      ENDFOR
-      FOR EACH SYSINCLUDE
-        PRINTNL 					%(!;@NAME),
-      ENDFOR
-      FOR EACH ABSINCLUDE_DEBUG
-        PRINTNL 					%(NAME),
-      ENDFOR
-      FOR EACH ABSINCLUDE
-        PRINTNL 					%(NAME),
-      ENDFOR
-      IF %(!;CONFIG_INCLUDE)
-        PRINTNL 					%(!;@CONFIG_INCLUDE),
-      ENDIF
-      PRINTNL 				);
+      PRINTNL 				USER_HEADER_SEARCH_PATHS = "%(!;@INCLUDE:%=% )%(!;@INCLUDE_DEBUG:%=% )%(!;@SYSINCLUDE:%=% )%(ABSINCLUDE_DEBUG:%=% )%(ABSINCLUDE:%=% )%(!;@CONFIG_INCLUDE:%=% )";
     ENDIF
     IF %(HAS_REZ)
       PRINTNL 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
@@ -901,26 +863,7 @@ FOR EACH WORKSPACE
       ENDIF
       PRINTNL 				SYMROOT = %(¯!;§OUTPUTPATH);
       IF %(INCLUDE) || %(INCLUDE_DEBUG) || %(SYSINCLUDE) || %(ABSINCLUDE_DEBUG) || %(ABSINCLUDE) || %(!;CONFIG_INCLUDE)
-        PRINTNL 				USER_HEADER_SEARCH_PATHS = (
-        FOR EACH INCLUDE
-          PRINTNL 					%(!;@NAME),
-        ENDFOR
-        FOR EACH INCLUDE_DEBUG
-          PRINTNL 					%(!;@NAME),
-        ENDFOR
-        FOR EACH SYSINCLUDE
-          PRINTNL 					%(!;@NAME),
-        ENDFOR
-        FOR EACH ABSINCLUDE_DEBUG
-          PRINTNL 					%(NAME),
-        ENDFOR
-        FOR EACH ABSINCLUDE
-          PRINTNL 					%(NAME),
-        ENDFOR
-        IF %(!;CONFIG_INCLUDE)
-          PRINTNL 					%(!;@CONFIG_INCLUDE),
-        ENDIF
-        PRINTNL 				);
+      PRINTNL 				USER_HEADER_SEARCH_PATHS = "%(!;@INCLUDE:%=% )%(!;@INCLUDE_DEBUG:%=% )%(!;@SYSINCLUDE:%=% )%(ABSINCLUDE_DEBUG:%=% )%(ABSINCLUDE:%=% )%(!;@CONFIG_INCLUDE:%=% )";
       ENDIF
       IF %(HAS_REZ)
         PRINTNL 				OTHER_REZFLAGS = "-d ppc_$(ppc) -d i386_$(i386)";
