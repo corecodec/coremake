@@ -12,6 +12,7 @@ FOR EACH WORKSPACE
   REMOVE %(¯PATH)%(NAME).sln
   REMOVE %(¯PATH)%(NAME).vcw
   REMOVE %(¯PATH)%(NAME).log
+  REMOVE %(¯PATH)%(NAME)_nsi.log  
   REMOVE %(¯PATH)%(NAME).log.tmp
   REMOVE %(¯PATH)%(NAME).kdevelop_gdbscript
   REMOVEDIR %(¯PATH)%(NAME).xcodeproj
@@ -61,6 +62,7 @@ FOR EACH LIB,DLL,EXE,CON,CAB,LIB_CSHARP,DLL_CSHARP,EXE_CSHARP,CON_CSHARP,EXE_JAV
   REMOVE %(¯PATH)%(NAME)_rsg.h
   REMOVE %(¯PATH)%(NAME).dsp
   REMOVE %(¯PATH)%(NAME).vcproj
+  REMOVE %(¯PATH)%(NAME).icproj
   REMOVE %(!ROOTPATH)%(PATH)%(NAME).csproj
   REMOVEDIR %(!ROOTPATH)%(PATH)%(NAME)/obj
   REMOVE %(¯PATH)%(NAME)_cab.vddproj

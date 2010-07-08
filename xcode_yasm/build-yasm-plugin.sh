@@ -1,7 +1,7 @@
 #!/bin/sh
 
 curl -O http://www.tortall.net/projects/yasm/releases/yasm-1.0.1.tar.gz
-tar -xvjf yasm-1.0.1.tar.gz
+tar -xvzf yasm-1.0.1.tar.gz
 pushd yasm-1.0.1
 ./configure
 make
