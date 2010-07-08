@@ -526,7 +526,7 @@ ELSE
         PRINTNL 	$(hide)cp -f $< $@
       ENDIF
     ENDIF
-    IFDEF RESOURCE_COREC 
+    IFDEF RESOURCE_COREC
       IF (%(TYPE)!=lib)
         PRINTNL 
         FOR EACH INSTALL
@@ -539,15 +539,17 @@ ELSE
           PRINTNL 
         ENDFOR
       ENDIF
-    ELIF !defined(TARGET_ANDROID)
-      PRINTNL 
-      FOR EACH INSTALL
+    ELSE
+      IF !defined(TARGET_ANDROID)
         PRINTNL 
-        PRINTNL %(!RESOURCEPATH)%(<NAME).%(>NAME): %(!NAME)
-        PRINTNL 	$(hide)echo copy $<
-        PRINTNL 	$(hide)mkdir -p %(!RESOURCEPATH)
-        PRINTNL 	$(hide)cp -f $< $@
-      ENDFOR
+        FOR EACH INSTALL
+          PRINTNL 
+          PRINTNL %(!RESOURCEPATH)%(<NAME).%(>NAME): %(!NAME)
+          PRINTNL 	$(hide)echo copy $<
+          PRINTNL 	$(hide)mkdir -p %(!RESOURCEPATH)
+          PRINTNL 	$(hide)cp -f $< $@
+        ENDFOR
+      ENDIF
     ENDIF
   ENDIF
 
