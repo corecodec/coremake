@@ -934,7 +934,7 @@ ELIF (%(>NAME)==c) && defined(MIPS) && ("%(TARGGCC)"!="") && %(gcc)
   PRINTNL 					>
   PRINTNL 					<Tool
   PRINTNL 						Name="%(CUSTOM_TOOL)"
-  PRINTNL 						CommandLine="%(TARGGCC) -DNDEBUG %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@INCLUDE:%=-I%) %(@CONFIG_INCLUDE:%=-I%) %(@COREMAKE_INCLUDE:%=-I%) -S &quot;$(InputPath)&quot; -o&quot;$(IntDir)/$(InputName).S&quot;%(CMD_NEWLINE)mips2s &quot;$(IntDir)/$(InputName).S&quot;%(CMD_NEWLINE)mipsasm /QMmips32 /c &quot;$(IntDir)/$(InputName)_gcc.S&quot; /Fo&quot;$(IntDir)/$(InputName).obj&quot;%(CMD_NEWLINE)"
+  PRINTNL 						CommandLine="%(TARGGCC) -DNDEBUG %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@INCLUDE:%=-I%) %(@CONFIG_INCLUDE:%=-I%) -S &quot;$(InputPath)&quot; -o&quot;$(IntDir)/$(InputName).S&quot;%(CMD_NEWLINE)mips2s &quot;$(IntDir)/$(InputName).S&quot;%(CMD_NEWLINE)mipsasm /QMmips32 /c &quot;$(IntDir)/$(InputName)_gcc.S&quot; /Fo&quot;$(IntDir)/$(InputName).obj&quot;%(CMD_NEWLINE)"
   PRINTNL 						Outputs="$(IntDir)/$(InputName).obj"
   PRINTNL 					/>
   PRINTNL 				</FileConfiguration>
