@@ -183,7 +183,7 @@ PRINTNL 			<Tool
 IF "%(PROJ_IS_ICL)"
   PRINTNL 				Name="MidlCmplrTool"
   PRINTNL 				PreprocessorDefinitions="_DEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_DEBUG:%=;%)"
-  PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_DEBUG:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+  PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_DEBUG:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)"
   PRINTNL 				MkTypLibCompatible="false"
   PRINTNL 				TypeLibraryName="$(TargetDir)$(ProjectName).tlb"
   PRINTNL 				OutputDirectory="%(¯~!BUILDPATH)%(~§PATH)"
@@ -194,7 +194,7 @@ IF "%(PROJ_IS_ICL)"
 ELSE
   PRINTNL 				Name="%(IDL_TOOL)"
   PRINTNL 				PreprocessorDefinitions="_DEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_DEBUG:%=;%)"
-  PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_DEBUG:%=;%)%(@&SYSINCLUDE:%=;%);%(TARGINC)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+  PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_DEBUG:%=;%)%(@&SYSINCLUDE:%=;%);%(TARGINC)%(@&CONFIG_INCLUDE:%=;%)"
   PRINTNL 				MkTypLibCompatible="false"
   PRINTNL 				TypeLibraryName="$(TargetDir)$(ProjectName).tlb"
   PRINTNL 				OutputDirectory="%(¯~!BUILDPATH)%(~§PATH)"
@@ -223,7 +223,7 @@ IF "%(HEADER_QT4)"!=""
   INCLUDE_DEBUG += %(¯|BUILDPATH)debug\%(PATH)GeneratedFiles
   INCLUDE_RELEASE += %(¯|BUILDPATH)release\%(PATH)GeneratedFiles
 ENDIF
-PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_DEBUG:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_DEBUG:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)"
 PRINTNL 				PreprocessorDefinitions="_DEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_DEBUG:%=;%)"
 IF DEFINED(CARBIDE_VS)
 PRINTNL 				IgnoreStandardIncludePath="true"
@@ -268,7 +268,7 @@ PRINTNL 			/>
 PRINTNL 			<Tool
 PRINTNL 				Name="%(RES_TOOL)"
 PRINTNL 				PreprocessorDefinitions="_DEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_DEBUG:%=;%)"
-PRINTNL 				AdditionalIncludeDirectories="$(TargetDir)%(@&INCLUDERC:%=;%)%(@&INCLUDE:%=;%)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+PRINTNL 				AdditionalIncludeDirectories="$(TargetDir)%(@&INCLUDERC:%=;%)%(@&INCLUDE:%=;%)%(@&CONFIG_INCLUDE:%=;%)"
 PRINTNL 			/>
 PRINTNL 			<Tool
 PRINTNL 				Name="%(PRELINKTOOL)"
@@ -480,7 +480,7 @@ IF DEFINED(CARBIDE_VS)
   PRINTNL 				CleanCommandLine="RCMake.exe &quot;$(ProjectPath)&quot; %(SDKNAME) GCCE UREL clean"
   PRINTNL 				Output=""
   PRINTNL 				PreprocessorDefinitions="NDEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_RELEASE:%=;%)"
-  PRINTNL 				IncludeSearchPath="%(@&INCLUDE:%=;%)%(@&INCLUDE_RELEASE:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+  PRINTNL 				IncludeSearchPath="%(@&INCLUDE:%=;%)%(@&INCLUDE_RELEASE:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)"
   PRINTNL 				ForcedIncludes=""
   PRINTNL 				AssemblySearchPath=""
   PRINTNL 				ForcedUsingAssemblies=""
@@ -505,7 +505,7 @@ PRINTNL 			/>
 PRINTNL 			<Tool
 PRINTNL 				Name="%(IDL_TOOL)"
 PRINTNL 				PreprocessorDefinitions="NDEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_RELEASE:%=;%)"
-PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_RELEASE:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_RELEASE:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)"
 PRINTNL 				MkTypLibCompatible="false"
 PRINTNL 				TypeLibraryName="$(TargetDir)$(ProjectName).tlb"
 PRINTNL 				OutputDirectory="%(¯~!BUILDPATH)%(~§PATH)"
@@ -543,7 +543,7 @@ IF "%(HEADER_QT4)"!=""
   DEFINE += QT_NO_DEBUG
   DEFINE += QT_NO_DEBUG_OUTPUT
 ENDIF
-PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_RELEASE:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+PRINTNL 				AdditionalIncludeDirectories="%(@&INCLUDE:%=;%)%(@&INCLUDE_RELEASE:%=;%)%(@&SYSINCLUDE:%=;%);%(&TARGINC)%(@&CONFIG_INCLUDE:%=;%)"
 PRINTNL 				PreprocessorDefinitions="NDEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_RELEASE:%=;%)"
 PRINTNL 				StringPooling="true"
 IF !defined(TARGET_WINCE)
@@ -582,7 +582,7 @@ PRINTNL 			/>
 PRINTNL 			<Tool
 PRINTNL 				Name="%(RES_TOOL)"
 PRINTNL 				PreprocessorDefinitions="NDEBUG%(&TARGDEF:%=;%)%(&DEFINE:%=;%)%(&DEFINE_RELEASE:%=;%)"
-PRINTNL 				AdditionalIncludeDirectories="$(TargetDir)%(@&INCLUDERC:%=;%)%(@&INCLUDE:%=;%)%(@&CONFIG_INCLUDE:%=;%)%(@&COREMAKE_INCLUDE:%=;%)"
+PRINTNL 				AdditionalIncludeDirectories="$(TargetDir)%(@&INCLUDERC:%=;%)%(@&INCLUDE:%=;%)%(@&CONFIG_INCLUDE:%=;%)"
 PRINTNL 			/>
 PRINTNL 			<Tool
 PRINTNL 				Name="%(PRELINKTOOL)"

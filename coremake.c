@@ -1576,8 +1576,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
             generated_dir = stricmp(file->token,"config_file")==0 ||
                             stricmp(file->token,"config_include")==0;
 
-            coremake_dir = stricmp(file->token,"platform_files")==0 ||
-                            stricmp(file->token,"coremake_include")==0;
+            coremake_dir = stricmp(file->token,"platform_files")==0;
 
             system_dir = stricmp(file->token,"config_android_ndk")==0 ||
                          stricmp(file->token,"os_include")==0;
@@ -3551,8 +3550,8 @@ void preprocess(item* p)
 	// add the path of PLATFORM_FILES to CONFIG_INCLUDE if COREMAKE_CONFIG_HELPER is set
 	if (item_get(getconfig(p),"COREMAKE_CONFIG_HELPER",0)->flags & FLAG_DEFINED)
 	{
-        i = item_get(item_get(p,"coremake_include",0),coremake_root,1);
-        set_path_type(i,FLAG_PATH_COREMAKE);
+        i = item_get(item_get(p,"config_include",0),coremake_root,1);
+        set_path_type(i,FLAG_PATH_SOURCE);
 	}
 
     // "GROUP con_to_exe": replaces all "con" by "exe" and add "USE con_to_exe"
