@@ -72,6 +72,13 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
     PRINTNL     %(!§NAME) \
   ENDFOR
   FOR EACH CONFIG_INCLUDE
+    IF %(FOR_LAST) && %(COREMAKE_INCLUDE)!=""
+      PRINTNL     %(!§NAME)
+    ELSE
+      PRINTNL     %(!§NAME) \
+    ENDIF
+  ENDFOR
+  FOR EACH COREMAKE_INCLUDE
     IF %(FOR_LAST)
       PRINTNL     %(!§NAME)
     ELSE

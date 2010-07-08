@@ -1576,7 +1576,8 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
             generated_dir = stricmp(file->token,"config_file")==0 ||
                             stricmp(file->token,"config_include")==0;
 
-            coremake_dir = stricmp(file->token,"platform_files")==0;
+            coremake_dir = stricmp(file->token,"platform_files")==0 ||
+                            stricmp(file->token,"coremake_include")==0;
 
             system_dir = stricmp(file->token,"config_android_ndk")==0 ||
                          stricmp(file->token,"os_include")==0;
@@ -3550,7 +3551,7 @@ void preprocess(item* p)
 	// add the path of PLATFORM_FILES to CONFIG_INCLUDE if COREMAKE_CONFIG_HELPER is set
 	if (item_get(getconfig(p),"COREMAKE_CONFIG_HELPER",0)->flags & FLAG_DEFINED)
 	{
-        i = item_get(item_get(p,"config_include",0),coremake_root,1);
+        i = item_get(item_get(p,"coremake_include",0),coremake_root,1);
         set_path_type(i,FLAG_PATH_COREMAKE);
 	}
 
@@ -5515,7 +5516,18 @@ int main(int argc, char** argv)
     set_path_type(i,FLAG_PATH_GENERATED);
 
 	i = getvalue(getroot(root,"platform_files"));
-	if (!i)
+	if (i)
+	{
+		if (ispathabs(i->value) || !ispathabs(src_root))
+			strcpy(coremake_root,i->value);
+		else
+		{
+			strcpy(coremake_root,src_root);
+			strcat(coremake_root,i->value);
+		}
+		simplifypath(coremake_root,1);
+	}
+	else
     {
 #ifdef _WIN32
         HMODULE this = GetModuleHandleA("coremake.exe");
@@ -5540,8 +5552,8 @@ int main(int argc, char** argv)
         i = item_get(root,"platform_files",1);
         i = item_get(i,coremake_root,1);
         set_path_type(i,FLAG_PATH_COREMAKE);
+		strcpy(coremake_root,i->value);
     }
-	strcpy(coremake_root,i->value);
 	addendpath(coremake_root);
     coremake_root_len = strlen(coremake_root);
 
