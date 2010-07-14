@@ -29,7 +29,6 @@ darwin* | rhapsody*)
             ;;
     esac
   ;;
-)
 linux* | freebsd* | kfreebsd*-gnu | dragonfly*)
     case $cpu_name in
         i*86)
