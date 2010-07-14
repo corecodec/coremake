@@ -29,15 +29,13 @@ darwin* | rhapsody*)
             ;;
     esac
   ;;
-freebsd* | kfreebsd*-gnu | dragonfly*)
-  coremake_param="gcc_linux"
-  ;;
-linux*)
+)
+linux* | freebsd* | kfreebsd*-gnu | dragonfly*)
     case $cpu_name in
         i*86)
             coremake_param="gcc_linux"
             ;;
-        x86_64)
+        x86_64 | amd64)
             coremake_param="gcc_linux_x64"
             ;;
         powerpc*)
