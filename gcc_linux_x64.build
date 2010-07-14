@@ -1,6 +1,7 @@
 #define TARGET_LINUX
 #define IX64
 #define IX86_64
+#define RESOURCE_COREC
 
 PLATFORMLIB = linux_x64
 SVNDIR = linux_x64
@@ -20,7 +21,7 @@ SVNDIR = linux_x64
 
 #define GLIBC
 
-#define CCFLAGS -O3 -m64 -Wno-multichar -fPIC -fvisibility=hidden
+#define CCFLAGS -O3 -m64 -Wno-multichar -fPIC -fvisibility=hidden -DRESOURCE_COREC
 #define ASMFLAGS -f elf64 -D_HIDDEN
 #define LFLAGS
 #define SHFLAGS -shared -Wl,--strip-all
