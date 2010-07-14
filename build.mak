@@ -1,4 +1,4 @@
-#all: coremake corerc
+all: coremake corerc
 
 coremake: coremake.c
 	$(CC) coremake.c -o coremake
