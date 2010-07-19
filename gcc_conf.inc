@@ -1,7 +1,7 @@
 FOR EACH WORKSPACE
 
   REMOVE %(¯PATH)make.bat
-  FILE %(¯PATH)Makefile
+  FILE %(¯PATH)GNUmakefile
   IFDEF TARGET_QTOPIA
     IF %(QPEDIR)
       // needed to run some of the Qtopia/Greenphone (stupid) scripts like gph
