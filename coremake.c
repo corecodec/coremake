@@ -5543,15 +5543,12 @@ int main(int argc, char** argv)
         ///       since the platform files should be in a dir like /usr/share
         ///       and the argv most likely doesn't contain the path to the exe
         ///       We probably need a --prefix during compilation to hardcode that /usr/share path
-        strcpy(coremake_root,argv[0]);
-        pathunix(coremake_root);
-        getfilename(coremake_root)[0] = 0;
-        strcat(coremake_root,"coremake");
+        strcpy(coremake_root,"/usr/local/share/coremake");
 #endif
         i = item_get(root,"platform_files",1);
         i = item_get(i,coremake_root,1);
         set_path_type(i,FLAG_PATH_COREMAKE);
-		strcpy(coremake_root,i->value);
+        strcpy(coremake_root,i->value);
     }
 	addendpath(coremake_root);
     coremake_root_len = strlen(coremake_root);
