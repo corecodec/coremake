@@ -54,7 +54,7 @@ FOR EACH WORKSPACE
       ENDIF
     ENDIF
   ENDFOR
-  PRINTNL clean depend cleandep:
+  PRINTNL clean depend cleandep install:
   FOR EACH USE
     PRINTNL 	@$(MAKE) -C %(¯!PATH) -f %(NAME).mak $@
   ENDFOR

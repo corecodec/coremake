@@ -798,6 +798,15 @@ FOR EACH USE
 ENDFOR
 */
 
+PRINTNL install: $(OUTPUT)
+IF (%(TYPE)==EXE || %(TYPE)==CON)
+  PRINTNL 	$(hide)install -c $(OUTPUT) /usr/local/bin
+ENDIF
+IF %(TYPE)==DLL
+  PRINTNL 	$(hide)install -c $(OUTPUT) /usr/local/lib
+ENDIF
+PRINTNL 
+
 PRINTNL clean:
 PRINTNL 	$(hide)rm -f $(OBJS)
 PRINTNL 	$(hide)rm -f $(OUTPUT)
