@@ -1,6 +1,7 @@
 FOR EACH WORKSPACE
 
   REMOVE %(¯PATH)Makefile
+  REMOVE %(¯PATH)GNUmakefile
   REMOVE %(¯PATH)Makefile.evc
   REMOVE %(¯PATH)Makefile.vc6
   REMOVE %(¯PATH)Makefile.vs
@@ -151,6 +152,7 @@ FOR EACH ALLDIRS
   REMOVEDIR %(NAME).deps
   REMOVEDIR %(NAME).libs
   REMOVE %(NAME)Makefile
+  REMOVE %(NAME)GNUmakefile
   REMOVE %(NAME)Makefile.in
   REMOVE %(NAME)Makefile.am
 ENDFOR

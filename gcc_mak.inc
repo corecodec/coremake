@@ -526,7 +526,7 @@ ELSE
         PRINTNL 	$(hide)cp -f $< $@
       ENDIF
     ENDIF
-    IFDEF RESOURCE_COREC
+    IFDEF RESOURCE_COREC 
       IF (%(TYPE)!=lib)
         PRINTNL 
         FOR EACH INSTALL
@@ -539,17 +539,15 @@ ELSE
           PRINTNL 
         ENDFOR
       ENDIF
-    ELSE
-      IF !defined(TARGET_ANDROID)
+    ELIF !defined(TARGET_ANDROID)
+      PRINTNL 
+      FOR EACH INSTALL
         PRINTNL 
-        FOR EACH INSTALL
-          PRINTNL 
-          PRINTNL %(!RESOURCEPATH)%(<NAME).%(>NAME): %(!NAME)
-          PRINTNL 	$(hide)echo copy $<
-          PRINTNL 	$(hide)mkdir -p %(!RESOURCEPATH)
-          PRINTNL 	$(hide)cp -f $< $@
-        ENDFOR
-      ENDIF
+        PRINTNL %(!RESOURCEPATH)%(<NAME).%(>NAME): %(!NAME)
+        PRINTNL 	$(hide)echo copy $<
+        PRINTNL 	$(hide)mkdir -p %(!RESOURCEPATH)
+        PRINTNL 	$(hide)cp -f $< $@
+      ENDFOR
     ENDIF
   ENDIF
 
@@ -799,6 +797,15 @@ FOR EACH USE
   PRINTNL 
 ENDFOR
 */
+
+PRINTNL install: $(OUTPUT)
+IF (%(TYPE)==EXE || %(TYPE)==CON)
+  PRINTNL 	$(hide)install -c $(OUTPUT) /usr/local/bin
+ENDIF
+IF %(TYPE)==DLL
+  PRINTNL 	$(hide)install -c $(OUTPUT) /usr/local/lib
+ENDIF
+PRINTNL 
 
 PRINTNL clean:
 PRINTNL 	$(hide)rm -f $(OBJS)
