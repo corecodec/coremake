@@ -226,6 +226,13 @@ FOR EACH WORKSPACE
       PRINTNL org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
       PRINTNL org.eclipse.jdt.core.compiler.compliance=1.5
       PRINTNL org.eclipse.jdt.core.compiler.source=1.5
+      
+      FILE %(¯BUILDDIR)export.map
+      PRINTNL {
+      PRINTNL    global: Java*;
+      PRINTNL    local: *;
+      PRINTNL };
+      
 
       // TODO: there should be one per EXE
       FILE %(¯BUILDDIR)AndroidManifest.xml
@@ -313,12 +320,13 @@ ENDFOR
 
 CC = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)gcc
 STRIP = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)strip 
-STRIPFLAGS = --strip-debug
+STRIPFLAGS = -s -w -K Java*
 OS_INCLUDE += %(ANDROID_LIBC_DIR)/include
 CCFLAGS += -DANDROID
 SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libc.so %(ANDROID_LIBC_DIR)/lib/libstdc++.so %(ANDROID_LIBC_DIR)/lib/libm.so -Wl,--no-undefined  -Wl,-rpath-link=%(ANDROID_LIBC_DIR)/lib -L%(ANDROID_LIBC_DIR)/lib
 IF %(ANDROID_GCC_LIB)!=""
   SHFLAGS1 += %(ANDROID_GCC_DIR)/../lib/%(ANDROID_GCC_LIB)
 ENDIF
+LFLAGS += -Wl,--version-script=%(¯|BUILDDIR)export.map
 
 #include "gcc_conf.inc"

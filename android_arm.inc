@@ -3,8 +3,8 @@
 #define TARGOPTIM release
 #define ARM
 
-CCFLAGS += -pipe -msoft-float -fpic -mthumb-interwork -ffunction-sections -funwind-tables -fstack-protector -fno-short-enums -O2 -fomit-frame-pointer -fstrict-aliasing -funswitch-loops -finline-limit=300 -g
-SFLAGS += -march=armv7-a
+CCFLAGS += -pipe -msoft-float -fpic -mthumb-interwork -ffunction-sections -funwind-tables -fstack-protector -fno-short-enums -O2 -fomit-frame-pointer -fstrict-aliasing -funswitch-loops -finline-limit=300 -fvisibility=hidden -g
+SFLAGS += -march=armv7-a -D_HIDDEN
 ANDROID_ABI += armeabi
 ANDROID_ARCH = arch-arm
 ANDROID_GCC_PREFIX = arm-eabi-

@@ -114,6 +114,7 @@ FOR EACH LIB,DLL,EXE,CON,CAB,LIB_CSHARP,DLL_CSHARP,EXE_CSHARP,CON_CSHARP,EXE_JAV
   REMOVE %(¯BUILDDIR)default.properties
   REMOVE %(¯BUILDDIR)AndroidManifest.xml
   REMOVE %(¯BUILDDIR).settings/org.eclipse.jdt.core.prefs
+  REMOVE %(¯BUILDDIR)export.map
   REMOVEDIR %(¯BUILDDIR).settings
   REMOVEDIR %(¯BUILDDIR)gen
   REMOVEDIR %(¯BUILDDIR)res
