@@ -88,7 +88,7 @@ typedef struct DIR
 
 DIR* opendir(const char* name)
 {
-	DIR* p = malloc(sizeof(DIR));
+	DIR* p = (DIR*)malloc(sizeof(DIR));
 	if (p)
 	{
 		sprintf(p->entry.d_name,"%s\\*",name);
@@ -288,7 +288,7 @@ void item_add(item* p,item* child)
 	{
 		intptr_t count = p->childend - p->child;
 		intptr_t alloc = count+16;
-		p->child = realloc(p->child,sizeof(item*)*alloc);
+		p->child = (item**)realloc(p->child,sizeof(item*)*alloc);
 		if (!p->child)
 		{
 			printf("out of memory!\r\n");
@@ -475,7 +475,7 @@ item* item_get(item* parent,const char* value,int defined)
 	item* p = item_find(parent,value);
 	if (!p)
 	{
-		p = zalloc(sizeof(item));
+		p = (item*)zalloc(sizeof(item));
 		if (value)
 			p->value = strdup(value);
 		if (parent)
@@ -515,7 +515,7 @@ void item_delete(item* p)
 
 itemcond* itemcond_new(int func, item* value)
 {
-	itemcond* p = zalloc(sizeof(itemcond));
+	itemcond* p = (itemcond*)zalloc(sizeof(itemcond));
     p->refcount = 1;
 	p->func = func;
 	p->value = value;
@@ -737,9 +737,9 @@ void item_merge(item* p,item* group,item* plus)
 void reader_init(reader *p)
 {
 	memset(p,0,sizeof(reader));
-    p->filename = malloc(MAX_PATH);
-    p->line = malloc(MAX_LINE);
-    p->token = malloc(MAX_LINE);
+    p->filename = (char*)malloc(MAX_PATH);
+    p->line = (char*)malloc(MAX_LINE);
+    p->token = (char*)malloc(MAX_LINE);
     memset(p->filename,0,MAX_PATH);
     memset(p->line,0,MAX_LINE);
     memset(p->token,0,MAX_LINE);
@@ -1449,18 +1449,18 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 				itemcond_delete(cond1);
 				if (mode==1)
 				{
-					itemcond* not = itemcond_new(COND_NOT,NULL);
-					not->a = itemcond_dup(cond);
-                    not = itemcond_and(itemcond_and(not,cond0),condextra);
-					load_item(p,file,3,not);
-	    			itemcond_delete(not);
+					itemcond* not1 = (itemcond*)itemcond_new(COND_NOT,NULL);
+					not1->a = itemcond_dup(cond);
+                    not1 = itemcond_and(itemcond_and(not1,cond0),condextra);
+					load_item(p,file,3,not1);
+	    			itemcond_delete(not1);
 				}
                 else if (mode==2)
                 {
-					itemcond* not = itemcond_new(COND_NOT,NULL);
-					not->a = itemcond_dup(cond);
-                    condextra = itemcond_and(condextra,not);
-	    			itemcond_delete(not);
+					itemcond* not1 = itemcond_new(COND_NOT,NULL);
+					not1->a = itemcond_dup(cond);
+                    condextra = itemcond_and(condextra,not1);
+	    			itemcond_delete(not1);
                 }
 				itemcond_delete(cond);
 			}
@@ -4359,7 +4359,7 @@ char* eval3(const char** s,item* config,reader* file)
 		if ((*s)[0]!='"')
 			syntax(file);
 		*s += 1;
-		a = zalloc(n+1);
+		a = (char*)zalloc(n+1);
 		memcpy(a,s0,n);
 	}
 	else
@@ -4367,7 +4367,7 @@ char* eval3(const char** s,item* config,reader* file)
 	{
 		s0 = *s;
 		for (n=0;(*s)[0] && isname((*s)[0]);(*s)++,++n);
-		a = zalloc(n+1);
+		a = (char*)zalloc(n+1);
 		memcpy(a,s0,n);
 
 		if (stricmp(a,"defined")==0 && (*s)[0]=='(')
@@ -4378,7 +4378,7 @@ char* eval3(const char** s,item* config,reader* file)
 
 			s0 = *s;
 			for (n=0;(*s)[0] && (*s)[0]!=')';(*s)++,++n);
-			a = zalloc(n+1);
+			a = (char*)zalloc(n+1);
 			memcpy(a,s0,n);
 
 			i = item_find(config,a);
@@ -5529,11 +5529,11 @@ int main(int argc, char** argv)
 	else
     {
 #ifdef _WIN32
-        HMODULE this = GetModuleHandleA("coremake.exe");
-        if (this)
+        HMODULE this1 = GetModuleHandleA("coremake.exe");
+        if (this1)
         {
-            GetModuleFileNameA(this,coremake_root,MAX_PATH);
-            FreeLibrary(this);
+            GetModuleFileNameA(this1,coremake_root,MAX_PATH);
+            FreeLibrary(this1);
             pathunix(coremake_root);
             getfilename(coremake_root)[0] = 0;
             strcat(coremake_root,"coremake");
