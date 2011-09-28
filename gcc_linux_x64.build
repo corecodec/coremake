@@ -24,6 +24,6 @@ SVNDIR = linux_x64
 #define CCFLAGS -O3 -m64 -Wno-multichar -fPIC -fvisibility=hidden -DRESOURCE_COREC
 #define ASMFLAGS -f elf64 -D_HIDDEN
 #define LFLAGS
-#define SHFLAGS -shared -Wl,--strip-all,-Bsymbolic
+#define SHFLAGS -shared -Wl,--strip-all
 
 #include "gcc.inc"
