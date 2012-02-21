@@ -34,7 +34,8 @@
 			DefaultValue = "";
 			CommandLineFlag = "-P";
 		},
-       		{   	Name = USER_HEADER_SEARCH_PATHS;
+       		{   	
+			Name = USER_HEADER_SEARCH_PATHS;
             		Type = PathList;
             		DefaultValue = "";
            		CommandLinePrefixFlag = "-I";
