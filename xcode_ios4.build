@@ -4,11 +4,11 @@
 #define ARM
 #define TARGET_ALWAYS_STATIC
 
-SDK = iphoneos4.1
+SDK = iphoneos
 IOSDEPLOYMENTTARGET = 3.0
-GCC_VERSION = 4.2
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0
 XCODECOMPATVERSION = 3.2
 ARCHS = "$(ARCHS_STANDARD_32_BIT)"
 DEVICEFAMILY = 1
 
-#include "xcode.inc"
+#include "xcode4.inc"
