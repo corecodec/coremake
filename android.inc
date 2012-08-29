@@ -321,13 +321,12 @@ ENDFOR
 CC = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-gcc
 AR = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-ar
 STRIP = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-strip 
-STRIPFLAGS = -s -w -K Java*
+STRIPFLAGS = -s -x
 OS_INCLUDE += %(ANDROID_LIBC_DIR)/include
 CCFLAGS += -DANDROID
 SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libc.so %(ANDROID_LIBC_DIR)/lib/libstdc++.so %(ANDROID_LIBC_DIR)/lib/libm.so -Wl,--no-undefined  -Wl,-rpath-link=%(ANDROID_LIBC_DIR)/lib -L%(ANDROID_LIBC_DIR)/lib
 IF %(ANDROID_GCC_LIB)!=""
   SHFLAGS1 += %(ANDROID_GCC_DIR)/../lib/%(ANDROID_GCC_LIB)
 ENDIF
-LFLAGS += -Wl,--version-script=%(¯|BUILDDIR)export.map
 
 #include "gcc_conf.inc"

@@ -87,7 +87,7 @@
 #undef CONFIG_NEON /* platforms that don't support NEON/ARMv7 instructions */
 #endif
 
-#if !defined(POWERPC)
+#if !defined(POWERPC) || defined(TARGET_WII)
 #undef CONFIG_ALTIVEC
 #endif
 

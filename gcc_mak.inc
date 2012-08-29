@@ -63,7 +63,7 @@ ENDIF
 IF (%(NASM)!="")
   PRINTNL NASM = %(NASM)
 ENDIF
-IF (%(AR)!="")
+IF ("%(AR)"!="")
   PRINTNL AR = %(AR)
 ENDIF
 IF ("%(CCENV)"!="")
