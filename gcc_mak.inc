@@ -133,7 +133,7 @@ ENDIF
 
 IF defined(TARGET_ANDROID)
   IF %(LIBS)!=""
-    PRINTNL LFLAGS += %(@LIBS:%=%(§CONFIG_ANDROID_NDK)/build/platforms/android-4/arch-arm/usr/lib/lib%.so)
+    PRINTNL LFLAGS += %(@LIBS:%=%(§CONFIG_ANDROID_NDK)/platforms/android-4/arch-arm/usr/lib/lib%.so)
   ENDIF
 ENDIF
 
