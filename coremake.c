@@ -776,10 +776,12 @@ int reader_line(reader* p)
 {
 	size_t i;
     p->line[0] = 0;
+	long before_pos = ftell(p->r.f);
 	fgets(p->line,MAX_LINE,p->r.f);
 	if (feof(p->r.f) && p->line[0]==0)
 		return 0;
 	i=strlen(p->line);
+	fseek(p->r.f, before_pos + i, SEEK_SET);
 	while (i && isspace(p->line[--i]))
 		p->line[i]=0;
 	p->pos = p->line;
