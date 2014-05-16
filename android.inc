@@ -154,7 +154,7 @@ FOR EACH WORKSPACE
       PRINTNL <?xml version="1.0" encoding="UTF-8"?>
       PRINTNL <classpath>
       PRINTNL 	<classpathentry kind="src" path="src"/>
-      PRINTNL 	<classpathentry kind="src" path="srcgen">
+      PRINTNL 	<classpathentry including="*.java" kind="src" path="srcgen">
       PRINTNL 		<attributes>
       PRINTNL 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="%(NAME)/libs/%(ANDROID_ABI)"/>
       PRINTNL 		</attributes>
