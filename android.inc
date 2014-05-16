@@ -218,7 +218,7 @@ FOR EACH WORKSPACE
       PRINTNL # Indicates whether an apk should be generated for each density.
       PRINTNL split.density=false
       PRINTNL # Project target.
-      PRINTNL target=android-4
+      PRINTNL target=android-%(CONFIG_ANDROID_VERSION)
       
       FILE %(¯BUILDDIR).settings/org.eclipse.jdt.core.prefs
       PRINTNL #Mon Jan 25 12:20:43 CET 2010
@@ -247,7 +247,7 @@ FOR EACH WORKSPACE
         PRINTNL       android:versionName="%(PROJECT_VERSION)"
       ENDIF
       PRINTNL       >
-      PRINTNL     <uses-sdk android:minSdkVersion="4"/>
+      PRINTNL     <uses-sdk android:minSdkVersion="%(CONFIG_ANDROID_VERSION)"/>
       PRINTNL     <application
       IF %(ICON)!=""
         PRINTNL         android:icon="@drawable/%(<ICON)_64x64"
