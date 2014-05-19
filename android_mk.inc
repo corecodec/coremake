@@ -86,6 +86,20 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
   ENDIF
   
   IF %(TYPE)==DLL
+    IF %(LIBS)!=""
+      PRINTNL LOCAL_LDLIBS += \
+      FOR EACH LIBS
+        IF %(NAME)!=""
+          IF %(FOR_LAST)
+            PRINTNL     -l%(NAME)
+          ELSE
+            PRINTNL     -l%(NAME) \
+          ENDIF
+        ENDIF
+      ENDFOR
+      PRINTNL 
+    ENDIF
+  
     PRINTNL include $(BUILD_SHARED_LIBRARY)
   ELSE
     PRINTNL include $(BUILD_STATIC_LIBRARY)
