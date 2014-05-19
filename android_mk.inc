@@ -65,8 +65,8 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
     PRINTNL 
   ENDIF
   
-  // the include folders are relative to the root of the NDK
-  DIRPUSH %(!CONFIG_ANDROID_NDK)
+  // the include folders are relative to project root
+  DIRPUSH ..
   PRINTNL LOCAL_C_INCLUDES := \
   FOR EACH INCLUDE
     PRINTNL     %(!§NAME) \
