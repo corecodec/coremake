@@ -66,18 +66,22 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
   ENDIF
   
   // the include folders are relative to project root
+  FOR EACH INCLUDE
+    ../USERINCLUDE += %(|NAME)
+  ENDFOR
+  FOR EACH EXPINCLUDE
+    ../USERINCLUDE += %(|NAME)
+  ENDFOR
+  FOR EACH SUBINCLUDE
+    ../USERINCLUDE += %(|NAME)
+  ENDFOR
+
   DIRPUSH ..
   PRINTNL LOCAL_C_INCLUDES := \
-  FOR EACH INCLUDE
-    PRINTNL     %(!§NAME) \
-  ENDFOR
-  FOR EACH CONFIG_INCLUDE
-    IF %(FOR_LAST)
-      PRINTNL     %(!§NAME)
-    ELSE
+  FOR EACH USERINCLUDE
       PRINTNL     %(!§NAME) \
-    ENDIF
   ENDFOR
+  PRINTNL     %(@&CONFIG_INCLUDE:%= %)
   DIRPOP
   PRINTNL 
 
