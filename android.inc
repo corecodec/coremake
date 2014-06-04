@@ -263,7 +263,7 @@ FOR EACH WORKSPACE
       ENDFOR
       PRINTNL         android:label="%(PROJECT_NAME)">
       PRINTNL       <activity android:name=".App"
-      PRINTNL             android:configChanges="mcc|mnc|keyboardHidden|orientation|fontScale"
+      PRINTNL             android:configChanges="mcc|mnc|keyboardHidden|orientation|fontScale|screenSize|screenLayout"
       IF %(ANDROID_SINGLE)!=""
         PRINTNL             android:launchMode="singleTask"
       ENDIF
@@ -289,7 +289,7 @@ FOR EACH WORKSPACE
         IF %(ACTIVITY)!=""
           DIRPUSH %(!PATH)
           PRINTNL       <activity android:name="%(```/§NAME).%(<NAME)"
-          PRINTNL             android:configChanges="mcc|mnc|keyboardHidden|orientation|fontScale"
+          PRINTNL             android:configChanges="mcc|mnc|keyboardHidden|orientation|fontScale|screenSize|screenLayout"
           PRINTNL       />
           DIRPOP
         ENDIF
