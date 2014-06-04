@@ -250,6 +250,9 @@ FOR EACH WORKSPACE
       ENDIF
       PRINTNL       >
       PRINTNL     <uses-sdk android:minSdkVersion="%(CONFIG_ANDROID_VERSION)"/>
+      FOR EACH ANDROID_PERMISSION
+        PRINTNL     <uses-permission android:name="%(NAME)"/>
+      ENDFOR
       PRINTNL     <application
       IF %(ICON)!=""
         PRINTNL         android:icon="@drawable/%(<ICON)_64x64"
@@ -304,9 +307,6 @@ FOR EACH WORKSPACE
         ENDIF
       ENDFOR
       PRINTNL     </application>
-      FOR EACH ANDROID_PERMISSION
-        PRINTNL     <uses-permission android:name="%(NAME)"/>
-      ENDFOR
       PRINTNL </manifest> 
       
     ENDIF
