@@ -4,27 +4,27 @@
   Copyright (c) 2006-2010, CoreCodec, Inc.
   All rights reserved.
 
-  Redistribution and use in source and binary forms, with or without 
+  Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
-  * Redistributions of source code must retain the above copyright notice, 
+  * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  * Redistributions in binary form must reproduce the above copyright notice, 
+  * Redistributions in binary form must reproduce the above copyright notice,
     this list of conditions and the following disclaimer in the documentation
     and/or other materials provided with the distribution.
-  * Neither the name of the CoreCodec, Inc. nor the names of its contributors 
-    may be used to endorse or promote products derived from this software 
+  * Neither the name of the CoreCodec, Inc. nor the names of its contributors
+    may be used to endorse or promote products derived from this software
     without specific prior written permission.
 
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
   THE POSSIBILITY OF SUCH DAMAGE.
 */
 
@@ -88,7 +88,7 @@ typedef struct DIR
 
 DIR* opendir(const char* name)
 {
-	DIR* p = malloc(sizeof(DIR));
+	DIR* p = (DIR*)malloc(sizeof(DIR));
 	if (p)
 	{
 		sprintf(p->entry.d_name,"%s\\*",name);
@@ -288,7 +288,7 @@ void item_add(item* p,item* child)
 	{
 		intptr_t count = p->childend - p->child;
 		intptr_t alloc = count+16;
-		p->child = realloc(p->child,sizeof(item*)*alloc);
+		p->child = (item**)realloc(p->child,sizeof(item*)*alloc);
 		if (!p->child)
 		{
 			printf("out of memory!\r\n");
@@ -359,10 +359,10 @@ void setvalue(item* p,const char* value)
 item* findref(const item* p)
 {
 	if (p->parent && (stricmp(p->parent->value,"project")==0 ||
-		              stricmp(p->parent->value,"dep")==0 || 
-		              stricmp(p->parent->value,"use")==0 || 
-					  stricmp(p->parent->value,"useinclude")==0 || 
-					  stricmp(p->parent->value,"usemerge")==0 || 
+		              stricmp(p->parent->value,"dep")==0 ||
+		              stricmp(p->parent->value,"use")==0 ||
+					  stricmp(p->parent->value,"useinclude")==0 ||
+					  stricmp(p->parent->value,"usemerge")==0 ||
 					  stricmp(p->parent->value,"usebuilt")==0))
 	{
 		item* v = item_find(getroot(p,"exe"),p->value);
@@ -403,7 +403,7 @@ int compare_use(const item* a, const item* b)
 	{
 		size_t i;
 		item* use;
-			
+
 		use = item_get(refb,"use",0);
 		for (i=0;i<item_childcount(use);++i)
 			if (refa == findref(use->child[i]))
@@ -427,7 +427,7 @@ int precompare_use(const item* refa, const item* refb)
 {
 	size_t i;
 	item* use;
-		
+
 	use = item_get((item*)refb,"use",0);
 	for (i=0;i<item_childcount(use);++i)
 		if (refa == findref(use->child[i]))
@@ -475,7 +475,7 @@ item* item_get(item* parent,const char* value,int defined)
 	item* p = item_find(parent,value);
 	if (!p)
 	{
-		p = zalloc(sizeof(item));
+		p = (item*)zalloc(sizeof(item));
 		if (value)
 			p->value = strdup(value);
 		if (parent)
@@ -515,7 +515,7 @@ void item_delete(item* p)
 
 itemcond* itemcond_new(int func, item* value)
 {
-	itemcond* p = zalloc(sizeof(itemcond));
+	itemcond* p = (itemcond*)zalloc(sizeof(itemcond));
     p->refcount = 1;
 	p->func = func;
 	p->value = value;
@@ -737,9 +737,9 @@ void item_merge(item* p,item* group,item* plus)
 void reader_init(reader *p)
 {
 	memset(p,0,sizeof(reader));
-    p->filename = malloc(MAX_PATH);
-    p->line = malloc(MAX_LINE);
-    p->token = malloc(MAX_LINE);
+    p->filename = (char*)malloc(MAX_PATH);
+    p->line = (char*)malloc(MAX_LINE);
+    p->token = (char*)malloc(MAX_LINE);
     memset(p->filename,0,MAX_PATH);
     memset(p->line,0,MAX_LINE);
     memset(p->token,0,MAX_LINE);
@@ -1077,7 +1077,7 @@ char* nextlevel(const char* path)
 
 void addendpath(char* path)
 {
-	if (path[0] && path[strlen(path)-1]!='/') 
+	if (path[0] && path[strlen(path)-1]!='/')
 		strcat(path,"/");
 }
 
@@ -1408,7 +1408,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 				dir = opendir(path[0]?path:".");
 				if (dir)
 				{
-					struct dirent* entry; 
+					struct dirent* entry;
                     struct stat entrystats;
 					addendpath(path);
 					while ((entry = readdir(dir)) != NULL)
@@ -1451,18 +1451,18 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 				itemcond_delete(cond1);
 				if (mode==1)
 				{
-					itemcond* not = itemcond_new(COND_NOT,NULL);
-					not->a = itemcond_dup(cond);
-                    not = itemcond_and(itemcond_and(not,cond0),condextra);
-					load_item(p,file,3,not);
-	    			itemcond_delete(not);
+					itemcond* not1 = (itemcond*)itemcond_new(COND_NOT,NULL);
+					not1->a = itemcond_dup(cond);
+                    not1 = itemcond_and(itemcond_and(not1,cond0),condextra);
+					load_item(p,file,3,not1);
+	    			itemcond_delete(not1);
 				}
                 else if (mode==2)
                 {
-					itemcond* not = itemcond_new(COND_NOT,NULL);
-					not->a = itemcond_dup(cond);
-                    condextra = itemcond_and(condextra,not);
-	    			itemcond_delete(not);
+					itemcond* not1 = itemcond_new(COND_NOT,NULL);
+					not1->a = itemcond_dup(cond);
+                    condextra = itemcond_and(condextra,not1);
+	    			itemcond_delete(not1);
                 }
 				itemcond_delete(cond);
 			}
@@ -1523,14 +1523,14 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 			need_path = !p->parent && (
 				   stricmp(file->token,"con")==0 ||
 				   stricmp(file->token,"exe")==0 ||
-				   stricmp(file->token,"group")==0 || 
-				   stricmp(file->token,"lib")==0 || 
-				   stricmp(file->token,"dll")==0 || 
-				   stricmp(file->token,"lib_csharp")==0 || 
-				   stricmp(file->token,"dll_csharp")==0 || 
-				   stricmp(file->token,"exe_csharp")==0 || 
-				   stricmp(file->token,"con_csharp")==0 || 
-				   stricmp(file->token,"exe_java")==0 || 
+				   stricmp(file->token,"group")==0 ||
+				   stricmp(file->token,"lib")==0 ||
+				   stricmp(file->token,"dll")==0 ||
+				   stricmp(file->token,"lib_csharp")==0 ||
+				   stricmp(file->token,"dll_csharp")==0 ||
+				   stricmp(file->token,"exe_csharp")==0 ||
+				   stricmp(file->token,"con_csharp")==0 ||
+				   stricmp(file->token,"exe_java")==0 ||
 			       stricmp(file->token,"workspace")==0);
 
             uselib = stricmp(file->token,"uselib")==0 || stricmp(file->token,"builtlib")==0;
@@ -1538,7 +1538,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 			filename = stricmp(file->token,"config_file")==0 ||
 					   stricmp(file->token,"config_include")==0 ||
 					   stricmp(file->token,"config_cleaner")==0 ||
-					   stricmp(file->token,"platform_files")==0 ||	
+					   stricmp(file->token,"platform_files")==0 ||
 					   stricmp(file->token,"expinclude")==0 ||
 					   stricmp(file->token,"subinclude")==0 ||
 					   stricmp(file->token,"sysinclude")==0 ||
@@ -1598,7 +1598,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 
 			cond = load_cond(p,file,0);
 			cond = itemcond_and(cond,cond0);
-		
+
 			if (cond && config)
 			{
 				item* v;
@@ -1954,7 +1954,7 @@ void preprocess_dependency_project(item* p)
 			else
 			if (stricmp(ref->parent->value,"lib")==0)
 			{
-				preprocess_dependency_project(ref); 
+				preprocess_dependency_project(ref);
 				// copy use of lib's
 				item_merge(use,item_find(ref,"use"),use->child[i]);
 
@@ -2397,7 +2397,7 @@ void preprocess_stdafx(item* p,int lib)
 		if (path)
 		{
             preprocess_stdafx_includes(p,lib);
-    
+
             if (prj)
             {
 			    FILE* f;
@@ -2919,15 +2919,15 @@ void preprocess_usemerge(item* p)
 
 		        item_merge(lib,dll,merge->child[i]);
                 item_delete(dll);
-            
+
                 use = item_find(item_get(lib,"use",0),(*child)->value);
                 if (use)
                     item_delete(use);
-                
+
                 use = item_find(item_get(lib,"usebuilt",0),(*child)->value);
                 if (use)
                     item_delete(use);
-                
+
 				replace_use(getroot(p,"dll"),lib->value,*child);
 				replace_use(getroot(p,"lib"),lib->value,*child);
 				replace_use(getroot(p,"con"),lib->value,*child);
@@ -2946,15 +2946,15 @@ void preprocess_usemerge(item* p)
 
 		        item_merge(lib,dll,merge->child[i]);
                 item_delete(dll);
-            
+
                 use = item_find(item_get(lib,"use",0),(*child)->value);
                 if (use)
                     item_delete(use);
-                
+
                 use = item_find(item_get(lib,"usebuilt",0),(*child)->value);
                 if (use)
                     item_delete(use);
-                
+
 				replace_use(getroot(p,"dll_csharp"),lib->value,*child);
 				replace_use(getroot(p,"lib_csharp"),lib->value,*child);
 				replace_use(getroot(p,"con_csharp"),lib->value,*child);
@@ -3129,7 +3129,7 @@ void generate_xcodeuid(char *xcodeuid,const char *srcstr)
 	sprintf(xcodeuid,"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
 		code.b[0],code.b[1],code.b[2],code.b[3],
 		code.b[4],code.b[5],code.b[6],code.b[7],
-		code.b[8],code.b[9],code.b[10],code.b[11]);            
+		code.b[8],code.b[9],code.b[10],code.b[11]);
 }
 
 void generate_msmuid(char *msmuid,const char *srcstr)
@@ -3185,7 +3185,7 @@ void generate_msuid(char *msuid,const char *srcstr)
         code.b[0],code.b[1],code.b[2],code.b[3],
         code.b[4],code.b[5],code.b[6],code.b[7],
         code.b[8],code.b[9],code.b[10],code.b[11],
-        code.b[12],code.b[13],code.b[14],code.b[15]);            
+        code.b[12],code.b[13],code.b[14],code.b[15]);
 }
 
 void preprocess_sort_workspace(item* p)
@@ -3383,7 +3383,7 @@ void preprocess_sort(item* p)
             generate_msmuid(msmuid, projfile);
             item_get(item_get(src->child[i],"msmuid",0),msmuid,1);
         }
-        
+
         src = item_get(*child,"framework_lib",0);
         for (i=0;i<item_childcount(src);++i)
         {
@@ -3492,7 +3492,7 @@ void preprocess_sort(item* p)
 
         if ((item_get(getconfig(*child),"TARGET_PALMOS",0)->flags & FLAG_DEFINED) && !getvalue(item_get(*child,"project_fourcc",0)))
             item_get(item_get(*child,"project_fourcc",0),"'CMAK'",1);
-        
+
         major=1;
         minor=0;
         revision=0;
@@ -3743,12 +3743,11 @@ void simplifypath(char* path, int head)
         if (strncmp(s,"/../",4)==0 && s!=path)
         {
             char* end = s+4;
-            while (--s!=path)
-                if (*s == '/' || *s == '\\')
-                {
-                    ++s;
-                    break;
-                }
+            do
+            {
+				if (s[-1] == '/' || s[-1] == '\\')
+					break;
+			} while (--s!=path);
             s = strdel(s,end);
             if (s != path)
                 --s;
@@ -3987,7 +3986,7 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
 
             if (relpath && (buildflags[curr_build] & FLAG_PATH_SET_ABSOLUTE))
                 abspath = 1;
-			
+
 			s = getname(s,name);
 
             ipos = pos;
@@ -4171,7 +4170,7 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
 								strcmp(value+n-maskend,mask+maskpos)==0)
 							{
                                 int skipquote=0;
-                                char* name0 = name+strlen(name);                              
+                                char* name0 = name+strlen(name);
 								if (name[0])
 									strcat(name," ");
                                 if (checkquote)
@@ -4222,7 +4221,7 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
 						strcpy(name,j->value);
                         name_flags = j->flags;
                     }
-					else 
+					else
 					if (j)
 					{
                         name_flags |= j->flags;
@@ -4361,7 +4360,7 @@ char* eval3(const char** s,item* config,reader* file)
 		if ((*s)[0]!='"')
 			syntax(file);
 		*s += 1;
-		a = zalloc(n+1);
+		a = (char*)zalloc(n+1);
 		memcpy(a,s0,n);
 	}
 	else
@@ -4369,7 +4368,7 @@ char* eval3(const char** s,item* config,reader* file)
 	{
 		s0 = *s;
 		for (n=0;(*s)[0] && isname((*s)[0]);(*s)++,++n);
-		a = zalloc(n+1);
+		a = (char*)zalloc(n+1);
 		memcpy(a,s0,n);
 
 		if (stricmp(a,"defined")==0 && (*s)[0]=='(')
@@ -4380,7 +4379,7 @@ char* eval3(const char** s,item* config,reader* file)
 
 			s0 = *s;
 			for (n=0;(*s)[0] && (*s)[0]!=')';(*s)++,++n);
-			a = zalloc(n+1);
+			a = (char*)zalloc(n+1);
 			memcpy(a,s0,n);
 
 			i = item_find(config,a);
@@ -4530,7 +4529,7 @@ void remove_file(const char* name)
 		dir = opendir(path[0]?path:".");
 		if (dir)
 		{
-			struct dirent* entry; 
+			struct dirent* entry;
 			addendpath(path);
 			while ((entry = readdir(dir)) != NULL)
 			{
@@ -4552,7 +4551,7 @@ void remove_dir(const char* name)
 	DIR* dir = opendir(name);
 	if (dir)
 	{
-		struct dirent* entry; 
+		struct dirent* entry;
 		while ((entry = readdir(dir)) != NULL)
 		{
 			if (entry->d_name[0]!='.')
@@ -4628,7 +4627,7 @@ void create_missing_dirs(const char *path)
         else if (strpos>1 && new_dir[strpos-2] != ':')
 		{
 			ret = make_dir(new_dir);
-			
+
 			if (ret != 0 && ret != EEXIST)
 			{
 				printf("can't create directory %s\r\n",new_dir);
@@ -4687,14 +4686,14 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
 		{
             reader_token(file);
 			reader_filename(file,FLAG_PATH_COREMAKE);
-			if (!skip) 
+			if (!skip)
 				build_file(p,file->token,FLAG_PATH_COREMAKE);
 		}
 		else
 		if (is_sharped && reader_istoken(file,"undef"))
 		{
 			reader_name(file);
-			if (!skip) 
+			if (!skip)
 			{
 				i=item_find(getconfig(p),file->token);
 				if (i) i->flags &= ~FLAG_DEFINED;
@@ -5451,9 +5450,9 @@ int main(int argc, char** argv)
 			if (dir)
 			{
                 int found = 0;
-				struct dirent* entry; 
+				struct dirent* entry;
 				while ((entry = readdir(dir)) != NULL)
-					if (entry->d_name[0]!='.' && strrchr(entry->d_name,'.') && 
+					if (entry->d_name[0]!='.' && strrchr(entry->d_name,'.') &&
                         stricmp(strrchr(entry->d_name,'.'),".proj")==0 && load_file(root,entry->d_name,FLAG_PATH_SOURCE,NULL))
                     {
                         found = 1;
@@ -5531,11 +5530,11 @@ int main(int argc, char** argv)
 	else
     {
 #ifdef _WIN32
-        HMODULE this = GetModuleHandleA("coremake.exe");
-        if (this)
+        HMODULE this1 = GetModuleHandleA("coremake.exe");
+        if (this1)
         {
-            GetModuleFileNameA(this,coremake_root,MAX_PATH);
-            FreeLibrary(this);
+            GetModuleFileNameA(this1,coremake_root,MAX_PATH);
+            FreeLibrary(this1);
             pathunix(coremake_root);
             getfilename(coremake_root)[0] = 0;
             strcat(coremake_root,"coremake");

@@ -11,4 +11,4 @@ XCODECOMPATVERSION = 3.2
 ARCHS = "$(ARCHS_STANDARD_32_BIT)"
 DEVICEFAMILY = 1
 
-#include "xcode.inc"
+#include "xcode4.inc"

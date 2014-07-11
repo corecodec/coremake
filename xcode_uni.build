@@ -1,10 +1,6 @@
-#define OSX_UNIVERSAL
-#define IX86
-#define POWERPC
-
-SDK = /Developer/SDKs/MacOSX10.4u.sdk
+SDK = macosx
 FRAMEWORK_PATH = /
-GCC_VERSION = 4.0
-XCODECOMPATVERSION = 3.1
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0
+//XCODECOMPATVERSION = 3.1
 
-#include "xcode.inc"
+#include "xcode4.inc"
