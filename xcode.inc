@@ -632,6 +632,10 @@ FOR EACH WORKSPACE
     ENDIF
     IFDEF TARGET_IPHONE
       PRINTNL				GCC_THUMB_SUPPORT = NO;
+      IF %(IOSDEPLOYMENTTARGET)!=""
+	PRINTNL				IPHONEOS_DEPLOYMENT_TARGET = %(IOSDEPLOYMENTTARGET);
+      ENDIF
+      PRINTNL				MACOSX_DEPLOYMENT_TARGET = "";
       IF (%(TYPE)==EXE)
         PRINTNL				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
         PRINTNL				IPHONE_OPTIMIZE_OPTIONS = "-skip-PNGs";
@@ -707,7 +711,7 @@ FOR EACH WORKSPACE
     ENDIF
     PRINTNL 		};
     IFDEF OSX_UNIVERSAL
-      PRINTNL 		%(XCODEGRPUID4) /* Debug ppc */ = {
+      PRINTNL 		%(XCODEGRPUID4) /* Debug other */ = {
     ELSE
       PRINTNL 		%(XCODEGRPUID4) /* Debug */ = {
     ENDIF
@@ -727,6 +731,10 @@ FOR EACH WORKSPACE
     ENDIF
     IFDEF TARGET_IPHONE
         PRINTNL				GCC_THUMB_SUPPORT = NO;
+        IF %(IOSDEPLOYMENTTARGET)!=""
+	  PRINTNL			IPHONEOS_DEPLOYMENT_TARGET = %(IOSDEPLOYMENTTARGET);
+        ENDIF
+        PRINTNL				MACOSX_DEPLOYMENT_TARGET = "";
         IF (%(TYPE)==EXE)
           PRINTNL			"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
           PRINTNL			IPHONE_OPTIMIZE_OPTIONS = "-skip-PNGs";
@@ -794,7 +802,11 @@ FOR EACH WORKSPACE
     ENDIF
     PRINTNL 			};
     IFDEF OSX_UNIVERSAL
-      PRINTNL 			name = "Debug ppc";
+      IFDEF IX86_64
+        PRINTNL 			name = "Debug x86_64";
+      ELSE
+        PRINTNL 			name = "Debug ppc";
+      ENDIF
     ELSE
       PRINTNL 			name = Debug;
     ENDIF
@@ -884,7 +896,7 @@ FOR EACH WORKSPACE
     ENDIF
   ENDFOR
   IFDEF OSX_UNIVERSAL
-    PRINTNL 		00277BB40B5E830800EA36F7 /* Debug ppc */ = {
+    PRINTNL 		00277BB40B5E830800EA36F7 /* Debug other */ = {
   ELSE
     PRINTNL 		00277BB40B5E830800EA36F7 /* Debug */ = {
   ENDIF
@@ -893,7 +905,11 @@ FOR EACH WORKSPACE
   IF %(ARCHS)
     PRINTNL 				ARCHS = %(ARCHS);
   ELSE
-    PRINTNL 				ARCHS = ppc;
+    IFDEF IX86_64
+      PRINTNL 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+    ELSE
+      PRINTNL 				ARCHS = ppc;
+    ENDIF
   ENDIF
 //  PRINTNL 				BUILD_VARIANTS = debug;
   PRINTNL 				GCC_MODEL_TUNING = G5;
@@ -919,6 +935,9 @@ FOR EACH WORKSPACE
   IF %(SDK)
     PRINTNL 				SDKROOT = %(SDK);
   ENDIF
+  IF %(DEVICEFAMILY)
+    PRINTNL				TARGETED_DEVICE_FAMILY = %(DEVICEFAMILY);
+  ENDIF
   IF %(SDK_PATH)
     PRINTNL 				USER_HEADER_SEARCH_PATHS = %(SDK_PATH)/include;
   ENDIF
@@ -941,7 +960,11 @@ FOR EACH WORKSPACE
   ENDIF
   PRINTNL 			};
   IFDEF OSX_UNIVERSAL
-    PRINTNL 			name = "Debug ppc";
+    IFDEF IX86_64
+      PRINTNL 			name = "Debug x86_64";
+    ELSE
+      PRINTNL 			name = "Debug ppc";
+    ENDIF
   ELSE
     PRINTNL 			name = Debug;
   ENDIF
@@ -1010,10 +1033,14 @@ FOR EACH WORKSPACE
     PRINTNL 				ARCHS = %(ARCHS);
   ELSE
     IFDEF OSX_UNIVERSAL
-      PRINTNL 				ARCHS = (
-      PRINTNL 					i386,
-      PRINTNL 					ppc,
-      PRINTNL 				);
+      IFDEF IX86_64
+        PRINTNL 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+      ELSE
+        PRINTNL 				ARCHS = (
+        PRINTNL 					i386,
+        PRINTNL 					ppc,
+        PRINTNL 				);
+      ENDIF
     ELSE
       PRINTNL 				ARCHS = ppc;
     ENDIF
@@ -1043,6 +1070,9 @@ FOR EACH WORKSPACE
   ENDIF
   IF %(SDK)
     PRINTNL 				SDKROOT = %(SDK);
+  ENDIF
+  IF %(DEVICEFAMILY)
+    PRINTNL				TARGETED_DEVICE_FAMILY = %(DEVICEFAMILY);
   ENDIF
   IF %(SDK_PATH)
     PRINTNL 				USER_HEADER_SEARCH_PATHS = %(SDK_PATH)/include;
@@ -1080,7 +1110,7 @@ FOR EACH WORKSPACE
     PRINTNL 			buildConfigurations = (
     IFDEF OSX_UNIVERSAL
       PRINTNL 				%(_XCODEGRPUID4) /* Release Universal */,
-      PRINTNL 				%(XCODEGRPUID4) /* Debug ppc */,
+      PRINTNL 				%(XCODEGRPUID4) /* Debug other */,
       PRINTNL 				%(_XCODEGRPUID8) /* Debug i386 */,
     ELSE
       PRINTNL 				%(_XCODEGRPUID4) /* Release */,
@@ -1105,7 +1135,7 @@ FOR EACH WORKSPACE
   IFDEF OSX_UNIVERSAL
     PRINTNL 				00377BB50B5E830800EA36F7 /* Release Universal */,
     PRINTNL 				00177BB40B5E830800EA36F7 /* Debug i386 */,
-    PRINTNL 				00277BB40B5E830800EA36F7 /* Debug ppc */,
+    PRINTNL 				00277BB40B5E830800EA36F7 /* Debug other */,
   ELSE
     PRINTNL 				00377BB50B5E830800EA36F7 /* Release */,
     PRINTNL 				00277BB40B5E830800EA36F7 /* Debug */,
