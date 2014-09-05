@@ -5,6 +5,7 @@
 
 #define OUTPUT_EXE     %(NAME)
 #define OUTPUT_ANDROID   %(NAME).apk
+#define OUTPUT_ANDROID_LIB   %(NAME).jar
 #define OUTPUT_CON     %(NAME)
 #define OUTPUT_DLL     lib%(NAME).so
 #define OUTPUT_DLL_LIB lib%(NAME).so
