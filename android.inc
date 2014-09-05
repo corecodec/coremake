@@ -223,11 +223,10 @@ FOR EACH WORKSPACE
       PRINTNL target=android-%(CONFIG_ANDROID_VERSION)
       
       FILE %(¯BUILDDIR).settings/org.eclipse.jdt.core.prefs
-      PRINTNL #Mon Jan 25 12:20:43 CET 2010
       PRINTNL eclipse.preferences.version=1
-      PRINTNL org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
-      PRINTNL org.eclipse.jdt.core.compiler.compliance=1.5
-      PRINTNL org.eclipse.jdt.core.compiler.source=1.5
+      PRINTNL org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
+      PRINTNL org.eclipse.jdt.core.compiler.compliance=1.6
+      PRINTNL org.eclipse.jdt.core.compiler.source=1.6
       
       FILE %(¯BUILDDIR)export.map
       PRINTNL {
