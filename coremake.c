@@ -5277,7 +5277,7 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
                 const char* s = file->token;
                 getarg(tmpstr,&s);
 	            pathunix(tmpstr);
-                getabspath(tmpstr,flags,"",buildflags[curr_build]);
+                //getabspath(tmpstr,flags,"",buildflags[curr_build]);
                 src = fopen(tmpstr,"rb");
                 if (!src)
                     printf("can't open file %s for copy reading\r\n",tmpstr);
@@ -5286,7 +5286,8 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
                     getarg(tmpstr,&s);
 	                pathunix(tmpstr);
                     getabspath(tmpstr,flags,"",buildflags[curr_build]);
-                    dst = fopen(tmpstr,"wb");
+                    create_missing_dirs(tmpstr);
+                    dst = fopen(tmpstr, "wb");
                     if (!dst)
                         printf("can't open file %s for copy writing\r\n",tmpstr);
                     else

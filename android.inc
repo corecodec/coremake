@@ -122,26 +122,22 @@ FOR EACH WORKSPACE
 
       MKDIR %(¯BUILDPATH)%(NAME)/java/gen/
 
-      MKDIR %(¯BUILDPATH)%(NAME)/java/res/
-      MKDIR %(¯BUILDPATH)%(NAME)/java/res/raw/
-
       FOR EACH INSTALL
-        COPY %(NAME) %(¯BUILDDIR)res/raw/%(<NAME).%(>NAME)
+        COPY %(|NAME) %(¯BUILDPATH)%(../NAME)/java/res/raw/%(<NAME).%(>NAME)
       ENDFOR
       FOR EACH USE
         FOR EACH INSTALL
-          COPY %(NAME) %(¯BUILDDIR)res/raw/%(<NAME).%(>NAME)
+          COPY %(|NAME) %(¯BUILDPATH)%(../../NAME)/java/res/raw/%(<NAME).%(>NAME)
         ENDFOR
       ENDFOR
+      
       IF %(ANDROID_VALUE)!=""
-        MKDIR %(¯BUILDDIR)res/values/
         FOR EACH ANDROID_VALUE
-          COPY %(NAME) %(¯BUILDDIR)res/values/%(<NAME).%(>NAME)
+          COPY %(|NAME) %(¯BUILDPATH)%(../NAME)/java/res/values/%(<NAME).%(>NAME)
         ENDFOR
       ENDIF
       IF %(ICON)!=""
-        MKDIR %(BUILDDIR)res/drawable/
-        COPY %(ICON)_64x64.png %(¯BUILDDIR)res/drawable/%(<ICON)_64x64.png
+        COPY %(|ICON)_64x64.png %(¯BUILDPATH)%(NAME)/java/res/drawable/%(<ICON)_64x64.png
       ENDIF
       
       FILE %(¯BUILDPATH)%(NAME)/java/src/com/%(PROJECT_VENDOR)/%(`PROJECT_NAME)/App.java
@@ -335,25 +331,22 @@ FOR EACH WORKSPACE
       
       MKDIR %(¯BUILDPATH)%(NAME)/java/gen/
 
-      MKDIR %(¯BUILDPATH)%(NAME)/java/res/
-      MKDIR %(¯BUILDPATH)%(NAME)/java/res/raw/
       FOR EACH INSTALL
-        COPY %(NAME) %(¯BUILDPATH)%(NAME)/java/res/raw/%(<NAME).%(>NAME)
+        COPY %(|NAME) %(¯BUILDPATH)%(../NAME)/java/res/raw/%(<NAME).%(>NAME)
       ENDFOR
       FOR EACH USE
         FOR EACH INSTALL
-          COPY %(NAME) %(¯BUILDPATH)%(NAME)/java/res/raw/%(<NAME).%(>NAME)
+          COPY %(|NAME) %(¯BUILDPATH)%(../../NAME)/java/res/raw/%(<NAME).%(>NAME)
         ENDFOR
       ENDFOR
+      
       IF %(ANDROID_VALUE)!=""
-        MKDIR %(¯BUILDPATH)%(NAME)/java/res/values/
         FOR EACH ANDROID_VALUE
-          COPY %(NAME) %(¯BUILDPATH)%(NAME)/java/res/values/%(<NAME).%(>NAME)
+          COPY %(|NAME) %(¯BUILDPATH)%(../NAME)/java/res/values/%(<NAME).%(>NAME)
         ENDFOR
       ENDIF
       IF %(ICON)!=""
-        MKDIR %(BUILDDIR)res/drawable/
-        COPY %(ICON)_64x64.png %(¯BUILDPATH)%(NAME)/java/res/drawable/%(<ICON)_64x64.png
+        COPY %(|ICON)_64x64.png %(¯BUILDPATH)%(NAME)/java/res/drawable/%(<ICON)_64x64.png
       ENDIF
 
       FILE %(¯BUILDPATH)%(NAME)/java/.classpath
