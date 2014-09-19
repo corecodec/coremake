@@ -1568,6 +1568,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 					   stricmp(file->token,"source_m68k")==0 ||
 					   stricmp(file->token,"export_svn")==0 ||
 					   stricmp(file->token,"source")==0 ||
+					   stricmp(file->token, "sourcedir") == 0 ||
 					   stricmp(file->token,"compile")==0 ||
 					   stricmp(file->token,"linkfile")==0 ||
 					   stricmp(file->token,"crt0")==0 ||
@@ -2750,7 +2751,17 @@ void preprocess_dependency_init(item* p,int onlysource)
 				break;
 			}
 
-		if (!onlysource)
+		if (empty) {
+			list = item_find(*child, "sourcedir");
+			for (i = 0; i < item_childcount(list); ++i)
+			if (!(list->child[i]->flags & FLAG_REMOVED) && !item_find(list->child[i], "sys"))
+			{
+				empty = 0;
+				break;
+			}
+		}
+
+		if (empty && !onlysource)
 		{
 			list = item_find(*child,"use");
 			for (i=0;i<item_childcount(list);++i)
@@ -3288,6 +3299,7 @@ void preprocess_sort(item* p)
         item_get(item_get(*child,"xcodegrpuid10",0),xcodeuid,1);
 
 		item_sort(item_get(*child,"source",0),compare_name);
+		item_sort(item_get(*child, "sourcedir", 0), compare_name);
 		item_sort(item_get(*child,"use",0),compare_use); // symbian libary linking madness...
 
 	    src = item_get(*child,"source",0);

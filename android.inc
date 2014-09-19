@@ -163,7 +163,9 @@ FOR EACH WORKSPACE
       PRINTNL 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
       PRINTNL 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
       PRINTNL 	<classpathentry kind="src" path="gen"/>
-      PRINTNL 	<classpathentry kind="src" path="src_tree"/>
+      FOR EACH SOURCEDIR
+        PRINTNL 	<classpathentry kind="src" path="%(NAME)"/>
+      ENDFOR
       PRINTNL 	<classpathentry kind="output" path="bin/classes"/>
       PRINTNL </classpath>
       MKDIR %(OUTPUTPATH)
@@ -202,11 +204,13 @@ FOR EACH WORKSPACE
       PRINTNL 		<nature>org.eclipse.jdt.core.javanature</nature>
       PRINTNL 	</natures>
       PRINTNL 	<linkedResources>
-      PRINTNL 		<link>
-      PRINTNL 			<name>src_tree</name>
-      PRINTNL 			<type>2</type>
-      PRINTNL 			<location>%(|§PATH)</location>
-      PRINTNL 		</link>
+      FOR EACH SOURCEDIR
+        PRINTNL 		<link>
+        PRINTNL 			<name>%(NAME)</name>
+        PRINTNL 			<type>2</type>
+        PRINTNL 			<location>%(|PATH)%(<NAME)</location>
+        PRINTNL 		</link>
+      ENDFOR
       PRINTNL 	</linkedResources>
       PRINTNL </projectDescription>
       
@@ -363,8 +367,8 @@ FOR EACH WORKSPACE
       PRINTNL 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
       PRINTNL 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
       PRINTNL 	<classpathentry kind="src" path="gen"/>
-      FOR EACH SOURCE
-        PRINTNL 	<classpathentry kind="src" path="%(<NAME)"/>
+      FOR EACH SOURCEDIR
+        PRINTNL 	<classpathentry kind="src" path="%(NAME)"/>
       ENDFOR
       PRINTNL 	<classpathentry kind="output" path="bin/classes"/>
       PRINTNL </classpath>
@@ -404,9 +408,9 @@ FOR EACH WORKSPACE
       PRINTNL 		<nature>org.eclipse.jdt.core.javanature</nature>
       PRINTNL 	</natures>
       PRINTNL 	<linkedResources>
-      FOR EACH SOURCE
+      FOR EACH SOURCEDIR
         PRINTNL 		<link>
-        PRINTNL 			<name>%(<NAME)</name>
+        PRINTNL 			<name>%(NAME)</name>
         PRINTNL 			<type>2</type>
         PRINTNL 			<location>%(|PATH)%(<NAME)</location>
         PRINTNL 		</link>
