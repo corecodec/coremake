@@ -215,10 +215,18 @@ FOR EACH WORKSPACE
       PRINTNL 
       PRINTNL # Project target.
       PRINTNL target=android-%(CONFIG_ANDROID_SDK)
+      LIB_INC_NUM = 0
       FOR EACH USE
         IF (%(TYPE)==LIB_ANDROID)
-          PRINTNL android.library.reference.1=%(@PATH)
+          INC ../LIB_INC_NUM
+          PRINTNL android.library.reference.%(../LIB_INC_NUM)=../../%(NAME)/java
         ENDIF
+        FOR EACH USE
+          IF (%(TYPE)==LIB_ANDROID)
+            INC ../../LIB_INC_NUM
+            PRINTNL android.library.reference.%(../../LIB_INC_NUM)=../../%(NAME)/java
+          ENDIF
+        ENDFOR
       ENDFOR
       
       FILE %(¯BUILDPATH)%(NAME)/java/.settings/org.eclipse.jdt.core.prefs
@@ -412,10 +420,18 @@ FOR EACH WORKSPACE
       PRINTNL # Project target.
       PRINTNL target=android-%(CONFIG_ANDROID_SDK)
       PRINTNL android.library=true
+      LIB_INC_NUM = 0
       FOR EACH USE
         IF (%(TYPE)==LIB_ANDROID)
-          PRINTNL android.library.reference.1=%(@PATH)
+          INC ../LIB_INC_NUM
+          PRINTNL android.library.reference.%(../LIB_INC_NUM)=../../%(NAME)/java
         ENDIF
+        FOR EACH USE
+          IF (%(TYPE)==LIB_ANDROID)
+            INC ../../LIB_INC_NUM
+            PRINTNL android.library.reference.%(../../LIB_INC_NUM)=../../%(NAME)/java
+          ENDIF
+        ENDFOR
       ENDFOR
       
       FILE %(¯BUILDPATH)%(NAME)/java/.settings/org.eclipse.jdt.core.prefs
