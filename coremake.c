@@ -1575,7 +1575,7 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 					   stricmp(file->token,"symbian_cert")==0 ||
 					   stricmp(file->token,"symbian_key")==0 ||
 					   stricmp(file->token,"doxygen")==0 ||
-                       stricmp(file->token,"project_svn_revision")==0 ||
+                       stricmp(file->token,"project_svn_revision")==0 || /* TODO really ? */
                        stricmp(file->token,"project_help")==0 ||
                        stricmp(file->token,"config_android_ndk")==0;
 
