@@ -3680,7 +3680,7 @@ void preprocess(item* p)
 	preprocess_stdafx_includes(item_find(p,"dll_csharp"),0);
 	preprocess_stdafx_includes(item_find(p,"lib_csharp"),1);
 	preprocess_stdafx_includes(item_find(p,"exe_android"),0);
-	preprocess_stdafx_includes(item_find(p,"lib_android"),0);
+//	preprocess_stdafx_includes(item_find(p,"lib_android"),0);
 
 	preprocess_dependency_init(item_find(p,"lib"),1);
 	preprocess_dependency_init(item_find(p,"exe"),0);
@@ -3713,7 +3713,7 @@ void preprocess(item* p)
 	preprocess_stdafx(item_find(p,"dll_csharp"),0);
 	preprocess_stdafx(item_find(p,"lib_csharp"),1);
 	preprocess_stdafx(item_find(p,"exe_android"),0);
-	preprocess_stdafx(item_find(p,"lib_android"),1);
+//	preprocess_stdafx(item_find(p,"lib_android"),1);
 
 	preprocess_workspace_init(item_find(p,"lib"));
 	preprocess_workspace_init(item_find(p,"exe"));
