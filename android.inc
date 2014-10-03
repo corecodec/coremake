@@ -66,6 +66,11 @@ FOR EACH WORKSPACE
         FOR EACH USE
           IF %(TYPE)==LIB
             ../../MODULES += %(NAME)
+          FOR EACH SOURCE
+            FOR EACH MIME_TYPE
+              ../../../../MIME_TYPES += %(NAME)
+            ENDFOR
+          ENDFOR
           ENDIF
         ENDFOR
       ENDFOR
@@ -80,8 +85,20 @@ FOR EACH WORKSPACE
           ENDFOR
         ENDIF
         FOR EACH USE
+          IF %(TYPE)==LIB
+            FOR EACH SOURCE
+              FOR EACH MIME_TYPE
+                ../../../../MIME_TYPES += %(NAME)
+              ENDFOR
+            ENDFOR
+          ENDIF
           IF %(TYPE)==DLL
             ../../MODULES += %(NAME)
+            FOR EACH SOURCE
+              FOR EACH MIME_TYPE
+                ../../../../MIME_TYPES += %(NAME)
+              ENDFOR
+            ENDFOR
           ENDIF
         ENDFOR
       ENDFOR
@@ -275,7 +292,7 @@ FOR EACH WORKSPACE
             PRINTNL             android:launchMode="%(ANDROID_MODE)"
           ENDIF
           PRINTNL             android:windowSoftInputMode="stateHidden"
-          IF %(../../../MIME_TYPES)!=""
+          IF %(../../MIME_TYPES)!=""
             PRINTNL             android:exported="true"
           ENDIF
           PRINTNL       >
@@ -538,7 +555,7 @@ FOR EACH WORKSPACE
             PRINTNL             android:launchMode="%(ANDROID_MODE)"
           ENDIF
           PRINTNL             android:windowSoftInputMode="stateHidden"
-          IF %(../../../MIME_TYPES)!=""
+          IF %(../../MIME_TYPES)!=""
             PRINTNL             android:exported="true"
           ENDIF
           PRINTNL       >
