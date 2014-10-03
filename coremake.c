@@ -777,8 +777,8 @@ void reader_restore(reader *p,reader* save)
 int reader_line(reader* p)
 {
 	size_t i;
-    p->line[0] = 0;
 	long before_pos = ftell(p->r.f);
+	p->line[0] = 0;
 	fgets(p->line,MAX_LINE,p->r.f);
 	if (feof(p->r.f) && p->line[0]==0)
 		return 0;
