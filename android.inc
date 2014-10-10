@@ -227,12 +227,6 @@ FOR EACH WORKSPACE
           INC ../LIB_INC_NUM
           PRINTNL android.library.reference.%(../LIB_INC_NUM)=../%(NAME)
         ENDIF
-        FOR EACH USE
-          IF (%(TYPE)==LIB_ANDROID)
-            INC ../../LIB_INC_NUM
-            PRINTNL android.library.reference.%(../../LIB_INC_NUM)=../%(NAME)
-          ENDIF
-        ENDFOR
       ENDFOR
       
       FILE %(¯BUILDPATH)%(NAME)/.settings/org.eclipse.jdt.core.prefs
@@ -496,12 +490,6 @@ FOR EACH WORKSPACE
           INC ../LIB_INC_NUM
           PRINTNL android.library.reference.%(../LIB_INC_NUM)=../%(NAME)
         ENDIF
-        FOR EACH USE
-          IF (%(TYPE)==LIB_ANDROID)
-            INC ../../LIB_INC_NUM
-            PRINTNL android.library.reference.%(../../LIB_INC_NUM)=../%(NAME)
-          ENDIF
-        ENDFOR
       ENDFOR
       
       FILE %(¯BUILDPATH)%(NAME)/.settings/org.eclipse.jdt.core.prefs
