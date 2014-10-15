@@ -7,7 +7,7 @@ CCFLAGS += -pipe -msoft-float -fpic -mthumb-interwork -ffunction-sections -funwi
 SFLAGS += -march=armv7-a -D_HIDDEN
 
 ANDROID_ARCH = arch-arm
-ANDROID_GCC_PREFIX = arm-eabi
+ANDROID_GCC_PREFIX = arm-linux-androideabi
 ANDROID_GCC_VERSION = 4.4.3
 ANDROID_GCC = %(ANDROID_GCC_PREFIX)-%(ANDROID_GCC_VERSION)
 ANDROID_GCC_LIB = gcc/%(ANDROID_GCC_PREFIX)/%(ANDROID_GCC_VERSION)/libgcc.a
