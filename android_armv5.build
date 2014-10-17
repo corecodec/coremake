@@ -1,4 +1,5 @@
 CCFLAGS = -march=armv5te -mtune=xscale
 ANDROID_ABI = armeabi
+HAS_NEON = false
 
 #include "android_arm.inc"

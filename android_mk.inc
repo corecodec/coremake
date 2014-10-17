@@ -84,6 +84,8 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
     PRINTNL LOCAL_CFLAGS := %(DEFINE:%=-D%)
   ENDIF
   
+  PRINTNL LOCAL_ARM_NEON := %(HAS_NEON)
+  
   IF %(TYPE)==DLL
     IF %(LIBS)!=""
       PRINTNL LOCAL_LDLIBS += \
