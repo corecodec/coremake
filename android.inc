@@ -376,7 +376,7 @@ FOR EACH WORKSPACE
         PRINTNL                 '%(!NAME)',
       ENDFOR
       PRINTNL             ]
-      PRINTNL             jniLibs.srcDir 'src/main/libs'
+      PRINTNL             jniLibs.srcDirs = ['libs']
       PRINTNL             res.srcDirs = ['res']
       PRINTNL             assets.srcDirs = ['assets']
       PRINTNL         }
