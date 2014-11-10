@@ -35,7 +35,7 @@ IFNDEF CONFIG_ANDROID_PLATFORM
 ENDIF
 
 FILE %(¯PATH)settings.gradle
-FOR EACH EXE_ANDROID,LIB_ANDROID
+FOR EACH EXE_ANDROID,DLL_ANDROID
   PRINTNL include '%(PROJECT_NAME)'
   PRINTNL project(':%(PROJECT_NAME)').projectDir = new File('%(¯BUILDPATH)%(NAME)')
 ENDFOR
@@ -253,7 +253,7 @@ FOR EACH WORKSPACE
       PRINTNL target=android-%(CONFIG_ANDROID_SDK)
       LIB_INC_NUM = 0
       FOR EACH USE
-        IF (%(TYPE)==LIB_ANDROID)
+        IF (%(TYPE)==DLL_ANDROID)
           INC ../LIB_INC_NUM
           PRINTNL android.library.reference.%(../LIB_INC_NUM)=../%(NAME)
         ENDIF
@@ -400,18 +400,18 @@ FOR EACH WORKSPACE
       PRINTNL 
       PRINTNL dependencies {
         FOR EACH USE
-          IF %(TYPE)==LIB_ANDROID
+          IF %(TYPE)==DLL_ANDROID
             PRINTNL    compile project(':%(PROJECT_NAME)')
           ENDIF
           FOR EACH USE
-            IF %(TYPE)==LIB_ANDROID
+            IF %(TYPE)==DLL_ANDROID
               PRINTNL    compile project(':%(PROJECT_NAME)')
             ENDIF
           ENDFOR
         ENDFOR
       PRINTNL }
 
-    ELIF %(TYPE)==LIB_ANDROID)
+    ELIF %(TYPE)==DLL_ANDROID)
       IF %(PROJECT_VENDOR)==""
         PROJECT_VENDOR = CoreCodec
       ENDIF
@@ -577,7 +577,7 @@ FOR EACH WORKSPACE
       PRINTNL android.library=true
       LIB_INC_NUM = 0
       FOR EACH USE
-        IF (%(TYPE)==LIB_ANDROID)
+        IF (%(TYPE)==DLL_ANDROID)
           INC ../LIB_INC_NUM
           PRINTNL android.library.reference.%(../LIB_INC_NUM)=../%(NAME)
         ENDIF
@@ -717,11 +717,11 @@ FOR EACH WORKSPACE
       PRINTNL 
       PRINTNL dependencies {
         FOR EACH USE
-          IF %(TYPE)==LIB_ANDROID
+          IF %(TYPE)==DLL_ANDROID
             PRINTNL    compile project(':%(PROJECT_NAME)')
           ENDIF
           FOR EACH USE
-            IF %(TYPE)==LIB_ANDROID
+            IF %(TYPE)==DLL_ANDROID
               PRINTNL    compile project(':%(PROJECT_NAME)')
             ENDIF
           ENDFOR
