@@ -48,7 +48,7 @@
 #define CONFIG_DYNCODE /* platforms when dynamic code can be used */
 #endif
 
-#if defined(IX86) || defined(IX86_64)
+#if defined(IX86) || defined(IX86_64) || defined(ARM64)
 #undef CONFIG_UNALIGNED_ACCESS
 #define CONFIG_UNALIGNED_ACCESS /* pointers can use unaligned memory */
 #endif
@@ -83,7 +83,7 @@
 #undef CONFIG_MMX /* platforms that don't support MMX CPUs/instructions */
 #endif
 
-#if !defined(ARM) || (!defined(TARGET_IPHONE) && !defined(TARGET_ANDROID))
+#if (!defined(ARM) && !defined(ARM64)) || (!defined(TARGET_IPHONE) && !defined(TARGET_ANDROID))
 #undef CONFIG_NEON /* platforms that don't support NEON/ARMv7 instructions */
 #endif
 

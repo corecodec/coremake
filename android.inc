@@ -265,12 +265,6 @@ FOR EACH WORKSPACE
       PRINTNL org.eclipse.jdt.core.compiler.compliance=1.6
       PRINTNL org.eclipse.jdt.core.compiler.source=1.6
       
-      FILE %(¯BUILDPATH)%(NAME)/export.map
-      PRINTNL {
-      PRINTNL    global: Java*;
-      PRINTNL    local: *;
-      PRINTNL };
-
       FILE %(¯BUILDPATH)%(NAME)/AndroidManifest.xml
       PRINTNL <?xml version="1.0" encoding="utf-8"?>
       PRINTNL <manifest xmlns:android="http://schemas.android.com/apk/res/android"
