@@ -1,6 +1,0 @@
-SDK = macosx
-FRAMEWORK_PATH = /
-GCC_VERSION = com.apple.compilers.llvm.clang.1_0
-//XCODECOMPATVERSION = 3.1
-
-#include "xcode4.inc"
