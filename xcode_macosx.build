@@ -1,8 +1,8 @@
-#define POWERPC
+#define IX86
 
-SDK = /Developer/SDKs/MacOSX10.3.9.sdk
+SDK = macosx
 FRAMEWORK_PATH = /
-GCC_VERSION = 4.0
-XCODECOMPATVERSION = 2.4
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0
+XCODECOMPATVERSION = 3.2
 
 #include "xcode.inc"

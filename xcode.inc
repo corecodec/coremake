@@ -182,6 +182,8 @@ FOR EACH WORKSPACE
           SOURCEASM = sourcecode.asm.arm
           IF DEFINED(CONFIG_NEON) && %(cpu)==neon
             SOURCEASM = sourcecode.asm.gaspp
+          ELIF DEFINED(CONFIG_NEON) && %(cpu)==neon64
+            SOURCEASM = sourcecode.asm.gaspp64
           ENDIF
         ENDIF
         PRINTNL		%(XCODEUID) /* %(!;NAME) */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = %(SOURCEASM); name = %(!;NAME); path = %(!;NAME); sourceTree = "<group>"; };
