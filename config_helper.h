@@ -83,7 +83,7 @@
 #undef CONFIG_MMX /* platforms that don't support MMX CPUs/instructions */
 #endif
 
-#if !defined(ARM) || (!defined(TARGET_IPHONE) && !defined(TARGET_ANDROID))
+#if (!defined(ARM) && !defined(ARM64)) || (!defined(TARGET_IPHONE) && !defined(TARGET_ANDROID))
 #undef CONFIG_NEON /* platforms that don't support NEON/ARMv7 instructions */
 #endif
 
