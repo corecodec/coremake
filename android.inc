@@ -42,7 +42,7 @@ ENDFOR
 
 FILE %(¯PATH)build.gradle
 PRINTNL task wrapper(type: Wrapper) {
-PRINTNL     gradleVersion = '1.12'
+PRINTNL     gradleVersion = '2.2.1'
 PRINTNL }
 PRINTNL 
 PRINTNL buildscript {
@@ -50,12 +50,12 @@ PRINTNL     repositories {
 PRINTNL         mavenCentral()
 PRINTNL     }
 PRINTNL     dependencies {
-PRINTNL         classpath 'com.android.tools.build:gradle:0.12.+'
+PRINTNL         classpath 'com.android.tools.build:gradle:1.0.0'
 PRINTNL     }
 PRINTNL }
 
 FILE %(¯PATH)gradle/wrapper/gradle-wrapper.properties
-PRINTNL distributionUrl=https\://services.gradle.org/distributions/gradle-1.12-all.zip
+PRINTNL distributionUrl=https\://services.gradle.org/distributions/gradle-2.2.1-all.zip
 
 FOR EACH WORKSPACE
   FOR EACH USE
@@ -322,7 +322,8 @@ FOR EACH WORKSPACE
             FOR EACH ../../MIME_TYPES
               PRINTNL         <intent-filter>
               PRINTNL           <data android:mimeType="%(NAME)"/>
-              PRINTNL           <action android:name="android.intent.action.OPENMIME"/>
+              PRINTNL           <action android:name="android.intent.action.VIEW"/>
+              PRINTNL           <category android:name="android.intent.category.DEFAULT"/>
               PRINTNL         </intent-filter>
             ENDFOR
           ENDIF
@@ -640,7 +641,8 @@ FOR EACH WORKSPACE
             FOR EACH ../../MIME_TYPES
               PRINTNL         <intent-filter>
               PRINTNL           <data android:mimeType="%(NAME)"/>
-              PRINTNL           <action android:name="android.intent.action.OPENMIME"/>
+              PRINTNL           <action android:name="android.intent.action.VIEW"/>
+              PRINTNL           <category android:name="android.intent.category.DEFAULT"/>
               PRINTNL         </intent-filter>
             ENDFOR
           ENDIF
