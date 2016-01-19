@@ -101,7 +101,9 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
       ENDFOR
       PRINTNL 
     ENDIF
-  
+    
+    PRINTNL LOCAL_LDFLAGS += -nostdlib
+    
     PRINTNL include $(BUILD_SHARED_LIBRARY)
   ELSE
     PRINTNL include $(BUILD_STATIC_LIBRARY)

@@ -733,7 +733,13 @@ STRIP = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-strip
 STRIPFLAGS = -s -x
 OS_INCLUDE += %(ANDROID_LIBC_DIR)/include
 CCFLAGS += -DANDROID
-SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libc.so %(ANDROID_LIBC_DIR)/lib/libstdc++.so %(ANDROID_LIBC_DIR)/lib/libm.so -Wl,--no-undefined  -Wl,-rpath-link=%(ANDROID_LIBC_DIR)/lib -L%(ANDROID_LIBC_DIR)/lib
+SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libc.so %(ANDROID_LIBC_DIR)/lib/libstdc++.so
+IF %(ANDROID_ABI)=="armeabi-v7a-hard"
+  SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libm_hard.a -Wl,--no-warn-mismatch
+ELSE
+  SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libm.so
+ENDIF
+SHFLAGS += -Wl,--no-undefined  -Wl,-rpath-link=%(ANDROID_LIBC_DIR)/lib -L%(ANDROID_LIBC_DIR)/lib
 IF %(ANDROID_GCC_LIB)!=""
   SHFLAGS1 += %(ANDROID_GCC_DIR)/../lib/%(ANDROID_GCC_LIB)
 ENDIF
