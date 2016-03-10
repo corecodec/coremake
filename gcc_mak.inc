@@ -722,33 +722,33 @@ IF defined(TARGET_PS2SDK)
 ENDIF
 IF "%(UI_FORM_QT4)"!=""
   FOR EACH UI_FORM_QT4
-    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/ui_%.h: %(!NAME)
-  ENDFOR
+    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/ui_%(~<!NAME).h: %(!NAME)
 //    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/ui_%.h: %.ui
-  PRINTNL 	$(hide)echo UICing $<
-  PRINTNL 	$(hide)mkdir -p %(!BUILDPATH)%(PATH)GeneratedFiles/$(*D)
-  PRINTNL 	$(hide)"$(QTDIR)/bin/uic" -o $@ $<
-  PRINTNL 
+    PRINTNL 	$(hide)echo UICing $<
+    PRINTNL 	$(hide)mkdir -p %(!BUILDPATH)%(PATH)GeneratedFiles/$(*D)
+    PRINTNL 	$(hide)"$(QTDIR)/bin/uic" -o $@ $<
+    PRINTNL 
+  ENDFOR
 ENDIF
 IF "%(RESOURCE_QT4)"!=""
   FOR EACH RESOURCE_QT4
-    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/qrc_%.cpp: %(!NAME)
-  ENDFOR
+    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/qrc_%(~<!NAME).cpp: %(!NAME)
 //    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/qrc_%.cpp: %.qrc
-  PRINTNL 	$(hide)echo RCCing $<
-  PRINTNL 	$(hide)mkdir -p $(BUILD)GeneratedFiles/$(*D)
-  PRINTNL 	$(hide)"$(QTDIR)/bin/rcc" -name $< -o $@ $<
-  PRINTNL 
+    PRINTNL 	$(hide)echo RCCing $<
+    PRINTNL 	$(hide)mkdir -p %(!BUILDPATH)%(PATH)GeneratedFiles/$(*D)
+    PRINTNL 	$(hide)"$(QTDIR)/bin/rcc" -name $< -o $@ $<
+    PRINTNL 
+  ENDFOR
 ENDIF
 IF "%(HEADER_QT4)"!=""
   FOR EACH HEADER_QT4
-    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/moc_%.cpp: %(!NAME)
-  ENDFOR
+    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/moc_%(~<!NAME).cpp: %(!NAME)
 //    PRINTNL %(!BUILDPATH)%(PATH)GeneratedFiles/moc_%.cpp: %.h
-  PRINTNL 	$(hide)echo MOCing $<
-  PRINTNL 	$(hide)mkdir -p $(BUILD)GeneratedFiles/$(*D)
-  PRINTNL 	$(hide)"$(QTDIR)/bin/moc" %(@INCLUDE:%=-I '%') %(@SYSINCLUDE:%=-I '%')  %(@CONFIG_INCLUDE:%=-I '%') $< -o $@
-  PRINTNL 
+    PRINTNL 	$(hide)echo MOCing $<
+    PRINTNL 	$(hide)mkdir -p %(!BUILDPATH)%(PATH)GeneratedFiles/$(*D)
+    PRINTNL 	$(hide)"$(QTDIR)/bin/moc" %(@INCLUDE:%=-I '%') %(@SYSINCLUDE:%=-I '%')  %(@CONFIG_INCLUDE:%=-I '%') $< -o $@
+    PRINTNL 
+  ENDFOR
 ENDIF
 IF "%(PRECOMPILED_HEADER)"!=""
   PRINTNL %(!ROOTPATH)%.%(>PRECOMPILED_HEADER).gch: %(!ROOTPATH)%.%(>PRECOMPILED_HEADER)
