@@ -4,7 +4,8 @@
 
 PLATFORMLIB = osx_x86
 SVNDIR = osx_x86
-SDK = /Developer/SDKs/MacOSX10.4u.sdk
+
+CC = xcrun --sdk macosx clang
 
 CCFLAGS=%(CCFLAGS) -arch x86_64 -mdynamic-no-pic -mmacosx-version-min=10.4
 ASMFLAGS = -f macho64 -D_MACHO
