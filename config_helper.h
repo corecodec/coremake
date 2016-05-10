@@ -79,7 +79,7 @@
 #undef CONFIG_ARMV6 /* platforms that don't support ARMv6 CPUs/instructions */
 #endif
 
-#if !defined(IX86) || defined(TARGET_SYMBIAN)
+#if (!defined(IX86) && !defined(IX86_64)) || defined(TARGET_SYMBIAN)
 #undef CONFIG_MMX /* platforms that don't support MMX CPUs/instructions */
 #endif
 
