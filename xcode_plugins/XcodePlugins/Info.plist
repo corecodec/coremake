@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Yasm</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.corecodec.yasm</string>
+	<string>com.corecodec.xcodeplugins</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -20,6 +20,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>DTXcode</key>
+	<string>0421</string>
+	<key>DTXcodeBuild</key>
+	<string>4D502</string>
 	<key>DVTPlugInCompatibilityUUIDs</key>
 	<array>
 		<string>9AFF134A-08DC-4096-8CEE-62A4BB123046</string>
@@ -45,14 +49,10 @@
 		<string>E71C2CFE-BFD8-4044-8F06-00AE685A406C</string>
 		<string>ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C</string>
 	</array>
-	<key>NSPrincipalClass</key>
-	<string></string>
-	<key>DTXcode</key>
-	<string>0421</string>
-	<key>DTXcodeBuild</key>
-	<string>4D502</string>
 	<key>LoadAtLaunch</key>
 	<string>YES</string>
+	<key>NSPrincipalClass</key>
+	<string></string>
 	<key>XC4Compatible</key>
 	<true/>
 	<key>XCPluginHasUI</key>

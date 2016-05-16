@@ -26,7 +26,7 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF630370AF2F00C91783 /* YasmPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YasmPlugin_Prefix.pch; sourceTree = "<group>"; };
-		8D5B49B6048680CD000E48DA /* Yasm.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Yasm.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5B49B6048680CD000E48DA /* CoreMakeXcode.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreMakeXcode.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B96A5DED1CE95950001CD13A /* gaspp.pbfilespec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.pbfilespec; path = gaspp.pbfilespec; sourceTree = "<group>"; };
 		B96A5DEE1CE95950001CD13A /* gaspp.xcbuildrules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xcbuildrules; path = gaspp.xcbuildrules; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		089C166AFE841209C02AAC07 /* Yasm */ = {
+		089C166AFE841209C02AAC07 /* CoreMakeXcode */ = {
 			isa = PBXGroup;
 			children = (
 				08FB77AFFE84173DC02AAC07 /* Classes */,
@@ -61,7 +61,7 @@
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
-			name = Yasm;
+			name = CoreMakeXcode;
 			sourceTree = "<group>";
 		};
 		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
@@ -119,7 +119,7 @@
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D5B49B6048680CD000E48DA /* Yasm.xcplugin */,
+				8D5B49B6048680CD000E48DA /* CoreMakeXcode.xcplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,9 +135,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D5B49AC048680CD000E48DA /* YASMPlugin */ = {
+		8D5B49AC048680CD000E48DA /* CoremakeXcodePlugin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "YASMPlugin" */;
+			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "CoremakeXcodePlugin" */;
 			buildPhases = (
 				8D5B49AF048680CD000E48DA /* Resources */,
 				8D5B49B1048680CD000E48DA /* Sources */,
@@ -147,10 +147,10 @@
 			);
 			dependencies = (
 			);
-			name = YASMPlugin;
+			name = CoremakeXcodePlugin;
 			productInstallPath = "$(HOME)/Library/Bundles";
-			productName = Yasm;
-			productReference = 8D5B49B6048680CD000E48DA /* Yasm.xcplugin */;
+			productName = CoreMakeXcode;
+			productReference = 8D5B49B6048680CD000E48DA /* CoreMakeXcode.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -160,18 +160,18 @@
 			isa = PBXProject;
 			attributes = {
 			};
-			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "YasmPlugin" */;
+			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "XcodePlugins" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 089C166AFE841209C02AAC07 /* Yasm */;
+			mainGroup = 089C166AFE841209C02AAC07 /* CoreMakeXcode */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D5B49AC048680CD000E48DA /* YASMPlugin */,
+				8D5B49AC048680CD000E48DA /* CoremakeXcodePlugin */,
 			);
 		};
 /* End PBXProject section */
@@ -231,7 +231,7 @@
 				GCC_PREFIX_HEADER = YasmPlugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_NAME = Yasm;
+				PRODUCT_NAME = CoreMakeXcode;
 				SDKROOT = "";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -247,7 +247,7 @@
 				GCC_PREFIX_HEADER = YasmPlugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_NAME = Yasm;
+				PRODUCT_NAME = CoreMakeXcode;
 				SDKROOT = "";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -284,7 +284,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "YASMPlugin" */ = {
+		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "CoremakeXcodePlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB913B08733D840010E9CD /* Debug */,
@@ -293,7 +293,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "YasmPlugin" */ = {
+		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "XcodePlugins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB913F08733D840010E9CD /* Debug */,
