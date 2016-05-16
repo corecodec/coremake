@@ -75,7 +75,7 @@
 #undef CONFIG_WMMX /* platforms that don't support Wireless MMX CPUs/instructions */
 #endif
 
-#if !defined(ARM) || defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS)
+#if !defined(ARM) || defined(TARGET_SYMBIAN) || defined(TARGET_PALMOS) || defined(TARGET_IPHONE)
 #undef CONFIG_ARMV6 /* platforms that don't support ARMv6 CPUs/instructions */
 #endif
 
