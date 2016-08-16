@@ -12,8 +12,8 @@
 
 CONFIG
 
-ANDROID_LIBC_DIR = %(低ONFIG_ANDROID_NDK)/build/platforms/android-%(CONFIG_ANDROID_VERSION)/%(ANDROID_ARCH)/usr
-ANDROID_GCC_DIR = %(低ONFIG_ANDROID_NDK)/build/prebuilt/%(CONFIG_ANDROID_PLATFORM)/%(ANDROID_GCC)/bin
+ANDROID_LIBC_DIR = %(低ONFIG_ANDROID_NDK)/platforms/android-%(CONFIG_ANDROID_VERSION)/%(ANDROID_ARCH)/usr
+ANDROID_GCC_DIR = %(低ONFIG_ANDROID_NDK)/toolchains/%(ANDROID_TOOL_DIR)/prebuilt/%(CONFIG_ANDROID_PLATFORM)/bin
 
 IFNDEF CONFIG_ANDROID_NDK
   ECHO Android NDK path not defined ! (CONFIG_ANDROID_NDK)
@@ -223,11 +223,17 @@ FOR EACH WORKSPACE
       PRINTNL target=android-%(CONFIG_ANDROID_VERSION)
       
       FILE %(浮UILDDIR).settings/org.eclipse.jdt.core.prefs
-      PRINTNL #Mon Jan 25 12:20:43 CET 2010
       PRINTNL eclipse.preferences.version=1
-      PRINTNL org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
-      PRINTNL org.eclipse.jdt.core.compiler.compliance=1.5
-      PRINTNL org.eclipse.jdt.core.compiler.source=1.5
+      PRINTNL org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
+      PRINTNL org.eclipse.jdt.core.compiler.compliance=1.6
+      PRINTNL org.eclipse.jdt.core.compiler.source=1.6
+      
+      FILE %(浮UILDDIR)export.map
+      PRINTNL {
+      PRINTNL    global: Java*;
+      PRINTNL    local: *;
+      PRINTNL };
+      
 
       // TODO: there should be one per EXE
       FILE %(浮UILDDIR)AndroidManifest.xml
@@ -313,9 +319,10 @@ FOR EACH WORKSPACE
   ENDFOR
 ENDFOR
 
-CC = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)gcc
-STRIP = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)strip 
-STRIPFLAGS = --strip-debug
+CC = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-gcc
+AR = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-ar
+STRIP = %(ANDROID_GCC_DIR)/%(ANDROID_GCC_PREFIX)-strip 
+STRIPFLAGS = -s -x
 OS_INCLUDE += %(ANDROID_LIBC_DIR)/include
 CCFLAGS += -DANDROID
 SHFLAGS += %(ANDROID_LIBC_DIR)/lib/libc.so %(ANDROID_LIBC_DIR)/lib/libstdc++.so %(ANDROID_LIBC_DIR)/lib/libm.so -Wl,--no-undefined  -Wl,-rpath-link=%(ANDROID_LIBC_DIR)/lib -L%(ANDROID_LIBC_DIR)/lib
