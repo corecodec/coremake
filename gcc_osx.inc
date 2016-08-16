@@ -37,9 +37,9 @@ ENDIF
 //#define FFSLDFLAGS -Wl,-bind_at_load
 
 #ifdef PIC
-#define SHFLAGS -dynamiclib -Wl,-single_module -Wl,-install_name,\$(OUTPUT)
+#define SHFLAGS -dynamiclib -Wl,-single_module -Wl,-install_name,%(OUTPUT_DLL)
 #else
-#define SHFLAGS -dynamiclib -Wl,-read_only_relocs,suppress -Wl,-single_module -Wl,-install_name,\$(OUTPUT)
+#define SHFLAGS -dynamiclib -Wl,-read_only_relocs,suppress -Wl,-single_module -Wl,-install_name,%(OUTPUT_DLL)
 #endif
 
 #include "gcc.inc"
