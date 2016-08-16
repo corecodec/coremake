@@ -1,7 +1,7 @@
 /*
   $Id$
 
-  Copyright (c) 2006-2010, CoreCodec, Inc.
+  Copyright (c) 2006-2016, CoreCodec, Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -3940,9 +3940,9 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
             item* i;
 
 			s += 2;
-            in_generated = *s=='¯';
+            in_generated = *s=='ï¿½';
             if (in_generated) ++s;
-            if (*s=='¯' && ++in_generated) ++s;
+            if (*s=='ï¿½' && ++in_generated) ++s;
             nodrive = *s==':';
             if (nodrive) ++s;
             count = *s=='=';
@@ -3959,9 +3959,9 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
 			if (filefourcc) ++s;
 			fileext = *s=='>';
 			if (fileext) ++s;
-            only_abspath = *s=='º';
+            only_abspath = *s=='ï¿½';
 			if (only_abspath) ++s;
-            only_relpath = *s=='º';
+            only_relpath = *s=='ï¿½';
             if (only_relpath) { ++s; only_abspath=0; }
             relpath = *s=='!';
 			if (relpath) ++s;
@@ -3978,7 +3978,7 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
             while (*s==';' && ++levelup) s++;
 			delend = *s=='@';
 			if (delend) { ++s; relpath=1; }
-			deltrail = *s=='§';
+			deltrail = *s=='ï¿½';
 			if (deltrail) ++s;
 			addend = *s=='+';
 			if (addend) { ++s; }
@@ -3988,7 +3988,7 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
             if (reverse) ++s;
             getused = *s=='*';
             if (getused) ++s;
-            findfile = *s=='÷';
+            findfile = *s=='ï¿½';
             if (findfile) ++s;
             quote = *s=='&';
             if (quote) ++s;
