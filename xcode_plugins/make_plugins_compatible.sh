@@ -5,8 +5,6 @@ cp -R "$HOME/.coremake/Library/Application Support/Developer/Shared/Xcode/Plug-i
 sudo mkdir -p "/usr/local/coremake/bin/"
 sudo cp -R "$HOME/.coremake/usr/local/coremake/bin/gas-preprocessor.pl" "/usr/local/coremake/bin/gas-preprocessor.pl"
 sudo cp -R "$HOME/.coremake/usr/local/coremake/bin/yasm" "/usr/local/coremake/bin/yasm"
-#sudo chown -R $(id -nu):$(id -ng) "$HOME/Library/Application Support/Developer/Shared/Xcode/Plug-ins/CoreMakeXcode.xcplugin"
-#sudo chmod 777 -R "$HOME/Library/Application Support/Developer/Shared/Xcode/Plug-ins/CoreMakeXcode.xcplugin"
 
 # read DVTPlugInCompatibilityUUID from the installed Xcode version
 UUID=$(defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID)

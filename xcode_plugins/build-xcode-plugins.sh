@@ -23,9 +23,7 @@ pushd XcodePlugins
 xcodebuild -configuration "Release" build
 popd
 
-#mkdir -p base/Developer/Library/Xcode/Plug-ins
 mkdir -p "base/coremake/Library/Application Support/Developer/Shared/Xcode/Plug-ins"
-#cp -R XcodePlugins/build/Release/CoreMakeXcode.xcplugin base/Developer/Library/Xcode/Plug-ins
 cp -R XcodePlugins/build/Release/CoreMakeXcode.xcplugin "base/coremake/Library/Application Support/Developer/Shared/Xcode/Plug-ins"
 cp make_plugins_compatible.sh base/coremake
 
