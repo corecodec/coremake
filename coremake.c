@@ -3792,7 +3792,7 @@ void simplifypath(char* path, int head)
 
 void getabspath(char* path, int path_flags, const char *rel_path, int rel_flags)
 {
-    assert((path_flags & FLAG_PATH_MASK) != FLAG_PATH_NOT_PATH);
+    //assert((path_flags & FLAG_PATH_MASK) != FLAG_PATH_NOT_PATH);
     if (!(path_flags & FLAG_PATH_SET_ABSOLUTE))
     {
         char base[3*MAX_PATH];
@@ -3940,9 +3940,9 @@ int tokeneval(char* s,int skip,build_pos* pos,reader* error, int extra_cmd)
             item* i;
 
 			s += 2;
-            in_generated = *s==(char)0xAF; // ø
+            in_generated = *s==(char)0xAF; // ¯
             if (in_generated) ++s;
-            if (*s==(char)0xD8 && ++in_generated) ++s;
+            if (*s==(char)0xAF && ++in_generated) ++s;
             nodrive = *s==':';
             if (nodrive) ++s;
             count = *s=='=';
