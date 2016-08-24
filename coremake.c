@@ -777,13 +777,11 @@ void reader_restore(reader *p,reader* save)
 int reader_line(reader* p)
 {
 	size_t i;
-	long before_pos = ftell(p->r.f);
-	p->line[0] = 0;
+    p->line[0] = 0;
 	fgets(p->line,MAX_LINE,p->r.f);
 	if (feof(p->r.f) && p->line[0]==0)
 		return 0;
 	i=strlen(p->line);
-	fseek(p->r.f, before_pos + i, SEEK_SET);
 	while (i && isspace(p->line[--i]))
 		p->line[i]=0;
 	p->pos = p->line;
