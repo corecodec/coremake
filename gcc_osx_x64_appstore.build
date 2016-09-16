@@ -7,6 +7,6 @@ SVNDIR = osx_x86
 SDK = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk
 
 CCFLAGS=%(CCFLAGS) -arch x86_64 -mdynamic-no-pic -mmacosx-version-min=10.4
-ASMFLAGS = -f macho64 -D_MACHO
+ASMFLAGS = -f macho64 -D_MACHO -D_HIDDEN
 
 #include "gcc_osx.inc"

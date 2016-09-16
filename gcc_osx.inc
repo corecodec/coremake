@@ -27,7 +27,7 @@ ELIF %(SDK)
   LFLAGS= -isysroot %(SDK) -Wl,-syslibroot,%(SDK)
 ENDIF
 
-CCFLAGS = %(CCFLAGS) -pipe -O3
+CCFLAGS = %(CCFLAGS) -pipe -O3 -fvisibility=hidden
 IF %(SDK_PATH)
   CCFLAGS = -I%(SDK_PATH)/include %(CCFLAGS)
 ENDIF
