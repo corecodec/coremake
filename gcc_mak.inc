@@ -131,12 +131,6 @@ IF defined(TARGET_WIN) && %(TYPE)!=lib
   ENDIF
 ENDIF
 
-IF defined(TARGET_ANDROID)
-  IF %(LIBS)!=""
-    PRINTNL LFLAGS += %(@LIBS:%=%(§CONFIG_ANDROID_NDK)/platforms/android-4/arch-arm/usr/lib/lib%.so)
-  ENDIF
-ENDIF
-
 IF (%(TYPE)==dll) && "%(SHFLAGS)"!=""
   PRINTNL LFLAGS += %(SHFLAGS)
 ENDIF
