@@ -729,6 +729,9 @@ $line =~ /^\s*((\w+\s*:\s*)?bl?x?(..)?(?:\.w)?|\.global)\s+(\w+)/) {
 $line =~ s/,\s+([^,]+)\@l\b/, lo16($1)/g;
 $line =~ s/,\s+([^,]+)\@ha\b/, ha16($1)/g;
 
+# convert movnes to movsne
+$line =~ s/movnes/movsne/g;
+
 # move to/from SPR
 if ($line =~ /(\s+)(m[ft])([a-z]+)\s+(\w+)/ and exists $ppc_spr{$3}) {
     if ($2 eq 'mt') {
