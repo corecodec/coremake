@@ -2,6 +2,7 @@
 #define TARGARCH_ABI arm
 #define TARGOPTIM release
 #define ARM
+#define PIC
 
 CCFLAGS += -pipe -fpic -mthumb-interwork -ffunction-sections -funwind-tables -fstack-protector -fno-short-enums -O2 -fomit-frame-pointer -fstrict-aliasing -funswitch-loops -finline-limit=300 -fvisibility=hidden -g
 SFLAGS += -march=armv7-a -D_HIDDEN -D__PIC__
