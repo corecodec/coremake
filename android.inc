@@ -42,7 +42,7 @@ ENDFOR
 
 FILE %(¯PATH)build.gradle
 PRINTNL task wrapper(type: Wrapper) {
-PRINTNL     gradleVersion = '2.2.1'
+PRINTNL     gradleVersion = '2.14.1'
 PRINTNL }
 PRINTNL 
 PRINTNL buildscript {
@@ -50,12 +50,12 @@ PRINTNL     repositories {
 PRINTNL         mavenCentral()
 PRINTNL     }
 PRINTNL     dependencies {
-PRINTNL         classpath 'com.android.tools.build:gradle:1.0.0'
+PRINTNL         classpath 'com.android.tools.build:gradle:2.2.0'
 PRINTNL     }
 PRINTNL }
 
 FILE %(¯PATH)gradle/wrapper/gradle-wrapper.properties
-PRINTNL distributionUrl=https\://services.gradle.org/distributions/gradle-2.2.1-all.zip
+PRINTNL distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip
 
 FOR EACH WORKSPACE
   FOR EACH USE
