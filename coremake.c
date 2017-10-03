@@ -1574,16 +1574,14 @@ int load_item(item* p,reader* file,int sub,itemcond* cond0)
 					   stricmp(file->token,"symbian_key")==0 ||
 					   stricmp(file->token,"doxygen")==0 ||
                        stricmp(file->token,"project_svn_revision")==0 || /* TODO really ? */
-                       stricmp(file->token,"project_help")==0 ||
-                       stricmp(file->token,"config_android_ndk")==0;
+                       stricmp(file->token,"project_help")==0;
 
             generated_dir = stricmp(file->token,"config_file")==0 ||
                             stricmp(file->token,"config_include")==0;
 
             coremake_dir = stricmp(file->token,"platform_files")==0;
 
-            system_dir = stricmp(file->token,"config_android_ndk")==0 ||
-                         stricmp(file->token,"os_include")==0;
+            system_dir = stricmp(file->token,"os_include")==0;
 
             attrib = filename ||
 					   stricmp(file->token,"register_cab")==0 ||
@@ -4699,6 +4697,7 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
 	while (!reader_eof(file))
 	{
         is_sharped =0;
+
 		if (reader_istoken_n(file,"#",1))
         {
             is_sharped = 1;
@@ -4752,7 +4751,7 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
 					strdel(s,s+3);
 				}
 				i = item_get(i,file->token,1);
-                if (stricmp(i->parent->value,"CONFIG_ANDROID_NDK")==0)
+                if (stricmp(i->parent->value,"COREMAKE_ANDROID_NDK")==0)
                 {
                     pathunix(i->value);
                     set_path_type(i,FLAG_PATH_SYSTEM);
@@ -5320,6 +5319,27 @@ int build_parse(item* p,reader* file,int sub,int skip,build_pos* pos0)
                     fclose(src);
                 }
             }
+		}
+		else
+		if (!is_sharped && reader_istoken(file,"getenv"))
+		{
+			reader_name(file);
+			if (!skip && (i=item_get(getconfig(p),file->token,0)))
+			{
+				const char *val = getenv(i->value);
+				if (val)
+				{
+					while (i->child != i->childend)
+						item_delete(i->child[0]);
+					i->flags |= FLAG_DEFINED;
+					i = item_get(i,val,1);
+					if (stricmp(i->parent->value,"COREMAKE_ANDROID_NDK")==0)
+					{
+						pathunix(i->value);
+						set_path_type(i,FLAG_PATH_SYSTEM);
+					}
+				}
+			}
 		}
         else
         if (!is_sharped)

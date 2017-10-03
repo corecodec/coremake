@@ -13,11 +13,14 @@
 
 CONFIG
 
-ANDROID_LIBC_DIR = %(低ONFIG_ANDROID_NDK)/platforms/android-%(CONFIG_ANDROID_VERSION)/%(ANDROID_ARCH)/usr
-ANDROID_GCC_DIR = %(低ONFIG_ANDROID_NDK)/toolchains/%(ANDROID_TOOL_DIR)/prebuilt/%(CONFIG_ANDROID_PLATFORM)/bin
+GETENV COREMAKE_ANDROID_NDK
+GETENV COREMAKE_ANDROID_PLATFORM
 
-IFNDEF CONFIG_ANDROID_NDK
-  ECHO Android NDK path not defined ! (CONFIG_ANDROID_NDK)
+ANDROID_LIBC_DIR = %(低OREMAKE_ANDROID_NDK)/platforms/android-%(CONFIG_ANDROID_VERSION)/%(ANDROID_ARCH)/usr
+ANDROID_GCC_DIR = %(低OREMAKE_ANDROID_NDK)/toolchains/%(ANDROID_TOOL_DIR)/prebuilt/%(COREMAKE_ANDROID_PLATFORM)/bin
+
+IFNDEF COREMAKE_ANDROID_NDK
+  ECHO Android NDK path not defined ! (COREMAKE_ANDROID_NDK)
 ENDIF
 
 IFNDEF CONFIG_ANDROID_VERSION
@@ -30,8 +33,8 @@ IFNDEF CONFIG_ANDROID_SDK
   CONFIG_ANDROID_SDK = %(CONFIG_ANDROID_VERSION)
 ENDIF
 
-IFNDEF CONFIG_ANDROID_PLATFORM
-  ECHO Android NDK build platform not defined ! (CONFIG_ANDROID_PLATFORM)
+IFNDEF COREMAKE_ANDROID_PLATFORM
+  ECHO Android NDK build platform not defined ! (COREMAKE_ANDROID_PLATFORM)
 ENDIF
 
 FILE %(烈ATH)settings.gradle
@@ -165,7 +168,7 @@ FOR EACH WORKSPACE
 //      PRINTNL 
 //      PRINTNL # you can use V=1 for more traces and -B to force a rebuild
 //      PRINTNL 
-//      PRINTNL (cd %(CONFIG_ANDROID_NDK); make APP=%(:``|伯UILDDIR) $1 $2 $3 $4 $5 $6)
+//      PRINTNL (cd %(COREMAKE_ANDROID_NDK); make APP=%(:``|伯UILDDIR) $1 $2 $3 $4 $5 $6)
 
       MKDIR %(浮UILDPATH)%(NAME)/gen/
       MKDIR %(浮UILDPATH)%(NAME)/res/
@@ -381,9 +384,9 @@ FOR EACH WORKSPACE
         PRINTNL     // call regular ndk-build(.cmd) script from app directory
         PRINTNL     task ndkBuild(type: Exec) {
         PRINTNL         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        PRINTNL             commandLine '%(~`+CONFIG_ANDROID_NDK)ndk-build.cmd'
+        PRINTNL             commandLine '%(~`+COREMAKE_ANDROID_NDK)ndk-build.cmd'
         PRINTNL         } else {
-        PRINTNL             commandLine '%(+CONFIG_ANDROID_NDK)ndk-build'
+        PRINTNL             commandLine '%(+COREMAKE_ANDROID_NDK)ndk-build'
         PRINTNL         }
         PRINTNL     }
         PRINTNL 
@@ -699,9 +702,9 @@ FOR EACH WORKSPACE
         PRINTNL     // call regular ndk-build(.cmd) script from app directory
         PRINTNL     task ndkBuild(type: Exec) {
         PRINTNL         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-        PRINTNL             commandLine '%(~`+CONFIG_ANDROID_NDK)ndk-build.cmd'
+        PRINTNL             commandLine '%(~`+COREMAKE_ANDROID_NDK)ndk-build.cmd'
         PRINTNL         } else {
-        PRINTNL             commandLine '%(+CONFIG_ANDROID_NDK)ndk-build'
+        PRINTNL             commandLine '%(+COREMAKE_ANDROID_NDK)ndk-build'
         PRINTNL         }
         PRINTNL     }
         PRINTNL 
