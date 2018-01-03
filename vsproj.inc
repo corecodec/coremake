@@ -574,6 +574,10 @@ ENDIF
 IF %(TAR64)
   PRINTNL 				Detect64BitPortabilityProblems="true"
 ENDIF
+IFDEF COREMAKE_DEBUG_SYMBOLS
+PRINTNL 				DebugInformationFormat="3"
+PRINTNL 				ProgramDataBaseFileName="$(OutDir)\$(ProjectName).pdb"
+ENDIF
 PRINTNL 			/>
 PRINTNL 			<Tool
 PRINTNL 				Name="VCManagedResourceCompilerTool"
