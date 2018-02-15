@@ -438,6 +438,15 @@ ELSE
     ENDIF
     PRINTNL 
   ENDIF
+  
+  IFDEF COREMAKE_DEBUG_SYMBOLS
+    // xcode ld requires "map" instead of "Map"
+    IFDEF TARGET_OSX
+      MAP = -Wl,-map,%(¯!OUTPUTPATH)%(+OUTPUT_DIR)%(NAME).map
+    ELSE
+      MAP = -Wl,-Map=%(¯!OUTPUTPATH)%(+OUTPUT_DIR)%(NAME).map
+    ENDIF
+  ENDIF
 
   IF (%(TYPE)==lib)
     PRINTNL $(OUTPUT): $(OBJS) $(USEBUILT) $(ICON) $(INSTALL) $(PLIST)
@@ -461,7 +470,7 @@ ELSE
     IF %(TYPE)==dll && defined(TARGET_ANDROID)
       PRINTNL 	$(hide)$(CC) -nostdlib -Wl,-soname,%(OUTPUT_DLL) -Wl,-shared,-Bsymbolic $(OBJS) $(LFLAGS) -o $@
     ELSE
-      PRINTNL 	$(hide)$(CXX) $(CCFLAGS) $(OBJS) -o $@ $(LFLAGS) 
+      PRINTNL 	$(hide)$(CXX) $(CCFLAGS) %(MAP) $(OBJS) -o $@ $(LFLAGS) 
       //-Wl,-Map=%(¯!OUTPUTPATH)%(+OUTPUT_DIR)%(NAME).map
     ENDIF
     IF "%(STRIP)"
