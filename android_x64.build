@@ -3,6 +3,7 @@
 #define TARGOPTIM release
 #define IX64
 #define IX86_64
+#define LIB_DIR lib64
 
 #define ASM yasm
 #define ASMFLAGS -f elf64 -D_HIDDEN
