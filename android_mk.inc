@@ -21,7 +21,9 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
     IF %(TYPE)==DLL
       ../DLL_DEPS += %(NAME)
     ELSE
-      ../LIB_DEPS += %(NAME)
+      IF %(TYPE)!=DLL_ANDROID
+        ../LIB_DEPS += %(NAME)
+      ENDIF
     ENDIF
   ENDFOR
   IF %(DLL_DEPS)!=""
