@@ -6,5 +6,6 @@ FRAMEWORK_PATH = /
 GCC_VERSION = com.apple.compilers.llvm.clang.1_0
 XCODECOMPATVERSION = 3.2
 ARCHS = "$(ARCHS_STANDARD)"
+MACDEPLOYMENTTARGET = 10.10
 
 #include "xcode.inc"
