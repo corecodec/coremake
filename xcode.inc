@@ -377,6 +377,34 @@ FOR EACH WORKSPACE
     ENDIF
   ENDFOR
   PRINTNL /* End PBXGroup section */
+  PRINTNL
+  PRINTNL /* Begin PBXBuildRule section */
+IFDEF TARGET_IPHONE
+    PRINTNL   F192372A2301CF0E004F37E9 /* PBXBuildRule */ = {
+    PRINTNL   isa = PBXBuildRule;
+    PRINTNL   compilerSpec = com.apple.compilers.proxy.script;
+    PRINTNL   filePatterns = "*.S";
+    PRINTNL   fileType = pattern.proxy;
+    PRINTNL   isEditable = 1;
+    PRINTNL   outputFiles = (
+    PRINTNL     "${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}/${INPUT_FILE_BASE}.o",
+    PRINTNL   );
+    PRINTNL   script = "ARRAY=(${USER_HEADER_SEARCH_PATHS})\n\ninclude_paths=\"\"\nfor i in \"${ARRAY[@]}\"\ndo\ninclude_paths=$include_paths\"-I\"$i\" \"\ndone\n\ncd ${SOURCE_ROOT}\n#export PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin\"\n\narchType=\"armv7\"\nif [[ ${INPUT_FILE_PATH} =~ \"64.S\" ]]\nthen\narchType='arm64'\nfi\n\n/usr/local/coremake/bin/gas-preprocessor.pl -x assembler-with-cpp ${INPUT_FILE_PATH} -arch $archType $include_paths -c -o ${SCRIPT_OUTPUT_FILE_0}\n";
+    PRINTNL };
+  ELSE
+      PRINTNL  F192372A2301CF0E004F37E9 /* PBXBuildRule */ = {
+    PRINTNL  isa = PBXBuildRule;
+    PRINTNL  compilerSpec = com.apple.compilers.proxy.script;
+    PRINTNL  fileType = sourcecode.asm.asm;
+    PRINTNL  isEditable = 1;
+    PRINTNL  outputFiles = (
+    PRINTNL  "${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}/${INPUT_FILE_BASE}.o",
+    PRINTNL  );
+    PRINTNL  script = "ARRAY=(${USER_HEADER_SEARCH_PATHS})\n\ninclude_paths=\"\"\nfor i in \"${ARRAY[@]}\"\ndo\ninclude_paths=$include_paths\"-I\"$i\" \"\ndone\n\n/usr/local/bin/yasm ${INPUT_FILE_PATH} -fmacho64 $include_paths -D_HIDDEN -D_MACHO -DPIC -DARCH_X86_64 -o ${SCRIPT_OUTPUT_FILE_0}\n";
+
+    PRINTNL };
+  ENDIF
+  PRINTNL /* End PBXBuildRule section */
   PRINTNL 
   IFNDEF USE_MAKEFILE
   PRINTNL /* Begin PBXNativeTarget section */
@@ -400,6 +428,9 @@ FOR EACH WORKSPACE
     ENDIF
     PRINTNL 			);
     PRINTNL 			buildRules = (
+    IF (%(TYPE)==DLL || %(TYPE)==LIB)
+      PRINTNL         F192372A2301CF0E004F37E9 /* PBXBuildRule */,
+    ENDIF
     PRINTNL 			);
     PRINTNL 			dependencies = (
     FOR EACH USE
@@ -628,12 +659,15 @@ FOR EACH WORKSPACE
     IFDEF TARGET_IPHONE
       PRINTNL				GCC_THUMB_SUPPORT = NO;
       IF %(IOSDEPLOYMENTTARGET)!=""
-	PRINTNL				IPHONEOS_DEPLOYMENT_TARGET = %(IOSDEPLOYMENTTARGET);
+	       PRINTNL				IPHONEOS_DEPLOYMENT_TARGET = %(IOSDEPLOYMENTTARGET);
       ENDIF
-      PRINTNL				MACOSX_DEPLOYMENT_TARGET = "";
       IF (%(TYPE)==EXE)
         PRINTNL				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
         PRINTNL				IPHONE_OPTIMIZE_OPTIONS = "-skip-PNGs";
+      ENDIF
+    ELSE
+      IF %(MACDEPLOYMENTTARGET)!=""
+        PRINTNL       MACOSX_DEPLOYMENT_TARGET = %(MACDEPLOYMENTTARGET);
       ENDIF
     ENDIF
     IF %(ASMFLAGS)!=""
@@ -719,13 +753,16 @@ FOR EACH WORKSPACE
     IFDEF TARGET_IPHONE
         PRINTNL				GCC_THUMB_SUPPORT = NO;
         IF %(IOSDEPLOYMENTTARGET)!=""
-	  PRINTNL			IPHONEOS_DEPLOYMENT_TARGET = %(IOSDEPLOYMENTTARGET);
+      	  PRINTNL			IPHONEOS_DEPLOYMENT_TARGET = %(IOSDEPLOYMENTTARGET);
         ENDIF
-        PRINTNL				MACOSX_DEPLOYMENT_TARGET = "";
         IF (%(TYPE)==EXE)
           PRINTNL			"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
           PRINTNL			IPHONE_OPTIMIZE_OPTIONS = "-skip-PNGs";
         ENDIF
+    ELSE
+      IF %(MACDEPLOYMENTTARGET)!=""
+        PRINTNL       MACOSX_DEPLOYMENT_TARGET = %(MACDEPLOYMENTTARGET);
+      ENDIF
     ENDIF
     IF %(DEFINE) || %(DEFINE_DEBUG)
       PRINTNL 				GCC_PREPROCESSOR_DEFINITIONS = (
