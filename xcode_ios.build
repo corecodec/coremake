@@ -10,6 +10,6 @@ IOSDEPLOYMENTTARGET = 8.0
 GCC_VERSION = com.apple.compilers.llvm.clang.1_0
 XCODECOMPATVERSION = 3.2
 DEVICEFAMILY = 1
-ARCHS = "$(ARCHS_STANDARD)"
+ARCHS = "$(ARCHS_STANDARD) arm64e"
 
 #include "xcode.inc"
