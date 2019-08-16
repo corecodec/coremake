@@ -380,7 +380,7 @@ FOR EACH WORKSPACE
   PRINTNL
   PRINTNL /* Begin PBXBuildRule section */
 IFDEF TARGET_IPHONE
-    PRINTNL   F192372A2301CF0E004F37E9 /* PBXBuildRule */ = {
+    PRINTNL   F1B8878A22FE0D360002351B /* PBXBuildRule */ = {
     PRINTNL   isa = PBXBuildRule;
     PRINTNL   compilerSpec = com.apple.compilers.proxy.script;
     PRINTNL   filePatterns = "*.S";
@@ -391,6 +391,18 @@ IFDEF TARGET_IPHONE
     PRINTNL   );
     PRINTNL   script = "ARRAY=(${USER_HEADER_SEARCH_PATHS})\n\ninclude_paths=\"\"\nfor i in \"${ARRAY[@]}\"\ndo\ninclude_paths=$include_paths\"-I\"$i\" \"\ndone\n\ncd ${SOURCE_ROOT}\n#export PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin\"\n\narchType=\"armv7\"\nif [[ ${INPUT_FILE_PATH} =~ \"64.S\" ]]\nthen\narchType='arm64'\nfi\n\n/usr/local/coremake/bin/gas-preprocessor.pl -x assembler-with-cpp ${INPUT_FILE_PATH} -arch $archType $include_paths -c -o ${SCRIPT_OUTPUT_FILE_0}\n";
     PRINTNL };
+    PRINTNL  F192372A2301CF0E004F37E9 /* PBXBuildRule */ = {
+    PRINTNL  isa = PBXBuildRule;
+    PRINTNL  compilerSpec = com.apple.compilers.proxy.script;
+    PRINTNL  fileType = sourcecode.asm.asm;
+    PRINTNL  isEditable = 1;
+    PRINTNL  outputFiles = (
+    PRINTNL  "${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}/${INPUT_FILE_BASE}.o",
+    PRINTNL  );
+    PRINTNL  script = "ARRAY=(${USER_HEADER_SEARCH_PATHS})\n\ninclude_paths=\"\"\nfor i in \"${ARRAY[@]}\"\ndo\ninclude_paths=$include_paths\"-I\"$i\" \"\ndone\n\n/usr/local/bin/yasm ${INPUT_FILE_PATH} -fmacho64 $include_paths -D_HIDDEN -D_MACHO -DPIC -DARCH_X86_64 -o ${SCRIPT_OUTPUT_FILE_0}\n";
+
+    PRINTNL };
+
   ELSE
       PRINTNL  F192372A2301CF0E004F37E9 /* PBXBuildRule */ = {
     PRINTNL  isa = PBXBuildRule;
@@ -429,7 +441,12 @@ IFDEF TARGET_IPHONE
     PRINTNL 			);
     PRINTNL 			buildRules = (
     IF (%(TYPE)==DLL || %(TYPE)==LIB)
+    IFDEF TARGET_IPHONE
       PRINTNL         F192372A2301CF0E004F37E9 /* PBXBuildRule */,
+      PRINTNL         F1B8878A22FE0D360002351B /* PBXBuildRule */,
+    ELSE
+      PRINTNL         F192372A2301CF0E004F37E9 /* PBXBuildRule */,
+    ENDIF
     ENDIF
     PRINTNL 			);
     PRINTNL 			dependencies = (
