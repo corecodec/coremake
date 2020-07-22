@@ -907,9 +907,9 @@ ELIF (%(>NAME)==nas)
   PRINTNL 						Name="%(CUSTOM_TOOL)"
   PRINTNL 						Description="Assembling %(~!NAME)..."
   IFDEF IX86
-    PRINTNL 						CommandLine="nasmw -f win32 -D_WIN32 -DWIN32 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="nasm -f win32 -D_WIN32 -DWIN32 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF IX86_64
-    PRINTNL 						CommandLine="nasmw -f win64 -D_WIN64 -DWIN64 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="nasm -f win64 -D_WIN64 -DWIN64 %(DEFINE:%=-D%) %(DEFINE_RELEASE:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF ARM
     PRINTNL 						CommandLine="armasm -cpu xscale &quot;$(InputPath)&quot; &quot;$(IntDir)/$(InputName).obj&quot;%(CMD_NEWLINE)"
   ENDIF
@@ -923,9 +923,9 @@ ELIF (%(>NAME)==nas)
   PRINTNL 						Name="%(CUSTOM_TOOL)"
   PRINTNL 						Description="Assembling %(~!NAME)..."
   IFDEF IX86
-    PRINTNL 						CommandLine="nasmw -f win32 -D_WIN32 -DWIN32 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="nasm -f win32 -D_WIN32 -DWIN32 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF IX86_64
-    PRINTNL 						CommandLine="nasmw -f win64 -D_WIN64 -DWIN64 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
+    PRINTNL 						CommandLine="nasm -f win64 -D_WIN64 -DWIN64 %(DEFINE:%=-D%) %(DEFINE_DEBUG:%=-D%) %(@INCLUDE:%=-I%) -o &quot;$(IntDir)/$(InputName).obj&quot; &quot;$(InputPath)&quot;%(CMD_NEWLINE)"
   ELIF ARM
     PRINTNL 						CommandLine="armasm -cpu xscale &quot;$(InputPath)&quot; &quot;$(IntDir)/$(InputName).obj&quot;%(CMD_NEWLINE)"
   ENDIF

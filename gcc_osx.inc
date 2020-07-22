@@ -7,6 +7,7 @@
 #define OUTPUT_LIB     lib%(NAME).a
 
 #define ASM yasm
+#define NASM nasm
 IFNDEF STRIP
 #define STRIP %(CC_PREFIX)strip
 ENDIF

@@ -16,6 +16,7 @@ SVNDIR = linux_x86
 //#define CXX g++
 //#define AR ar
 #define ASM yasm
+#define NASM nasm
 //#define STRIP strip
 //#define STRIPFLAGS 
 
@@ -24,6 +25,7 @@ SVNDIR = linux_x86
 #define CCFLAGS -DDEBUG -ggdb -m32 -march=i486 -msse -mmmx -Wno-multichar -DRESOURCE_COREC
 // -savetemps doesn't work with the corerc | pipe
 #define ASMFLAGS -f elf32
+#define NASMFLAGS -f elf32
 #define LFLAGS
 #define SHFLAGS -shared 
 

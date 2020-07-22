@@ -16,6 +16,7 @@ SVNDIR = linux_x64
 //#define CXX g++
 //#define AR ar
 #define ASM yasm
+#define NASM nasm
 #define STRIP strip
 #define STRIPFLAGS -s -x
 
@@ -23,6 +24,7 @@ SVNDIR = linux_x64
 
 #define CCFLAGS -O3 -m64 -Wno-multichar -fPIC -fvisibility=hidden -DRESOURCE_COREC
 #define ASMFLAGS -f elf64 -D_HIDDEN
+#define NASMFLAGS -f elf64 -D_HIDDEN
 #define LFLAGS
 #define SHFLAGS -shared -Wl,--strip-all
 

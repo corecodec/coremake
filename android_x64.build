@@ -7,6 +7,8 @@
 
 #define ASM yasm
 #define ASMFLAGS -f elf64 -D_HIDDEN
+#define NASM nasm
+#define NASMFLAGS -f elf64 -D_HIDDEN
 
 CCFLAGS += -pipe -fpic -ffunction-sections -funwind-tables -fno-short-enums -O2 -fomit-frame-pointer -funswitch-loops -finline-limit=300 -fvisibility=hidden -g
 SFLAGS += -D_HIDDEN
