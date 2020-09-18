@@ -638,7 +638,7 @@ PRINTNL $(BUILD)%.%(NAME).o: %.S
 PRINTNL 	$(hide)echo compiling $<
 PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
 IF defined(TARGET_OSX) && defined(ARM64)
-PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
+PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
 ELSE
 PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
 ENDIF
@@ -648,7 +648,7 @@ FOR EACH FUNC_S
   PRINTNL 	$(hide)echo compiling $< %(NAME)
   PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
 IF defined(TARGET_OSX) && defined(ARM64)
-PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
+PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(CCENV) $(CC) -Wall $(SFLAGS) -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
 ELSE
   PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
 ENDIF
@@ -657,7 +657,7 @@ ENDIF
   PRINTNL 	$(hide)echo compiling $< %(NAME)
   PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
 IF defined(TARGET_OSX) && defined(ARM64)
-PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
+PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(CCENV) $(CC) -Wall $(SFLAGS) -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
 ELSE
   PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
 ENDIF
