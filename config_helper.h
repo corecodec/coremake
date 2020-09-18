@@ -71,7 +71,7 @@
 #undef CONFIG_FILEPOS_64 /* platforms where 64 bits file position/size should not be used */
 #endif
 
-#if !defined(ARM) || defined(TARGET_SYMBIAN) || defined(TARGET_IPHONE)
+#if !defined(ARM) || defined(TARGET_SYMBIAN) || (defined(TARGET_OSX) && defined(TARGET_ARM64))
 #undef CONFIG_WMMX /* platforms that don't support Wireless MMX CPUs/instructions */
 #endif
 
@@ -83,7 +83,7 @@
 #undef CONFIG_MMX /* platforms that don't support MMX CPUs/instructions */
 #endif
 
-#if (!defined(ARM) && !defined(ARM64)) || (!defined(TARGET_IPHONE) && !defined(TARGET_ANDROID) && !defined(TARGET_LINUX))
+#if (!defined(ARM) && !defined(ARM64)) || (!defined(TARGET_OSX) && !defined(TARGET_ANDROID) && !defined(TARGET_LINUX))
 #undef CONFIG_NEON /* platforms that don't support NEON/ARMv7 instructions */
 #endif
 
