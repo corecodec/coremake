@@ -1,7 +1,5 @@
                      CoreMake USAGE DOCUMENTATION
                      
-             $Id$
-
 *** INTRODUCTION ***
 CoreMake is a meta-makefile processor that turns .proj files into makefiles
 for various compilers/IDE, including Visual Studio, MSVC6 , EVC4 , XCode
@@ -28,6 +26,14 @@ On Linux/OS X/Mingw you can generate it using :
 Once you have the CoreMake executable you need to run it from the root of your
 source code :
   coremake vs_2005
+
+At present, the default XCode SDK does not support arm64.  This may lead to 
+the error "error: Unsupported architecture" when attempting to compile.
+If this occurs, select the XCode beta with the following command:
+
+  `sudo xcode-select -s /Applications/Xcode-beta.app/Contents/Developer`
+  
+You can then build coremake as normal using `gcc -o coremake coremake.c`.
 
 This command will generate the project files to compile your source in Visual
 Studio 2005 for Windows on x86. Each target is located in the coremake directory
