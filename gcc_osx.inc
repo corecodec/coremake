@@ -12,10 +12,6 @@ IFNDEF STRIP
 #define STRIP %(CC_PREFIX)strip
 ENDIF
 #define STRIPFLAGS -x
-// TODO should come from config.h
-#ifndef TARGET_IPHONE
-#define CCENV MACOSX_DEPLOYMENT_TARGET_ppc=10.3 MACOSX_DEPLOYMENT_TARGET_i386=10.5
-#endif
 
 #define GLIBC
 

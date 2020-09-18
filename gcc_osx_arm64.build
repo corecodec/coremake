@@ -1,0 +1,14 @@
+#define TARGET_OSX
+#define ARM64
+
+PLATFORMLIB = osx_arm64
+SVNDIR = arm64
+SDK = /Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk 
+
+CC = xcrun --sdk macosx clang
+
+CCFLAGS=%(CCFLAGS) -arch arm64 -mdynamic-no-pic -mmacosx-version-min=10.9
+ASMFLAGS = -f arm64 -D_MACHO -D_HIDDEN
+NASMFLAGS = -f arm64 -D_MACHO -D_HIDDEN
+
+#include "gcc_osx.inc"
