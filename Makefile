@@ -1,3 +1,6 @@
+COREMAKE_BINDIR=/usr/local/bin
+COREMAKE_SHAREDIR=/usr/local/share/coremake
+
 all: coremake corerc
 # make has all the default built-ins to build this for the current system
 
@@ -5,157 +8,147 @@ clean:
 	rm -f coremake corerc
 
 install: coremake corerc
-	install -c coremake /usr/local/bin/coremake
-	install -c corerc /usr/local/bin/corerc
-	install -c -m 644 -D android_armv5.build /usr/local/share/coremake/android_armv5.build
-	install -c -m 644 -D android_armv6.build /usr/local/share/coremake/android_armv6.build
-	install -c -m 644 -D android_armv7.build /usr/local/share/coremake/android_armv7.build
-	install -c -m 644 -D automake.build /usr/local/share/coremake/automake.build
-	install -c -m 644 -D clean.build /usr/local/share/coremake/clean.build
-	install -c -m 644 -D distclean.build /usr/local/share/coremake/distclean.build
-	install -c -m 644 -D evc_arm.build /usr/local/share/coremake/evc_arm.build
-	install -c -m 644 -D evc_arm_pocketpc.build /usr/local/share/coremake/evc_arm_pocketpc.build
-	install -c -m 644 -D evc_arm_smartphone.build /usr/local/share/coremake/evc_arm_smartphone.build
-	install -c -m 644 -D evc_armv4.build /usr/local/share/coremake/evc_armv4.build
-	install -c -m 644 -D evc_armv4i.build /usr/local/share/coremake/evc_armv4i.build
-	install -c -m 644 -D evc_armv4_pocketpc.build /usr/local/share/coremake/evc_armv4_pocketpc.build
-	install -c -m 644 -D evc_armv4_smartphone.build /usr/local/share/coremake/evc_armv4_smartphone.build
-	install -c -m 644 -D evc_emulator.build /usr/local/share/coremake/evc_emulator.build
-	install -c -m 644 -D evc_mips.build /usr/local/share/coremake/evc_mips.build
-	install -c -m 644 -D evc_mipsii.build /usr/local/share/coremake/evc_mipsii.build
-	install -c -m 644 -D evc_sh3.build /usr/local/share/coremake/evc_sh3.build
-	install -c -m 644 -D evc_sh4.build /usr/local/share/coremake/evc_sh4.build
-	install -c -m 644 -D evc_x86.build /usr/local/share/coremake/evc_x86.build
-	install -c -m 644 -D gcc_linux_arm.build /usr/local/share/coremake/gcc_linux_arm.build
-	install -c -m 644 -D gcc_linux.build /usr/local/share/coremake/gcc_linux.build
-	install -c -m 644 -D gcc_linux_debug.build /usr/local/share/coremake/gcc_linux_debug.build
-	install -c -m 644 -D gcc_linux_mips.build /usr/local/share/coremake/gcc_linux_mips.build
-	install -c -m 644 -D gcc_linux_ppc.build /usr/local/share/coremake/gcc_linux_ppc.build
-	install -c -m 644 -D gcc_linux_qt_x86.build /usr/local/share/coremake/gcc_linux_qt_x86.build
-	install -c -m 644 -D gcc_linux_qt_x86_debug.build /usr/local/share/coremake/gcc_linux_qt_x86_debug.build
-	install -c -m 644 -D gcc_linux_x64.build /usr/local/share/coremake/gcc_linux_x64.build
-	install -c -m 644 -D gcc_linux_x64_debug.build /usr/local/share/coremake/gcc_linux_x64_debug.build
-	install -c -m 644 -D gcc_osx.build /usr/local/share/coremake/gcc_osx.build
-	install -c -m 644 -D gcc_osx_iphone_dev.build /usr/local/share/coremake/gcc_osx_iphone_dev.build
-	install -c -m 644 -D gcc_osx_ppc.build /usr/local/share/coremake/gcc_osx_ppc.build
-	install -c -m 644 -D gcc_osx_x64.build /usr/local/share/coremake/gcc_osx_x64.build
-	install -c -m 644 -D gcc_osx_x86.build /usr/local/share/coremake/gcc_osx_x86.build
-	install -c -m 644 -D gcc_osx_x86_pic.build /usr/local/share/coremake/gcc_osx_x86_pic.build
-	install -c -m 644 -D gcc_palmos.build /usr/local/share/coremake/gcc_palmos.build
-	install -c -m 644 -D gcc_ps2sdk.build /usr/local/share/coremake/gcc_ps2sdk.build
-	install -c -m 644 -D gcc_qtcore_arm.build /usr/local/share/coremake/gcc_qtcore_arm.build
-	install -c -m 644 -D gcc_qtcore_mips.build /usr/local/share/coremake/gcc_qtcore_mips.build
-	install -c -m 644 -D gcc_qtcore_x86.build /usr/local/share/coremake/gcc_qtcore_x86.build
-	install -c -m 644 -D gcc_qtphone_arm.build /usr/local/share/coremake/gcc_qtphone_arm.build
-	install -c -m 644 -D gcc_qtphone_x86.build /usr/local/share/coremake/gcc_qtphone_x86.build
-	install -c -m 644 -D gcc_sparc32.build /usr/local/share/coremake/gcc_sparc32.build
-	install -c -m 644 -D gcc_sparc64.build /usr/local/share/coremake/gcc_sparc64.build
-	install -c -m 644 -D gcc_win32.build /usr/local/share/coremake/gcc_win32.build
-	install -c -m 644 -D gcc_wince_arm.build /usr/local/share/coremake/gcc_wince_arm.build
-	install -c -m 644 -D gcc_x_win32.build /usr/local/share/coremake/gcc_x_win32.build
-	install -c -m 644 -D icl_2005.build /usr/local/share/coremake/icl_2005.build
-	install -c -m 644 -D kdevelop.build /usr/local/share/coremake/kdevelop.build
-	install -c -m 644 -D kdevelop_qtcore_arm_debug.build /usr/local/share/coremake/kdevelop_qtcore_arm_debug.build
-	install -c -m 644 -D kdevelop_qtphone_arm.build /usr/local/share/coremake/kdevelop_qtphone_arm.build
-	install -c -m 644 -D kdevelop_qtphone_arm_debug.build /usr/local/share/coremake/kdevelop_qtphone_arm_debug.build
-	install -c -m 644 -D kdevelop_qtphone_x86.build /usr/local/share/coremake/kdevelop_qtphone_x86.build
-	install -c -m 644 -D kdevelop_qtphone_x86_debug.build /usr/local/share/coremake/kdevelop_qtphone_x86_debug.build
-	install -c -m 644 -D s60_1st.build /usr/local/share/coremake/s60_1st.build
-	install -c -m 644 -D s60_1st_wins.build /usr/local/share/coremake/s60_1st_wins.build
-	install -c -m 644 -D s60_2nd_fp3.build /usr/local/share/coremake/s60_2nd_fp3.build
-	install -c -m 644 -D s60_2nd_fp3_debug.build /usr/local/share/coremake/s60_2nd_fp3_debug.build
-	install -c -m 644 -D s60_2nd_fp3_winscw.build /usr/local/share/coremake/s60_2nd_fp3_winscw.build
-	install -c -m 644 -D s60_3rd_fp1.build /usr/local/share/coremake/s60_3rd_fp1.build
-	install -c -m 644 -D s60_3rd_fp1_debug.build /usr/local/share/coremake/s60_3rd_fp1_debug.build
-	install -c -m 644 -D s60_3rd_fp1_winscw.build /usr/local/share/coremake/s60_3rd_fp1_winscw.build
-	install -c -m 644 -D s60_3rd_mr.build /usr/local/share/coremake/s60_3rd_mr.build
-	install -c -m 644 -D s60_3rd_mr_debug.build /usr/local/share/coremake/s60_3rd_mr_debug.build
-	install -c -m 644 -D s60_3rd_mr_winscw.build /usr/local/share/coremake/s60_3rd_mr_winscw.build
-	install -c -m 644 -D s60_5th.build /usr/local/share/coremake/s60_5th.build
-	install -c -m 644 -D s60_5th_winscw.build /usr/local/share/coremake/s60_5th_winscw.build
-	install -c -m 644 -D s80_dp2.build /usr/local/share/coremake/s80_dp2.build
-	install -c -m 644 -D s80_dp2_wins.build /usr/local/share/coremake/s80_dp2_wins.build
-	install -c -m 644 -D s90_7710.build /usr/local/share/coremake/s90_7710.build
-	install -c -m 644 -D s90_7710_wins.build /usr/local/share/coremake/s90_7710_wins.build
-	install -c -m 644 -D script.build /usr/local/share/coremake/script.build
-	install -c -m 644 -D uiq_21.build /usr/local/share/coremake/uiq_21.build
-	install -c -m 644 -D uiq_21_wins.build /usr/local/share/coremake/uiq_21_wins.build
-	install -c -m 644 -D uiq_30.build /usr/local/share/coremake/uiq_30.build
-	install -c -m 644 -D uiq_30_debug.build /usr/local/share/coremake/uiq_30_debug.build
-	install -c -m 644 -D uiq_30_winscw.build /usr/local/share/coremake/uiq_30_winscw.build
-	install -c -m 644 -D uiq_31.build /usr/local/share/coremake/uiq_31.build
-	install -c -m 644 -D uiq_31_winscw.build /usr/local/share/coremake/uiq_31_winscw.build
-	install -c -m 644 -D vc6.build /usr/local/share/coremake/vc6.build
-	install -c -m 644 -D vc6_palmos.build /usr/local/share/coremake/vc6_palmos.build
-	install -c -m 644 -D vs_2003.build /usr/local/share/coremake/vs_2003.build
-	install -c -m 644 -D vs_2005.build /usr/local/share/coremake/vs_2005.build
-	install -c -m 644 -D vs9_ce5_armv4i.build /usr/local/share/coremake/vs9_ce5_armv4i.build
-	install -c -m 644 -D vs9_ce5_mips32_gcc.build /usr/local/share/coremake/vs9_ce5_mips32_gcc.build
-	install -c -m 644 -D vs9_ce5_mipsii.build /usr/local/share/coremake/vs9_ce5_mipsii.build
-	install -c -m 644 -D vs9_ce5_x86.build /usr/local/share/coremake/vs9_ce5_x86.build
-	install -c -m 644 -D vs9_express.build /usr/local/share/coremake/vs9_express.build
-	install -c -m 644 -D vs9_ic_x64.build /usr/local/share/coremake/vs9_ic_x64.build
-	install -c -m 644 -D vs9_ic_x86.build /usr/local/share/coremake/vs9_ic_x86.build
-	install -c -m 644 -D vs9_ppc2003_armv4.build /usr/local/share/coremake/vs9_ppc2003_armv4.build
-	install -c -m 644 -D vs9_smart2003_armv4.build /usr/local/share/coremake/vs9_smart2003_armv4.build
-	install -c -m 644 -D vs9_win32.build /usr/local/share/coremake/vs9_win32.build
-	install -c -m 644 -D vs9_wm5_armv4i.build /usr/local/share/coremake/vs9_wm5_armv4i.build
-	install -c -m 644 -D vs9_wm5s_armv4i.build /usr/local/share/coremake/vs9_wm5s_armv4i.build
-	install -c -m 644 -D vs9_wm6p_armv4i.build /usr/local/share/coremake/vs9_wm6p_armv4i.build
-	install -c -m 644 -D vs9_x64.build /usr/local/share/coremake/vs9_x64.build
-	install -c -m 644 -D vs_ce5_armv4i.build /usr/local/share/coremake/vs_ce5_armv4i.build
-	install -c -m 644 -D vs_ce5_mips32.build /usr/local/share/coremake/vs_ce5_mips32.build
-	install -c -m 644 -D vs_ce5_mips32_gcc.build /usr/local/share/coremake/vs_ce5_mips32_gcc.build
-	install -c -m 644 -D vs_ce5_mipsii.build /usr/local/share/coremake/vs_ce5_mipsii.build
-	install -c -m 644 -D vs_ce5_x86.build /usr/local/share/coremake/vs_ce5_x86.build
-	install -c -m 644 -D vs_ce6_krs_armv4i.build /usr/local/share/coremake/vs_ce6_krs_armv4i.build
-	install -c -m 644 -D vs_express.build /usr/local/share/coremake/vs_express.build
-	install -c -m 644 -D vs_palmos.build /usr/local/share/coremake/vs_palmos.build
-	install -c -m 644 -D vs_ppc2003_armv4.build /usr/local/share/coremake/vs_ppc2003_armv4.build
-	install -c -m 644 -D vs_s60_3rd_mr.build /usr/local/share/coremake/vs_s60_3rd_mr.build
-	install -c -m 644 -D vs_smart2003_armv4.build /usr/local/share/coremake/vs_smart2003_armv4.build
-	install -c -m 644 -D vs_wm5_armv4i.build /usr/local/share/coremake/vs_wm5_armv4i.build
-	install -c -m 644 -D vs_wm5s_armv4i.build /usr/local/share/coremake/vs_wm5s_armv4i.build
-	install -c -m 644 -D vs_wm6p_armv4i.build /usr/local/share/coremake/vs_wm6p_armv4i.build
-	install -c -m 644 -D vs_wm6s_armv4i.build /usr/local/share/coremake/vs_wm6s_armv4i.build
-	install -c -m 644 -D vs_x64.build /usr/local/share/coremake/vs_x64.build
-	install -c -m 644 -D xcode24_universal.build /usr/local/share/coremake/xcode24_universal.build
-	install -c -m 644 -D xcode.build /usr/local/share/coremake/xcode.build
-	install -c -m 644 -D xcode_ios4.build /usr/local/share/coremake/xcode_ios4.build
-	install -c -m 644 -D xcode_ios4_simu.build /usr/local/share/coremake/xcode_ios4_simu.build
-	install -c -m 644 -D xcode_iphone.build /usr/local/share/coremake/xcode_iphone.build
-	install -c -m 644 -D xcode_iphone_dev.build /usr/local/share/coremake/xcode_iphone_dev.build
-	install -c -m 644 -D xcode_iphone_ipad.build /usr/local/share/coremake/xcode_iphone_ipad.build
-	install -c -m 644 -D xcode_iphone_ipad_simu.build /usr/local/share/coremake/xcode_iphone_ipad_simu.build
-	install -c -m 644 -D xcode_iphone_simulator.build /usr/local/share/coremake/xcode_iphone_simulator.build
-	install -c -m 644 -D xcode_iphone_uni.build /usr/local/share/coremake/xcode_iphone_uni.build
-	install -c -m 644 -D xcode_uni64.build /usr/local/share/coremake/xcode_uni64.build
-	install -c -m 644 -D xcode_uni.build /usr/local/share/coremake/xcode_uni.build
-	install -c -m 644 -D xcode_x86.build /usr/local/share/coremake/xcode_x86.build
-	install -c -m 644 -D android_arm.inc /usr/local/share/coremake/android_arm.inc
-	install -c -m 644 -D android.inc /usr/local/share/coremake/android.inc
-	install -c -m 644 -D android_mk.inc /usr/local/share/coremake/android_mk.inc
-	install -c -m 644 -D automake.inc /usr/local/share/coremake/automake.inc
-	install -c -m 644 -D carbide.inc /usr/local/share/coremake/carbide.inc
-	install -c -m 644 -D carbide_vs.inc /usr/local/share/coremake/carbide_vs.inc
-	install -c -m 644 -D evc.inc /usr/local/share/coremake/evc.inc
-	install -c -m 644 -D gcc_conf.inc /usr/local/share/coremake/gcc_conf.inc
-	install -c -m 644 -D gcc.inc /usr/local/share/coremake/gcc.inc
-	install -c -m 644 -D gcc_mak.inc /usr/local/share/coremake/gcc_mak.inc
-	install -c -m 644 -D gcc_osx.inc /usr/local/share/coremake/gcc_osx.inc
-	install -c -m 644 -D gcc_qtopia.inc /usr/local/share/coremake/gcc_qtopia.inc
-	install -c -m 644 -D kdevelop_qtopia_arm.inc /usr/local/share/coremake/kdevelop_qtopia_arm.inc
-	install -c -m 644 -D kdevelop_qtopia_x86.inc /usr/local/share/coremake/kdevelop_qtopia_x86.inc
-	install -c -m 644 -D osx_plist.inc /usr/local/share/coremake/osx_plist.inc
-	install -c -m 644 -D qmake.inc /usr/local/share/coremake/qmake.inc
-	install -c -m 644 -D qtopia_desktop.inc /usr/local/share/coremake/qtopia_desktop.inc
-	install -c -m 644 -D qtopia_resource.inc /usr/local/share/coremake/qtopia_resource.inc
-	install -c -m 644 -D symbian.inc /usr/local/share/coremake/symbian.inc
-	install -c -m 644 -D symbian_pkg.inc /usr/local/share/coremake/symbian_pkg.inc
-	install -c -m 644 -D vc6.inc /usr/local/share/coremake/vc6.inc
-	install -c -m 644 -D vs.inc /usr/local/share/coremake/vs.inc
-	install -c -m 644 -D vsproj.inc /usr/local/share/coremake/vsproj.inc
-	install -c -m 644 -D vsproj-user.inc /usr/local/share/coremake/vsproj-user.inc
-	install -c -m 644 -D wincab.inc /usr/local/share/coremake/wincab.inc
-	install -c -m 644 -D winrc.inc /usr/local/share/coremake/winrc.inc
-	install -c -m 644 -D xcode.inc /usr/local/share/coremake/xcode.inc
+	mkdir -p "${COREMAKE_BINDIR}" "${COREMAKE_SHAREDIR}"
+	install -c coremake ${COREMAKE_BINDIR}/coremake
+	install -c corerc ${COREMAKE_BINDIR}/corerc
+	install -c -m 644 android_armv5.build ${COREMAKE_SHAREDIR}/android_armv5.build
+	install -c -m 644 android_armv6.build ${COREMAKE_SHAREDIR}/android_armv6.build
+	install -c -m 644 android_armv7.build ${COREMAKE_SHAREDIR}/android_armv7.build
+	install -c -m 644 automake.build ${COREMAKE_SHAREDIR}/automake.build
+	install -c -m 644 clean.build ${COREMAKE_SHAREDIR}/clean.build
+	install -c -m 644 distclean.build ${COREMAKE_SHAREDIR}/distclean.build
+	install -c -m 644 evc_arm.build ${COREMAKE_SHAREDIR}/evc_arm.build
+	install -c -m 644 evc_arm_pocketpc.build ${COREMAKE_SHAREDIR}/evc_arm_pocketpc.build
+	install -c -m 644 evc_arm_smartphone.build ${COREMAKE_SHAREDIR}/evc_arm_smartphone.build
+	install -c -m 644 evc_armv4.build ${COREMAKE_SHAREDIR}/evc_armv4.build
+	install -c -m 644 evc_armv4i.build ${COREMAKE_SHAREDIR}/evc_armv4i.build
+	install -c -m 644 evc_armv4_pocketpc.build ${COREMAKE_SHAREDIR}/evc_armv4_pocketpc.build
+	install -c -m 644 evc_armv4_smartphone.build ${COREMAKE_SHAREDIR}/evc_armv4_smartphone.build
+	install -c -m 644 evc_emulator.build ${COREMAKE_SHAREDIR}/evc_emulator.build
+	install -c -m 644 evc_mips.build ${COREMAKE_SHAREDIR}/evc_mips.build
+	install -c -m 644 evc_mipsii.build ${COREMAKE_SHAREDIR}/evc_mipsii.build
+	install -c -m 644 evc_sh3.build ${COREMAKE_SHAREDIR}/evc_sh3.build
+	install -c -m 644 evc_sh4.build ${COREMAKE_SHAREDIR}/evc_sh4.build
+	install -c -m 644 evc_x86.build ${COREMAKE_SHAREDIR}/evc_x86.build
+	install -c -m 644 gcc_linux_arm.build ${COREMAKE_SHAREDIR}/gcc_linux_arm.build
+	install -c -m 644 gcc_linux.build ${COREMAKE_SHAREDIR}/gcc_linux.build
+	install -c -m 644 gcc_linux_debug.build ${COREMAKE_SHAREDIR}/gcc_linux_debug.build
+	install -c -m 644 gcc_linux_mips.build ${COREMAKE_SHAREDIR}/gcc_linux_mips.build
+	install -c -m 644 gcc_linux_ppc.build ${COREMAKE_SHAREDIR}/gcc_linux_ppc.build
+	install -c -m 644 gcc_linux_qt_x86.build ${COREMAKE_SHAREDIR}/gcc_linux_qt_x86.build
+	install -c -m 644 gcc_linux_qt_x86_debug.build ${COREMAKE_SHAREDIR}/gcc_linux_qt_x86_debug.build
+	install -c -m 644 gcc_linux_x64.build ${COREMAKE_SHAREDIR}/gcc_linux_x64.build
+	install -c -m 644 gcc_linux_x64_debug.build ${COREMAKE_SHAREDIR}/gcc_linux_x64_debug.build
+	install -c -m 644 gcc_osx.build ${COREMAKE_SHAREDIR}/gcc_osx.build
+	install -c -m 644 gcc_osx_iphone_dev.build ${COREMAKE_SHAREDIR}/gcc_osx_iphone_dev.build
+	install -c -m 644 gcc_osx_ppc.build ${COREMAKE_SHAREDIR}/gcc_osx_ppc.build
+	install -c -m 644 gcc_osx_x64.build ${COREMAKE_SHAREDIR}/gcc_osx_x64.build
+	install -c -m 644 gcc_osx_x86.build ${COREMAKE_SHAREDIR}/gcc_osx_x86.build
+	install -c -m 644 gcc_osx_x86_pic.build ${COREMAKE_SHAREDIR}/gcc_osx_x86_pic.build
+	install -c -m 644 gcc_palmos.build ${COREMAKE_SHAREDIR}/gcc_palmos.build
+	install -c -m 644 gcc_ps2sdk.build ${COREMAKE_SHAREDIR}/gcc_ps2sdk.build
+	install -c -m 644 gcc_qtcore_arm.build ${COREMAKE_SHAREDIR}/gcc_qtcore_arm.build
+	install -c -m 644 gcc_qtcore_mips.build ${COREMAKE_SHAREDIR}/gcc_qtcore_mips.build
+	install -c -m 644 gcc_qtcore_x86.build ${COREMAKE_SHAREDIR}/gcc_qtcore_x86.build
+	install -c -m 644 gcc_qtphone_arm.build ${COREMAKE_SHAREDIR}/gcc_qtphone_arm.build
+	install -c -m 644 gcc_qtphone_x86.build ${COREMAKE_SHAREDIR}/gcc_qtphone_x86.build
+	install -c -m 644 gcc_sparc32.build ${COREMAKE_SHAREDIR}/gcc_sparc32.build
+	install -c -m 644 gcc_sparc64.build ${COREMAKE_SHAREDIR}/gcc_sparc64.build
+	install -c -m 644 gcc_win32.build ${COREMAKE_SHAREDIR}/gcc_win32.build
+	install -c -m 644 gcc_wince_arm.build ${COREMAKE_SHAREDIR}/gcc_wince_arm.build
+	install -c -m 644 gcc_x_win32.build ${COREMAKE_SHAREDIR}/gcc_x_win32.build
+	install -c -m 644 icl_2005.build ${COREMAKE_SHAREDIR}/icl_2005.build
+	install -c -m 644 kdevelop.build ${COREMAKE_SHAREDIR}/kdevelop.build
+	install -c -m 644 kdevelop_qtcore_arm_debug.build ${COREMAKE_SHAREDIR}/kdevelop_qtcore_arm_debug.build
+	install -c -m 644 kdevelop_qtphone_arm.build ${COREMAKE_SHAREDIR}/kdevelop_qtphone_arm.build
+	install -c -m 644 kdevelop_qtphone_arm_debug.build ${COREMAKE_SHAREDIR}/kdevelop_qtphone_arm_debug.build
+	install -c -m 644 kdevelop_qtphone_x86.build ${COREMAKE_SHAREDIR}/kdevelop_qtphone_x86.build
+	install -c -m 644 kdevelop_qtphone_x86_debug.build ${COREMAKE_SHAREDIR}/kdevelop_qtphone_x86_debug.build
+	install -c -m 644 s60_1st.build ${COREMAKE_SHAREDIR}/s60_1st.build
+	install -c -m 644 s60_1st_wins.build ${COREMAKE_SHAREDIR}/s60_1st_wins.build
+	install -c -m 644 s60_2nd_fp3.build ${COREMAKE_SHAREDIR}/s60_2nd_fp3.build
+	install -c -m 644 s60_2nd_fp3_debug.build ${COREMAKE_SHAREDIR}/s60_2nd_fp3_debug.build
+	install -c -m 644 s60_2nd_fp3_winscw.build ${COREMAKE_SHAREDIR}/s60_2nd_fp3_winscw.build
+	install -c -m 644 s60_3rd_fp1.build ${COREMAKE_SHAREDIR}/s60_3rd_fp1.build
+	install -c -m 644 s60_3rd_fp1_debug.build ${COREMAKE_SHAREDIR}/s60_3rd_fp1_debug.build
+	install -c -m 644 s60_3rd_fp1_winscw.build ${COREMAKE_SHAREDIR}/s60_3rd_fp1_winscw.build
+	install -c -m 644 s60_3rd_mr.build ${COREMAKE_SHAREDIR}/s60_3rd_mr.build
+	install -c -m 644 s60_3rd_mr_debug.build ${COREMAKE_SHAREDIR}/s60_3rd_mr_debug.build
+	install -c -m 644 s60_3rd_mr_winscw.build ${COREMAKE_SHAREDIR}/s60_3rd_mr_winscw.build
+	install -c -m 644 s60_5th.build ${COREMAKE_SHAREDIR}/s60_5th.build
+	install -c -m 644 s60_5th_winscw.build ${COREMAKE_SHAREDIR}/s60_5th_winscw.build
+	install -c -m 644 s80_dp2.build ${COREMAKE_SHAREDIR}/s80_dp2.build
+	install -c -m 644 s80_dp2_wins.build ${COREMAKE_SHAREDIR}/s80_dp2_wins.build
+	install -c -m 644 s90_7710.build ${COREMAKE_SHAREDIR}/s90_7710.build
+	install -c -m 644 s90_7710_wins.build ${COREMAKE_SHAREDIR}/s90_7710_wins.build
+	install -c -m 644 script.build ${COREMAKE_SHAREDIR}/script.build
+	install -c -m 644 uiq_21.build ${COREMAKE_SHAREDIR}/uiq_21.build
+	install -c -m 644 uiq_21_wins.build ${COREMAKE_SHAREDIR}/uiq_21_wins.build
+	install -c -m 644 uiq_30.build ${COREMAKE_SHAREDIR}/uiq_30.build
+	install -c -m 644 uiq_30_debug.build ${COREMAKE_SHAREDIR}/uiq_30_debug.build
+	install -c -m 644 uiq_30_winscw.build ${COREMAKE_SHAREDIR}/uiq_30_winscw.build
+	install -c -m 644 uiq_31.build ${COREMAKE_SHAREDIR}/uiq_31.build
+	install -c -m 644 uiq_31_winscw.build ${COREMAKE_SHAREDIR}/uiq_31_winscw.build
+	install -c -m 644 vc6.build ${COREMAKE_SHAREDIR}/vc6.build
+	install -c -m 644 vc6_palmos.build ${COREMAKE_SHAREDIR}/vc6_palmos.build
+	install -c -m 644 vs_2003.build ${COREMAKE_SHAREDIR}/vs_2003.build
+	install -c -m 644 vs_2005.build ${COREMAKE_SHAREDIR}/vs_2005.build
+	install -c -m 644 vs9_ce5_armv4i.build ${COREMAKE_SHAREDIR}/vs9_ce5_armv4i.build
+	install -c -m 644 vs9_ce5_mips32_gcc.build ${COREMAKE_SHAREDIR}/vs9_ce5_mips32_gcc.build
+	install -c -m 644 vs9_ce5_mipsii.build ${COREMAKE_SHAREDIR}/vs9_ce5_mipsii.build
+	install -c -m 644 vs9_ce5_x86.build ${COREMAKE_SHAREDIR}/vs9_ce5_x86.build
+	install -c -m 644 vs9_express.build ${COREMAKE_SHAREDIR}/vs9_express.build
+	install -c -m 644 vs9_ic_x64.build ${COREMAKE_SHAREDIR}/vs9_ic_x64.build
+	install -c -m 644 vs9_ic_x86.build ${COREMAKE_SHAREDIR}/vs9_ic_x86.build
+	install -c -m 644 vs9_ppc2003_armv4.build ${COREMAKE_SHAREDIR}/vs9_ppc2003_armv4.build
+	install -c -m 644 vs9_smart2003_armv4.build ${COREMAKE_SHAREDIR}/vs9_smart2003_armv4.build
+	install -c -m 644 vs9_win32.build ${COREMAKE_SHAREDIR}/vs9_win32.build
+	install -c -m 644 vs9_wm5_armv4i.build ${COREMAKE_SHAREDIR}/vs9_wm5_armv4i.build
+	install -c -m 644 vs9_wm5s_armv4i.build ${COREMAKE_SHAREDIR}/vs9_wm5s_armv4i.build
+	install -c -m 644 vs9_wm6p_armv4i.build ${COREMAKE_SHAREDIR}/vs9_wm6p_armv4i.build
+	install -c -m 644 vs9_x64.build ${COREMAKE_SHAREDIR}/vs9_x64.build
+	install -c -m 644 vs_ce5_armv4i.build ${COREMAKE_SHAREDIR}/vs_ce5_armv4i.build
+	install -c -m 644 vs_ce5_mips32.build ${COREMAKE_SHAREDIR}/vs_ce5_mips32.build
+	install -c -m 644 vs_ce5_mips32_gcc.build ${COREMAKE_SHAREDIR}/vs_ce5_mips32_gcc.build
+	install -c -m 644 vs_ce5_mipsii.build ${COREMAKE_SHAREDIR}/vs_ce5_mipsii.build
+	install -c -m 644 vs_ce5_x86.build ${COREMAKE_SHAREDIR}/vs_ce5_x86.build
+	install -c -m 644 vs_ce6_krs_armv4i.build ${COREMAKE_SHAREDIR}/vs_ce6_krs_armv4i.build
+	install -c -m 644 vs_express.build ${COREMAKE_SHAREDIR}/vs_express.build
+	install -c -m 644 vs_palmos.build ${COREMAKE_SHAREDIR}/vs_palmos.build
+	install -c -m 644 vs_ppc2003_armv4.build ${COREMAKE_SHAREDIR}/vs_ppc2003_armv4.build
+	install -c -m 644 vs_s60_3rd_mr.build ${COREMAKE_SHAREDIR}/vs_s60_3rd_mr.build
+	install -c -m 644 vs_smart2003_armv4.build ${COREMAKE_SHAREDIR}/vs_smart2003_armv4.build
+	install -c -m 644 vs_wm5_armv4i.build ${COREMAKE_SHAREDIR}/vs_wm5_armv4i.build
+	install -c -m 644 vs_wm5s_armv4i.build ${COREMAKE_SHAREDIR}/vs_wm5s_armv4i.build
+	install -c -m 644 vs_wm6p_armv4i.build ${COREMAKE_SHAREDIR}/vs_wm6p_armv4i.build
+	install -c -m 644 vs_wm6s_armv4i.build ${COREMAKE_SHAREDIR}/vs_wm6s_armv4i.build
+	install -c -m 644 vs_x64.build ${COREMAKE_SHAREDIR}/vs_x64.build
+	install -c -m 644 xcode_ios.build ${COREMAKE_SHAREDIR}/xcode.build
+	install -c -m 644 xcode_macosx.build ${COREMAKE_SHAREDIR}/xcode.build
+	install -c -m 644 android_arm.inc ${COREMAKE_SHAREDIR}/android_arm.inc
+	install -c -m 644 android.inc ${COREMAKE_SHAREDIR}/android.inc
+	install -c -m 644 android_mk.inc ${COREMAKE_SHAREDIR}/android_mk.inc
+	install -c -m 644 automake.inc ${COREMAKE_SHAREDIR}/automake.inc
+	install -c -m 644 carbide.inc ${COREMAKE_SHAREDIR}/carbide.inc
+	install -c -m 644 carbide_vs.inc ${COREMAKE_SHAREDIR}/carbide_vs.inc
+	install -c -m 644 evc.inc ${COREMAKE_SHAREDIR}/evc.inc
+	install -c -m 644 gcc_conf.inc ${COREMAKE_SHAREDIR}/gcc_conf.inc
+	install -c -m 644 gcc.inc ${COREMAKE_SHAREDIR}/gcc.inc
+	install -c -m 644 gcc_mak.inc ${COREMAKE_SHAREDIR}/gcc_mak.inc
+	install -c -m 644 gcc_osx.inc ${COREMAKE_SHAREDIR}/gcc_osx.inc
+	install -c -m 644 gcc_qtopia.inc ${COREMAKE_SHAREDIR}/gcc_qtopia.inc
+	install -c -m 644 kdevelop_qtopia_arm.inc ${COREMAKE_SHAREDIR}/kdevelop_qtopia_arm.inc
+	install -c -m 644 kdevelop_qtopia_x86.inc ${COREMAKE_SHAREDIR}/kdevelop_qtopia_x86.inc
+	install -c -m 644 osx_plist.inc ${COREMAKE_SHAREDIR}/osx_plist.inc
+	install -c -m 644 qmake.inc ${COREMAKE_SHAREDIR}/qmake.inc
+	install -c -m 644 qtopia_desktop.inc ${COREMAKE_SHAREDIR}/qtopia_desktop.inc
+	install -c -m 644 qtopia_resource.inc ${COREMAKE_SHAREDIR}/qtopia_resource.inc
+	install -c -m 644 symbian.inc ${COREMAKE_SHAREDIR}/symbian.inc
+	install -c -m 644 symbian_pkg.inc ${COREMAKE_SHAREDIR}/symbian_pkg.inc
+	install -c -m 644 vc6.inc ${COREMAKE_SHAREDIR}/vc6.inc
+	install -c -m 644 vs.inc ${COREMAKE_SHAREDIR}/vs.inc
+	install -c -m 644 vsproj.inc ${COREMAKE_SHAREDIR}/vsproj.inc
+	install -c -m 644 vsproj-user.inc ${COREMAKE_SHAREDIR}/vsproj-user.inc
+	install -c -m 644 wincab.inc ${COREMAKE_SHAREDIR}/wincab.inc
+	install -c -m 644 winrc.inc ${COREMAKE_SHAREDIR}/winrc.inc
+	install -c -m 644 xcode.inc ${COREMAKE_SHAREDIR}/xcode.inc

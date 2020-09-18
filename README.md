@@ -73,7 +73,7 @@ in the <root>/release/<target> directory. For example:
   <root>/release/vs_2005/test.exe
 
 
- * Syntax *
+### Syntax
 A .proj file is just a text file that describes the projects to create and the
 source/libraries to use. All folders should use the '/' character and never
 the DOS/Windows '\' character.
@@ -89,7 +89,7 @@ There are different types of definitions in CoreMake:
   content of the GROUP will be added (like an include file or a template)
 
 
- * Use command *
+### Use command
 To add a project into a WORKSPACE you have to use the USE command:
   EXE test
   {
@@ -127,7 +127,7 @@ files is not important. But each project should have a unique name in all the
 .proj files found.
 
 
- * Libraries & Headers *
+### Libraries & Headers
 Any regular C program usually has to include some headers and use the 
 corresponding libraries. The headers and libraries can be in some specific
 location. The syntax to add such directories is the following:
