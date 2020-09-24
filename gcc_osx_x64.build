@@ -1,16 +1,17 @@
 #define TARGET_OSX
 #define IX64
 #define IX86_64
+#define ASM yasm
 
 PLATFORMLIB = osx_x86
 SVNDIR = osx_x86
-SDK = /Developer/SDKs/MacOSX10.5.sdk
+SDK = /Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk 
 
-//CC = xcrun --sdk macosx clang
+CC = xcrun --sdk macosx clang
 
-CCFLAGS=%(CCFLAGS) -arch x86_64 -mdynamic-no-pic -mmacosx-version-min=10.5
+CCFLAGS=%(CCFLAGS) -target x86_64-apple-macos10.12 -mdynamic-no-pic -Qunused-arguments
+SFLAGS=%(SFLAGS) -target x86_64-apple-macos11 -mdynamic-no-pic -Qunused-arguments
 ASMFLAGS = -f macho64 -D_MACHO -D_HIDDEN
 NASMFLAGS = -f macho64 -D_MACHO -D_HIDDEN
 
 #include "gcc_osx.inc"
-
