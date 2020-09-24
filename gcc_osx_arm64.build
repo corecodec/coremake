@@ -7,8 +7,7 @@ SDK = /Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/
 
 CC = xcrun --sdk macosx clang
 
-CCFLAGS=%(CCFLAGS) -arch arm64 -mdynamic-no-pic -mmacosx-version-min=10.9
-ASMFLAGS = -f arm64 -D_MACHO -D_HIDDEN
-NASMFLAGS = -f arm64 -D_MACHO -D_HIDDEN
+CCFLAGS=%(CCFLAGS) -target arm64-apple-macos11 -mdynamic-no-pic -Qunused-arguments
+SFLAGS=%(SFLAGS) -target arm64-apple-macos11 -mdynamic-no-pic -Qunused-arguments
 
 #include "gcc_osx.inc"
