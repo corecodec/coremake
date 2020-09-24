@@ -629,9 +629,9 @@ PRINTNL $(BUILD)%.%(NAME).o: %(!ROOTPATH)%.S
 PRINTNL 	$(hide)echo compiling $<
 PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
 IF defined(TARGET_OSX) && defined(ARM64)
-PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
+    PRINTNL 	$(hide)perl %(!ROOTPATH)tools/gas-preprocessor.pl -arch arm64 -as-type apple-clang -- $(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
 ELSE
-PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
+    PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
 ENDIF
 PRINTNL 
 PRINTNL $(BUILD)%.%(NAME).o: %.S
