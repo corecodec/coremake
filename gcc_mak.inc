@@ -625,6 +625,18 @@ PRINTNL 	$(hide)echo compiling $<
 PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
 PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(CFLAGS) $(CCFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
 PRINTNL 
+IF defined(TARGET_OSX) && defined(ARM64)
+  PRINTNL $(BUILD)%.%(NAME).clang.o: %(!ROOTPATH)%.clang.S
+  PRINTNL 	$(hide)echo compiling $<
+  PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
+  PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -integrated-as -c $< -o $@ -MMD -MP -MF $@.d
+  PRINTNL
+  PRINTNL $(BUILD)%.%(NAME).clang.o: %.clang.S
+  PRINTNL 	$(hide)echo compiling $<
+  PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
+  PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -integrated-as -c $< -o $@ -MMD -MP -MF $@.d
+  PRINTNL
+ENDIF
 PRINTNL $(BUILD)%.%(NAME).o: %(!ROOTPATH)%.S
 PRINTNL 	$(hide)echo compiling $<
 PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
@@ -644,6 +656,18 @@ PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -c $< -o $@ -MMD -MP -MF $@.d
 ENDIF
 PRINTNL 
 FOR EACH FUNC_S
+  IF defined(TARGET_OSX) && defined(ARM64)
+    PRINTNL $(BUILD)%.%(NAME).%(../NAME).clang.o: %(!ROOTPATH)%.clang.S
+    PRINTNL 	$(hide)echo compiling $< %(NAME)
+    PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
+    PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -integrated-as -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
+    PRINTNL
+    PRINTNL $(BUILD)%.%(NAME).%(../NAME).clang.o: %.clang.S
+    PRINTNL 	$(hide)echo compiling $< %(NAME)
+    PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
+    PRINTNL 	$(hide)$(CCENV) $(CC) -Wall $(SFLAGS) -integrated-as -DF_%(NAME) -c $< -o $@ -MMD -MP -MF $@.d
+    PRINTNL
+  ENDIF
   PRINTNL $(BUILD)%.%(NAME).%(../NAME).o: %(!ROOTPATH)%.S
   PRINTNL 	$(hide)echo compiling $< %(NAME)
   PRINTNL 	$(hide)mkdir -p $(BUILD)$(*D)
