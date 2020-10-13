@@ -92,6 +92,10 @@ IF %(TYPE)==DLL || %(TYPE)==LIB
     PRINTNL LOCAL_CFLAGS := %(DEFINE:%=-D%)
   ENDIF
   
+  IFDEF NDK_CLANG
+    PRINTNL LOCAL_ASFLAGS := -fno-integrated-as
+  ENDIF
+  
   IF %(TYPE)==DLL
     IF %(LIBS)!=""
       PRINTNL LOCAL_LDLIBS += \
