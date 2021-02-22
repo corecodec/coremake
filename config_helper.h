@@ -83,7 +83,7 @@
 #undef CONFIG_MMX /* platforms that don't support MMX CPUs/instructions */
 #endif
 
-#if (!defined(ARM) && !defined(ARM64)) || (!defined(TARGET_OSX) && !defined(TARGET_ANDROID) && !defined(TARGET_LINUX))
+#if (!defined(ARM) && !defined(ARM64)) || (!defined(TARGET_OSX) && !defined(TARGET_ANDROID) && !defined(TARGET_LINUX) && !defined(TARGET_WIN64))
 #undef CONFIG_NEON /* platforms that don't support NEON/ARMv7 instructions */
 #endif
 
